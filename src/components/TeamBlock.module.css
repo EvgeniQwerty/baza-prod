@@ -1,0 +1,43 @@
+.team {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+}
+
+.team__member {
+    position: relative;
+    width: 20%;
+}
+
+.team__image {
+    z-index: 1;
+}
+
+.team__name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: 900;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 2;
+    color: rgb(var(--primary));
+}
+
+.team__position {
+    width: 100%;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translate(-50%, -3%);
+    text-align: center;
+    text-align: center;
+    z-index: 2;
+    color: rgb(var(--primary));
+}

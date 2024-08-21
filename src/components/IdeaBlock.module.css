@@ -1,0 +1,33 @@
+.ideablock {    
+    background-image: url('/ideas.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 16rem;
+    padding-top: 8rem;
+}
+
+.ideablock__flex {
+    display: flex;
+    gap: 8rem;
+}
+
+.ideablock__text {
+    display: flex;
+    gap: 3rem;
+    color: rgb(var(--primary)); 
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+}
+
+.ideablock__title {
+    font-weight: 600;
+    display: block;
+    width: 5rem;
+}
+
+.ideablock__row {
+    padding-bottom: 0.5rem;
+}
