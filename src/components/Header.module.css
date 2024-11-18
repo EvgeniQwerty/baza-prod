@@ -17,10 +17,19 @@
     top: 4rem;
     left: 4rem;
     transition: .3s all;
+    display: flex;
+    gap: 1rem;
 }
 
-.header__burger:hover{
+.burger__button:hover{
     transform: scale(1.02);
+}
+
+.burger__text {
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 0.8rem;
+    vertical-align: middle;
 }
 
 .header__logo {

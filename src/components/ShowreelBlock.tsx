@@ -20,7 +20,7 @@ export default function ShowreelBlock() {
                     className={`${styles.showreel__button} ${activeButton === 'baza' ? styles.button_active : ''}`} 
                     onClick={() => handleClick('baza')}
                 >
-                    Baza кампейн <span className={styles.showreel__year}>2024</span>
+                    Baza «Мы вас видим» <span className={styles.showreel__year}>2024</span>
                 </a>
                 <a 
                     className={`${styles.showreel__button} ${activeButton === 'showreel' ? styles.button_active : ''}`} 

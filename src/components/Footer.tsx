@@ -13,8 +13,9 @@ export default function Footer() {
                     </div>
                     <div className={styles.footer__block}>
                         <a href="/" className={styles.footer__link}>О нас</a>
+                        <a href="/" className={styles.footer__link}>Проекты</a>
+                        <a href="/" className={styles.footer__link}>Услуги</a>
                         <a href="/" className={styles.footer__link}>Контакты</a>
-                        <a href="/" className={styles.footer__link}>Вакансии</a>
                     </div>
                     <div className={styles.footer__block}>
                         <a href="tel:79195105601" className={styles.footer__link}>+7 (919) 510-56-01</a>
@@ -24,19 +25,11 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className={styles.footer__block}>
-                    <form className="${styles.footer__form} ${form}">
-                        <div className={styles.form__wrapper}>
-                            <p className={styles.form__title}>Форма обратной связи</p>
-                            <div className={styles.form__creds}>
-                                <input className={styles.width8rem} type="text" name="name" id="name" placeholder="Ваше имя" required />
-                                <input type="email" name="email" id="email" placeholder="Ваш адрес эл. почты" required />
-                            </div>
-                            <textarea id="text" rows={3} placeholder="Напишите сообщение" required />
-
-                            <input className={styles.width8rem} type="submit" value="Отправить" />
-                        </div>
-                    </form>
+                <div className={styles.footer__right}>
+                    <div className={styles.footer__block}>
+                        <p className={styles.form__title}>По вопросам:</p>
+                        <button className={styles.form__button}>Связаться с нами</button>
+                    </div>
                 </div>
             </div>
         </footer>

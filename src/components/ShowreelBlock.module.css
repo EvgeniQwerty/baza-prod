@@ -1,8 +1,6 @@
 .showreel {
-    /* height: 100vh;
-    width: 100vw; */
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     position: relative;
 }
 
@@ -16,7 +14,7 @@
 }
 
 .showreel__button {
-    font-weight: 800;
+    font-weight: 400;
     font-size: 4rem;
     text-transform: uppercase;
     color: rgb(var(--primary));
@@ -25,8 +23,8 @@
 }
 
 .showreel__button:hover {
+    font-weight: 800;
     color: rgb(var(--accent));
-    transform: scale(1.02); 
 }
 
 .showreel__image {
@@ -36,10 +34,19 @@
 .showreel__year {
     font-weight: 300;
     font-size: 1.5rem;
-    vertical-align: top;
-    line-height: 1.5;
+    vertical-align: middle;
 }
 
 .button_active {
     color: rgb(var(--accent));
+    animation: pulse-weight 1s infinite alternate;
+}
+
+@keyframes pulse-weight {
+    from {
+        font-weight: 800;
+    }
+    to {
+        font-weight: 600;
+    }
 }

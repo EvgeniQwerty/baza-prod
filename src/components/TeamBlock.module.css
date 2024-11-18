@@ -1,6 +1,6 @@
 .team {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
 
     display: flex;
 }
@@ -18,9 +18,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 100%);
     text-align: center;
-    font-weight: 900;
+    font-weight: 600;
     font-size: 2.5rem;
     text-transform: uppercase;
     text-align: center;
@@ -28,9 +28,13 @@
     color: rgb(var(--primary));
 }
 
+.team__name_last {
+    transform: translate(-50%, -50%);
+}
+
 .team__position {
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-transform: uppercase;
     position: absolute;
     bottom: 3%;
@@ -40,4 +44,16 @@
     text-align: center;
     z-index: 2;
     color: rgb(var(--primary));
+}
+
+.team__position_last {
+    text-decoration: underline;
+    cursor: pointer;
+    transition: .3s all;
+}
+
+.team__position_last:hover {
+    color: rgb(var(--accent));
+    font-weight: 800;
+    
 }
