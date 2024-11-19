@@ -4,46 +4,51 @@ import styles from "./VideosBlock.module.css";
 import VideoBlock from "@/components/VideoBlock";
 
 interface VideoData {
-    path: string;
+    folderPath: string;
     name: string;
     org: string;
     type: string;
     typeCode: string;
     year: string;
+    imgs: number;
 }
 
 const videoData: VideoData[] = [
     {
-        path: "/projects/servicecar/1.png", 
+        folderPath: "/projects/servicecar", 
         name: "Servicecar", 
         org: "Servicecar", 
         type: "Реклама на ТВ", 
         typeCode: "commercial", 
-        year: "2023"
+        year: "2023",
+        imgs: 4
     },
     {
-        path: "/projects/smena/1.png", 
+        folderPath: "/projects/smena", 
         name: "Первая работа", 
         org: "Кинотеатр Смена", 
         type: "HR-видео", 
         typeCode: "commercial", 
-        year: "2023"
+        year: "2023",
+        imgs: 1
     },
     {
-        path: "/projects/supergoats/1.png", 
+        folderPath: "/projects/supergoats", 
         name: "Суперкозлы", 
         org: "Суперкозлы", 
         type: "Музыкальный клип", 
         typeCode: "clip", 
-        year: "2023"
+        year: "2023",
+        imgs: 9
     },
     {
-        path: "/projects/psycho/1.png", 
+        folderPath: "/projects/psycho", 
         name: "Псих", 
         org: "Бренд одежды", 
         type: "Fashion-ролик", 
         typeCode: "photo", 
-        year: "2023"
+        year: "2023",
+        imgs: 6
     }
 ];
 
@@ -106,12 +111,13 @@ export default function VideosBlock() {
                 {filteredVideos.slice(0, 4).map((video, index) => (
                     <VideoBlock 
                         key={index}
-                        path={video.path}
+                        folderPath={video.folderPath}
                         name={video.name}
                         org={video.org}
                         type={video.type}
                         typeCode={video.typeCode}
                         year={video.year}
+                        imgs={video.imgs}
                     />
                 ))}
             </div>

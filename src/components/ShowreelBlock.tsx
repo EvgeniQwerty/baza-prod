@@ -44,7 +44,7 @@ export default function ShowreelBlock() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentImage(prev => prev === 3 ? 1 : prev + 1);
+            setCurrentImage(prev => prev === 5 ? 1 : prev + 1);
         }, 3000);
         return () => clearInterval(interval);
     }, []);
@@ -84,7 +84,7 @@ export default function ShowreelBlock() {
             {/* Слайдшоу изображений */}
             {!isVideoLoaded && (
                 <div className={styles.showreel__slideshow}>
-                    {[1, 2, 3].map((imgNum) => (
+                    {[1, 2, 3, 4, 5].map((imgNum) => (
                         <Image 
                             key={imgNum}
                             src={`/showreel/imgs/${imgNum}.png`} 
