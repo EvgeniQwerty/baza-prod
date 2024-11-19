@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    webpack(config) {
+    webpack(config, { isServer }) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
@@ -19,6 +19,19 @@ const nextConfig = {
                 resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
                 use: ["@svgr/webpack"],
             },
+            {
+                test: /\.(webm|mp4)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            publicPath: '/_next/static/videos/',
+                            outputPath: `${isServer ? '../' : ''}static/videos/`,
+                            name: '[name].[hash].[ext]',
+                        },
+                    },
+                ],
+            }
         );
 
         // Modify the file loader rule to ignore *.svg, since we have it handled now.

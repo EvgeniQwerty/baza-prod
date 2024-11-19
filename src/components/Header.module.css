@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; 
+    z-index: 100; 
 }
 
 .header__wrapper {
@@ -19,10 +19,11 @@
     transition: .3s all;
     display: flex;
     gap: 1rem;
+    z-index: 150;
 }
 
 .burger__button:hover{
-    transform: scale(1.02);
+    transform: scale(1.1);
 }
 
 .burger__text {
@@ -37,4 +38,112 @@
     top: 4rem;
     left: 50%;    
     transform: translate(-50%, -0.5rem); 
+}
+
+.header__logo:hover{
+    scale: 1.05;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100vh;
+    background-color: rgb(var(--primary));
+    z-index: 100;
+    transition: left 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu_open {
+    left: 0;
+}
+
+.menu__list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu__item {
+    margin-bottom: 2rem;
+}
+
+.menu__link {
+    text-decoration: none;
+    color: rgb(var(--background));
+    font-size: 2.5rem;
+    font-weight: 400;
+    transition: 0.3s all;
+}
+
+.menu__link:hover {
+    color: rgb(var(--accent));
+}
+
+.burger__button {
+    transition: 0.3s all;
+}
+
+/* Стили для кнопки бургера */
+.burger__button svg path {
+    fill: rgb(var(--primary)); /* Белый цвет по умолчанию */
+    transition: fill 0.3s ease;
+}
+
+.burger__button:hover svg path {
+    fill: rgb(var(--accent)); /* Рыжий цвет при наведении */
+}
+
+/* Черный цвет при открытом меню */
+.burger_active .burger__button svg path {
+    fill: rgb(var(--background));
+}
+
+/* Рыжий цвет при наведении на черную кнопку в открытом меню */
+.burger_active .burger__button:hover svg path {
+    fill: rgb(var(--accent));
+}
+
+/* Анимация для оверлея */
+.menu__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--background), 0);
+    opacity: 0;
+    z-index: 50;
+    transition: all 0.5s ease-in-out;
+    animation: overlayFadeIn 0.5s forwards;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        background-color: rgba(var(--background), 0);
+    }
+    to {
+        opacity: 1;
+        background-color: rgba(var(--background), 0.5);
+    }
+}
+
+.menu__overlay_closing {
+    animation: overlayFadeOut 0.5s forwards;
+}
+
+@keyframes overlayFadeOut {
+    from {
+        opacity: 1;
+        background-color: rgba(var(--background), 0.5);
+    }
+    to {
+        opacity: 0;
+        background-color: rgba(var(--background), 0);
+    }
 }

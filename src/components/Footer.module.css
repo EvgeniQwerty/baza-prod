@@ -57,4 +57,23 @@
     font-size: 1rem;
     text-transform: uppercase;
     font-weight: 400;
+    transition: .3s all;
+    border: 0;
+    cursor: pointer;
+    background-color: rgb(var(--primary));
+    color: rgb(var(--background)); 
+}
+
+.form__button:hover {
+    color: rgb(var(--accent));
+    background-color: rgb(var(--gray));
+    scale: 1.05;
+}
+
+.footer__coords {
+    color: rgb(var(--gray));
+}
+
+.footer__link:hover {
+    scale: 1.05;
 }

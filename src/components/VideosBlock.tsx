@@ -14,7 +14,7 @@ interface VideoData {
 
 const videoData: VideoData[] = [
     {
-        path: "/video-3.png", 
+        path: "/projects/servicecar/1.png", 
         name: "Servicecar", 
         org: "Servicecar", 
         type: "Реклама на ТВ", 
@@ -22,7 +22,7 @@ const videoData: VideoData[] = [
         year: "2023"
     },
     {
-        path: "/video-1.png", 
+        path: "/projects/smena/1.png", 
         name: "Первая работа", 
         org: "Кинотеатр Смена", 
         type: "HR-видео", 
@@ -30,7 +30,7 @@ const videoData: VideoData[] = [
         year: "2023"
     },
     {
-        path: "/video-2.png", 
+        path: "/projects/supergoats/1.png", 
         name: "Суперкозлы", 
         org: "Суперкозлы", 
         type: "Музыкальный клип", 
@@ -38,7 +38,7 @@ const videoData: VideoData[] = [
         year: "2023"
     },
     {
-        path: "/video-4.png", 
+        path: "/projects/psycho/1.png", 
         name: "Псих", 
         org: "Бренд одежды", 
         type: "Fashion-ролик", 
@@ -72,7 +72,7 @@ export default function VideosBlock() {
         setTimeout(() => {
             setCurrentFilter(filter);
             setIsFiltering(false);
-        }, 100); // Время должно совпадать с длительностью CSS-транзишена
+        }, 200); // Время должно совпадать с длительностью CSS-транзишена
     };
 
     return (
@@ -84,8 +84,8 @@ export default function VideosBlock() {
                         <button
                             key={category.value}
                             className={`
-                            ${styles.category_button} 
-                            ${currentFilter === category.value ? styles.category_button_active : ''}
+                            ${styles.categories__button} 
+                            ${currentFilter === category.value ? styles.categories__button_active : ''}
                         `}
                             onClick={() => handleFilterChange(category.value)}
                         >
@@ -93,7 +93,7 @@ export default function VideosBlock() {
                         </button>
                     ))}
                 </div>
-                <button className={styles.categories__watchall}>Смотреть все</button>
+                <button className={styles.categories__button}>Смотреть все</button>
             </div>
 
             {/* Явная установка класса videos_hidden при фильтрации */}
