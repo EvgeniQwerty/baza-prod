@@ -72,7 +72,7 @@ export default function ShowreelBlock() {
     return (
         <div className={styles.showreel}>
             {/* Слайдшоу изображений */}
-            {/* {!isVideoLoaded && (
+            {!isVideoLoaded && (
                 <div className={styles.showreel__slideshow}>
                     {[1, 2, 3, 4, 5].map((imgNum) => (
                         <Image 
@@ -90,21 +90,13 @@ export default function ShowreelBlock() {
                         />
                     ))}
                 </div>
-            )} */}
+            )}
 
             {/* Видео */}
-            {/* <video
-                ref={videoRef}
-                preload="auto"
-                className={`${styles.showreel__video} ${isVideoLoaded ? styles.video_visible : ''}`}
-                playsInline
-                muted
-                loop
-            /> */}
             <video
                 ref={videoRef}
                 preload="auto"
-                className={`${styles.showreel__video}`}
+                className={`${styles.showreel__video} ${isVideoLoaded ? styles.video_visible : ''}`}
                 playsInline
                 muted
                 loop
