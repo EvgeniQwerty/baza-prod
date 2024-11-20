@@ -1,11 +1,19 @@
-.ideablock {    
-    background-image: url('/ideas/ideas.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 80vh;
+.ideablock {
+    width: 100dvw;
+    height: 90dvh;
     position: relative;
+    overflow: hidden; /* Чтобы скрыть возможные границы видео */
+}
+
+.ideablock__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Масштабируем на ширину */
+    height: 100%; /* Масштабируем на высоту */
+    object-fit: cover; /* Устанавливаем правильное масштабирование */
+    z-index: -1; /* Чтобы текст был поверх видео */
 }
 
 .ideablock__title {
@@ -17,4 +25,5 @@
     line-height: 1;
     top: 3rem;
     left: -3rem;
+    z-index: 1; /* Заголовок над видео */
 }

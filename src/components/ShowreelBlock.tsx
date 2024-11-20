@@ -53,22 +53,12 @@ export default function ShowreelBlock() {
         setActiveButton(buttonType);
     };
 
-    const handleVideoLoaded = () => {
-        setIsVideoLoaded(true);
-        videoRef.current?.play().catch(error => {
-            console.error("Ошибка при попытке воспроизведения видео:", error);
-        });
-    };
-
     // Добавляем консольные логи для отладки
     useEffect(() => {
-        console.log('Путь к видео:', '/showreel/main_video.webm');
-
         // Проверка существования файла через fetch
         fetch('/showreel/main_video.webm')
             .then(response => {
                 console.log('Статус ответа:', response.status);
-                console.log('Заголовки:', response.headers);
                 return response.blob();
             })
             .then(blob => {
@@ -82,7 +72,7 @@ export default function ShowreelBlock() {
     return (
         <div className={styles.showreel}>
             {/* Слайдшоу изображений */}
-            {!isVideoLoaded && (
+            {/* {!isVideoLoaded && (
                 <div className={styles.showreel__slideshow}>
                     {[1, 2, 3, 4, 5].map((imgNum) => (
                         <Image 
@@ -100,13 +90,21 @@ export default function ShowreelBlock() {
                         />
                     ))}
                 </div>
-            )}
+            )} */}
 
             {/* Видео */}
-            <video
+            {/* <video
                 ref={videoRef}
                 preload="auto"
                 className={`${styles.showreel__video} ${isVideoLoaded ? styles.video_visible : ''}`}
+                playsInline
+                muted
+                loop
+            /> */}
+            <video
+                ref={videoRef}
+                preload="auto"
+                className={`${styles.showreel__video}`}
                 playsInline
                 muted
                 loop

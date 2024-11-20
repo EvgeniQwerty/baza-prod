@@ -14,13 +14,6 @@
   --bottom-padding: 3rem; 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 255, 255, 255;
-    --primary: 0, 0, 0;
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -36,6 +29,30 @@ body {
 body {
   color: rgb(var(--primary));
   background: rgb(var(--background));
+}
+
+@media (max-width: 1280px) {
+  html {
+      font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  html {
+      font-size: 12px;
+  }
+}
+
+@media (max-width: 780px) {
+  html {
+      font-size: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  html {
+      font-size: 7px;
+  }
 }
 
 a {
@@ -95,10 +112,4 @@ textarea {
 
 ::-ms-input-placeholder { /* Edge 12 -18 */
   color: rgb(var(--primary));
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

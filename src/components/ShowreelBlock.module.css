@@ -1,7 +1,9 @@
 .showreel {
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     position: relative;
+    background: rgb(var(--background));
+    background: radial-gradient(circle at top right, rgba(var(--accent), 0.5), rgba(var(--background), 1) 60%);
 }
 
 .showreel__buttons {
@@ -14,12 +16,13 @@
 }
 
 .showreel__button {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 4rem;
     text-transform: uppercase;
     color: rgb(var(--primary));
     line-height: 1;
     transition: .3s all;
+    margin-bottom: 1.6rem;
 }
 
 .showreel__button:hover {
@@ -74,7 +77,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 1;
 }

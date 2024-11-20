@@ -30,7 +30,7 @@ const videoData: VideoData[] = [
         type: "HR-видео", 
         typeCode: "commercial", 
         year: "2023",
-        imgs: 1
+        imgs: 8
     },
     {
         folderPath: "/projects/supergoats", 

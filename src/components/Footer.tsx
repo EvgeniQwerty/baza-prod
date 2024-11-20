@@ -1,8 +1,7 @@
 import styles from "./Footer.module.css";
-import Image from "next/image";
 import Insta from "@/svg/insta.svg";
 import VK from "@/svg/vk.svg";
-import Tg from "@/svg/telegram.svg";
+import TG from "@/svg/telegram.svg";
 import Logo from "@/svg/logo.svg"
 
 //@ts-ignore
@@ -27,7 +26,7 @@ export default function Footer() {
                         <div className={styles.footer__socials}>
                             <a href="https://instagram.com/samoyed.biz" target="_blank" className={styles.footer__link}><Insta /></a>
                             <a href="https://vk.com/kalashnikov.prod" target="_blank" className={styles.footer__link}><VK /></a>
-                            <a href="https://t.me/kalashnikovk" target="_blank" className={styles.footer__link}><Tg /></a>
+                            <a href="https://t.me/kalashnikovk" target="_blank" className={styles.footer__link}><TG /></a>
                         </div>
                     </div>
                 </div>
