@@ -26,6 +26,11 @@ export default function IdeaBlock() {
                 loop
             />
             <p className={styles.ideablock__title}>Мы<br />вас<br />видим</p>
+            <div className={styles.ideablock__title_mobile}>
+                <p className={`${styles.ideablock__text_mobile} ${styles.ideablock__text_mobile_first}`}>Мы</p>
+                <p className={`${styles.ideablock__text_mobile} ${styles.ideablock__text_mobile_second}`}>вас</p>
+                <p className={`${styles.ideablock__text_mobile} ${styles.ideablock__text_mobile_third}`}>видим</p>
+            </div>
         </div>
     );
 }

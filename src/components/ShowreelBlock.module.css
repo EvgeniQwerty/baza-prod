@@ -21,8 +21,12 @@
     text-transform: uppercase;
     color: rgb(var(--primary));
     line-height: 1;
-    transition: .3s all;
+    transition: 0.3s all;
     margin-bottom: 1.6rem;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .showreel__button:hover {
@@ -35,9 +39,10 @@
 }
 
 .showreel__year {
-    font-weight: 300;
-    font-size: 1.5rem;
+    font-weight: 200;
+    font-size: 1.8rem;
     vertical-align: middle;
+    margin-left: 0.5rem;
 }
 
 .showreel__slideshow {
@@ -83,4 +88,16 @@
 
 .video_visible {
     opacity: 1;
+}
+
+@media (max-width: 900px) {
+    .showreel__button {
+        flex-direction: column; /* Переключаемся на колонку для мобильных */
+        align-items: flex-start; /* Выравниваем текст по левому краю */
+    }
+
+    .showreel__year {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
 }

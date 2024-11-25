@@ -39,26 +39,26 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.header__wrapper}>
-                <div 
+                <div
                     className={`
                         ${styles.header__burger} 
                         ${isMenuOpen ? styles.burger_active : ''}
                     `}
                     onClick={toggleMenu}
-                >   
+                >
                     <div className={styles.burger__button}>
-                        <Burger/>
+                        <Burger />
                     </div>
                     <p className={styles.burger__text}>Menu</p>
                 </div>
                 <a href="/" className={styles.header__logo}>
-                    <Logo/>
+                        <Logo className={styles.logo} />
                 </a>
             </div>
 
             {/* Оверлей меню */}
             {showOverlay && (
-                <div 
+                <div
                     className={`
                         ${styles.menu__overlay}
                         ${isClosing ? styles.menu__overlay_closing : ''}
@@ -68,7 +68,7 @@ export default function Header() {
             )}
 
             {/* Выплывающее меню */}
-            <nav 
+            <nav
                 className={`
                     ${styles.menu} 
                     ${isMenuOpen ? styles.menu_open : ''}
@@ -77,8 +77,8 @@ export default function Header() {
                 <ul className={styles.menu__list}>
                     {menuItems.map((item, index) => (
                         <li key={index} className={styles.menu__item}>
-                            <a 
-                                href={item.href} 
+                            <a
+                                href={item.href}
                                 className={styles.menu__link}
                             >
                                 {item.label}

@@ -10,7 +10,11 @@
 @media (max-width: 900px) {
     .videoblock {
         opacity: 1;    
-    }    
+    }   
+    
+    .videoblock__imageWrapper {
+        aspect-ratio: 18 / 9;
+    }
 }
 
 .videoblock_hovered {
@@ -22,7 +26,10 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    /* aspect-ratio: 18 / 9; */
 }
+
+
 
 .videoblock__image {
     position: absolute;
@@ -31,7 +38,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 1s ease-in-out; /* Плавный переход */
+    transition: opacity 1s ease-in-out;
     z-index: 1;
 }
 
@@ -59,6 +66,7 @@
     color: rgb(var(--primary));
     line-height: 1;
     transition: 0.3s all;
+    margin-bottom: 1rem;
 }
 
 .videoblock__button:hover {
@@ -77,6 +85,11 @@
 
 .videoblock__year {
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     vertical-align: middle;
+}
+
+.videoblock__org {
+    font-size: 1.4rem;
+    text-transform: uppercase;   
 }

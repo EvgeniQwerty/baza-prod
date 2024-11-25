@@ -15,38 +15,38 @@ interface VideoData {
 
 const videoData: VideoData[] = [
     {
-        folderPath: "/projects/servicecar", 
-        name: "Servicecar", 
-        org: "Servicecar", 
-        type: "Реклама на ТВ", 
-        typeCode: "commercial", 
+        folderPath: "/projects/servicecar",
+        name: "Servicecar",
+        org: "Servicecar",
+        type: "Реклама на ТВ",
+        typeCode: "commercial",
         year: "2023",
         imgs: 4
     },
     {
-        folderPath: "/projects/smena", 
-        name: "Первая работа", 
-        org: "Кинотеатр Смена", 
-        type: "HR-видео", 
-        typeCode: "commercial", 
+        folderPath: "/projects/smena",
+        name: "Первая работа",
+        org: "Кинотеатр Смена",
+        type: "HR-видео",
+        typeCode: "commercial",
         year: "2023",
         imgs: 8
     },
     {
-        folderPath: "/projects/supergoats", 
-        name: "Суперкозлы", 
-        org: "Суперкозлы", 
-        type: "Музыкальный клип", 
-        typeCode: "clip", 
+        folderPath: "/projects/supergoats",
+        name: "Суперкозлы",
+        org: "Суперкозлы",
+        type: "Музыкальный клип",
+        typeCode: "clip",
         year: "2023",
         imgs: 9
     },
     {
-        folderPath: "/projects/psycho", 
-        name: "Псих", 
-        org: "Бренд одежды", 
-        type: "Fashion-ролик", 
-        typeCode: "photo", 
+        folderPath: "/projects/psycho",
+        name: "Псих",
+        org: "Бренд одежды",
+        type: "Fashion-ролик",
+        typeCode: "photo",
         year: "2023",
         imgs: 6
     }
@@ -58,7 +58,7 @@ export default function VideosBlock() {
     const [currentFilter, setCurrentFilter] = useState<FilterType>('all');
     const [isFiltering, setIsFiltering] = useState(false);
 
-    const filteredVideos = videoData.filter(video => 
+    const filteredVideos = videoData.filter(video =>
         currentFilter === 'all' || video.typeCode === currentFilter
     );
 
@@ -72,7 +72,7 @@ export default function VideosBlock() {
     const handleFilterChange = (filter: FilterType) => {
         // Начинаем анимацию исчезновения
         setIsFiltering(true);
-        
+
         // Через короткий интервал меняем фильтр и останавливаем анимацию
         setTimeout(() => {
             setCurrentFilter(filter);
@@ -98,18 +98,18 @@ export default function VideosBlock() {
                         </button>
                     ))}
                 </div>
-                <button className={styles.categories__button}>Смотреть все</button>
+                <button className={`${styles.categories__button} ${styles.categories__watchall}`}>Смотреть все</button>
             </div>
 
             {/* Явная установка класса videos_hidden при фильтрации */}
-            <div 
+            <div
                 className={`
                     ${styles.videos__blocks} 
                     ${isFiltering ? styles.videos__blocks_hidden : ''}
                 `}
             >
                 {filteredVideos.slice(0, 4).map((video, index) => (
-                    <VideoBlock 
+                    <VideoBlock
                         key={index}
                         folderPath={video.folderPath}
                         name={video.name}
@@ -121,6 +121,11 @@ export default function VideosBlock() {
                     />
                 ))}
             </div>
+
+            <button className={`${styles.categories__button} ${styles.categories__watchall_mobile}`}>
+                Смотреть все
+            </button>
+
         </div>
     )
 }

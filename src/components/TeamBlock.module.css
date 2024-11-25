@@ -1,69 +1,87 @@
 .team {
-    width: 100dvw;
-    height: 75dvh;
-
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки на десктопе */
+    width: 100%;
 }
 
 .team__member {
     position: relative;
-    width: 20%;
+    height: 40rem; /* Фиксированная высота для карточек */
+    overflow: hidden;
 }
 
 .team__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.team__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    color: white;
+    padding: 1rem;
+    text-align: center;
     z-index: 1;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 
 .team__name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    text-align: center;
-    font-weight: 600;
-    font-size: 2.2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
     text-transform: uppercase;
-    text-align: center;
-    z-index: 2;
-    color: rgb(var(--primary));
-}
-
-.team__name_last {
-    transform: translate(-50%, -50%);
+    margin-bottom: 0.5rem;
 }
 
 .team__position {
-    width: 100%;
-    font-size: 1.4rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: pre-line;
     text-transform: uppercase;
-    position: absolute;
-    bottom: 3%;
-    left: 50%;
-    transform: translate(-50%, -3%);
-    text-align: center;
-    text-align: center;
-    z-index: 2;
-    color: rgb(var(--primary));
 }
 
-.team__position_last {
-    text-decoration: underline;
-    cursor: pointer;
-    transition: .3s all;
+.team__socials {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
 }
 
-.team__position_last:hover {
-    color: rgb(var(--accent));
-    font-weight: 800;
-
+.team__link {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
-@media (max-width: 1280px) {
-    .team__name {
-        font-size: 1.8rem;
+.team__link:hover {
+    color: rgb(var(--primary)); /* Основной цвет сайта */
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .team {
+        grid-template-columns: 1fr 1fr; /* 2 колонки на планшетах */
+    }
+}
+
+@media (max-width: 600px) {
+    .team {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
     }
 
-    .team__position {
-        font-size: 1rem;
+    .team__member {
+        height: 300px; /* Уменьшенная высота карточек */
     }
 }

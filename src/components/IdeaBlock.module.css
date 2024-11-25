@@ -27,3 +27,72 @@
     left: -3rem;
     z-index: 1; /* Заголовок над видео */
 }
+
+.ideablock__title_mobile {
+    display: none;
+    /* position: relative; */
+}
+
+.ideablock__text_mobile {
+    color: rgb(var(--gray));
+    font-weight: 800;
+    font-size: 13rem;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.ideablock__text_mobile_first {
+    position: absolute;
+    top: -4rem;
+    left: -4rem;
+}
+
+.ideablock__text_mobile_second {
+    position: absolute;
+    top: -4rem;
+    right: -4rem;
+}
+
+.ideablock__text_mobile_third {
+    position: absolute;
+    bottom: -2rem;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 1280px) {
+    .ideablock__title {
+        font-size: 15rem;
+    }    
+}
+
+@media (max-width: 1024px) {
+
+    .ideablock {
+        height: 60dvh;    
+    }
+
+    .ideablock__title {
+        display: none;
+    }
+
+    .ideablock__title_mobile {
+        display: block;
+    }
+
+    .ideablock__text_mobile {
+        font-size: 15rem;    
+    }
+}
+
+@media (max-width: 780px) {
+    .ideablock__text_mobile {
+        font-size: 13rem;    
+    }
+}
+
+@media (max-width: 500px) {
+    .ideablock {
+        height: 40dvh;    
+    }
+}
