@@ -14,7 +14,7 @@
 
 .header__burger {
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     left: 4rem;
     transition: .3s all;
     display: flex;
@@ -42,7 +42,7 @@
 
 .header__logo {
     position: absolute;
-    top: 4rem;
+    top: 3rem;
     left: 50%;    
     transform: translate(-50%, -0.5rem); 
 }

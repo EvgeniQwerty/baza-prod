@@ -1,5 +1,6 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./VideosBlock.module.css";
 import VideoBlock from "@/components/VideoBlock";
 
@@ -21,7 +22,7 @@ const videoData: VideoData[] = [
         type: "Реклама на ТВ",
         typeCode: "commercial",
         year: "2023",
-        imgs: 4
+        imgs: 4,
     },
     {
         folderPath: "/projects/smena",
@@ -30,7 +31,7 @@ const videoData: VideoData[] = [
         type: "HR-видео",
         typeCode: "commercial",
         year: "2023",
-        imgs: 8
+        imgs: 8,
     },
     {
         folderPath: "/projects/supergoats",
@@ -39,7 +40,7 @@ const videoData: VideoData[] = [
         type: "Музыкальный клип",
         typeCode: "clip",
         year: "2023",
-        imgs: 9
+        imgs: 9,
     },
     {
         folderPath: "/projects/psycho",
@@ -48,25 +49,65 @@ const videoData: VideoData[] = [
         type: "Fashion-ролик",
         typeCode: "photo",
         year: "2023",
-        imgs: 6
-    }
+        imgs: 6,
+    },
+    {
+        folderPath: "/projects/servicecar",
+        name: "Servicecar",
+        org: "Servicecar",
+        type: "Реклама на ТВ",
+        typeCode: "commercial",
+        year: "2023",
+        imgs: 4,
+    },
+    {
+        folderPath: "/projects/smena",
+        name: "Первая работа",
+        org: "Кинотеатр Смена",
+        type: "HR-видео",
+        typeCode: "commercial",
+        year: "2023",
+        imgs: 8,
+    },
+    {
+        folderPath: "/projects/supergoats",
+        name: "Суперкозлы",
+        org: "Суперкозлы",
+        type: "Музыкальный клип",
+        typeCode: "clip",
+        year: "2023",
+        imgs: 9,
+    },
+    {
+        folderPath: "/projects/psycho",
+        name: "Псих",
+        org: "Бренд одежды",
+        type: "Fashion-ролик",
+        typeCode: "photo",
+        year: "2023",
+        imgs: 6,
+    },
 ];
 
-type FilterType = 'all' | 'clip' | 'commercial' | 'photo';
+type FilterType = "all" | "clip" | "commercial" | "photo";
 
-export default function VideosBlock() {
-    const [currentFilter, setCurrentFilter] = useState<FilterType>('all');
+interface VideosBlockProps {
+    displayCount?: number;
+}
+
+export default function VideosBlock({ displayCount = 4 }: VideosBlockProps) {
+    const [currentFilter, setCurrentFilter] = useState<FilterType>("all");
     const [isFiltering, setIsFiltering] = useState(false);
 
-    const filteredVideos = videoData.filter(video =>
-        currentFilter === 'all' || video.typeCode === currentFilter
+    const filteredVideos = videoData.filter(
+        (video) => currentFilter === "all" || video.typeCode === currentFilter
     );
 
     const categories: { label: string; value: FilterType }[] = [
-        { label: 'Все категории', value: 'all' },
-        { label: 'Музыкальные клипы', value: 'clip' },
-        { label: 'Реклама', value: 'commercial' },
-        { label: 'Фотографии', value: 'photo' }
+        { label: "Все категории", value: "all" },
+        { label: "Музыкальные клипы", value: "clip" },
+        { label: "Реклама", value: "commercial" },
+        { label: "Фотографии", value: "photo" },
     ];
 
     const handleFilterChange = (filter: FilterType) => {
@@ -90,7 +131,7 @@ export default function VideosBlock() {
                             key={category.value}
                             className={`
                             ${styles.categories__button} 
-                            ${currentFilter === category.value ? styles.categories__button_active : ''}
+                            ${currentFilter === category.value ? styles.categories__button_active : ""}
                         `}
                             onClick={() => handleFilterChange(category.value)}
                         >
@@ -98,17 +139,22 @@ export default function VideosBlock() {
                         </button>
                     ))}
                 </div>
-                <button className={`${styles.categories__button} ${styles.categories__watchall}`}>Смотреть все</button>
+                <Link
+                    href="/projects"
+                    className={`${styles.categories__button} ${styles.categories__watchall}`}
+                >
+                    Смотреть все
+                </Link>
             </div>
 
             {/* Явная установка класса videos_hidden при фильтрации */}
             <div
                 className={`
                     ${styles.videos__blocks} 
-                    ${isFiltering ? styles.videos__blocks_hidden : ''}
+                    ${isFiltering ? styles.videos__blocks_hidden : ""}
                 `}
             >
-                {filteredVideos.slice(0, 4).map((video, index) => (
+                {filteredVideos.slice(0, displayCount).map((video, index) => (
                     <VideoBlock
                         key={index}
                         folderPath={video.folderPath}
@@ -122,10 +168,12 @@ export default function VideosBlock() {
                 ))}
             </div>
 
-            <button className={`${styles.categories__button} ${styles.categories__watchall_mobile}`}>
+            <Link
+                href="/projects"
+                className={`${styles.categories__button} ${styles.categories__watchall_mobile}`}
+            >
                 Смотреть все
-            </button>
-
+            </Link>
         </div>
-    )
+    );
 }

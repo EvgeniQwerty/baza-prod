@@ -3,7 +3,7 @@
     width: 100dvw;
     position: relative;
     background: rgb(var(--background));
-    background: radial-gradient(circle at top right, rgba(var(--accent), 0.5), rgba(var(--background), 1) 60%);
+    /* background: radial-gradient(circle at top right, rgba(var(--accent), 0.5), rgba(var(--background), 1) 60%); */
 }
 
 .showreel__buttons {

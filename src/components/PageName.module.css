@@ -1,0 +1,30 @@
+/* styles/PageName.module.css */
+.pagename {
+    margin-top: 7.5rem;
+    padding: 0 1rem;
+    /* padding-bottom: 2rem; */
+    background-color: rgb(var(--background));
+  }
+  
+  .pagename__imagewrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 18.75rem;
+  }
+  
+  .pagename__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .pagename__title {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem; 
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }

@@ -1,5 +1,6 @@
-"use client"
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
 import styles from "./Header.module.css";
 import Burger from "@/svg/burger.svg";
 import Logo from "@/svg/logo.svg";
@@ -25,15 +26,20 @@ export default function Header() {
     };
 
     const closeMenu = () => {
-        toggleMenu();
+        setIsClosing(true);
+        setIsMenuOpen(false);
+        setTimeout(() => {
+            setShowOverlay(false);
+            setIsClosing(false);
+        }, 500);
     };
 
     const menuItems = [
-        { label: 'О нас', href: '#' },
-        { label: 'Проекты', href: '#' },
-        { label: 'Услуги', href: '#' },
-        { label: 'Контакты', href: '#' },
-        { label: 'Showreel', href: '#' }
+        { label: 'О нас', href: '/#' },
+        { label: 'Проекты', href: '/projects' },
+        { label: 'Услуги', href: '/#' },
+        { label: 'Контакты', href: '/#' },
+        { label: 'Showreel', href: '/#' }
     ];
 
     return (
@@ -77,16 +83,17 @@ export default function Header() {
                 <ul className={styles.menu__list}>
                     {menuItems.map((item, index) => (
                         <li key={index} className={styles.menu__item}>
-                            <a
+                            <Link
                                 href={item.href}
                                 className={styles.menu__link}
+                                onClick={closeMenu}
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
             </nav>
         </header>
-    )
+    );
 }
