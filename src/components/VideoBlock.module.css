@@ -1,20 +1,9 @@
 .videoblock {
-    width: 100%;
-    height: 100%;
     position: relative;
-    opacity: 0.7;
-    transition: opacity 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-@media (max-width: 900px) {
-    .videoblock {
-        opacity: 1;    
-    }   
-    
-    .videoblock__imageWrapper {
-        aspect-ratio: 18 / 9;
-    }
+    width: 100%;
+    aspect-ratio: 17/9;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .videoblock_hovered {
@@ -25,21 +14,15 @@
     position: relative;
     width: 100%;
     height: 100%;
+    aspect-ratio: 17/9;
     overflow: hidden;
-    /* aspect-ratio: 18 / 9; */
 }
 
-
-
 .videoblock__image {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 1s ease-in-out;
-    z-index: 1;
+    transition: transform 0.3s ease;
 }
 
 .videoblock__image.fadeOut {
@@ -92,4 +75,22 @@
 .videoblock__org {
     font-size: 1.4rem;
     text-transform: uppercase;   
+}
+
+@media (max-width: 1280px) {
+    .videoblock__button {
+        font-size: 3.2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .videoblock {
+        aspect-ratio: 19/9;
+        height: auto;
+    }
+    
+    .videoblock__imageWrapper {
+        aspect-ratio: 19/9;
+        height: auto;
+    }
 }
