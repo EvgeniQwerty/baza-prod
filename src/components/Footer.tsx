@@ -3,6 +3,7 @@ import Insta from "@/svg/insta.svg";
 import VK from "@/svg/vk.svg";
 import TG from "@/svg/telegram.svg";
 import Logo from "@/svg/logo.svg"
+import Link from "next/link";
 
 //@ts-ignore
 export default function Footer() {
@@ -24,9 +25,9 @@ export default function Footer() {
                     <div className={styles.footer__block}>
                         <a href="tel:79195105601" className={styles.footer__link}>+7 (919) 510-56-01</a>
                         <div className={styles.footer__socials}>
-                            <a href="https://instagram.com/samoyed.biz" target="_blank" className={styles.footer__link}><Insta /></a>
-                            <a href="https://vk.com/kalashnikov.prod" target="_blank" className={styles.footer__link}><VK /></a>
-                            <a href="https://t.me/kalashnikovk" target="_blank" className={styles.footer__link}><TG /></a>
+                            <a href="https://instagram.com/samoyed.biz" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><Insta /></a>
+                            <a href="https://vk.com/kalashnikov.prod" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><VK /></a>
+                            <a href="https://t.me/kalashnikovk" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><TG /></a>
                         </div>
                     </div>
                 </div>
@@ -47,8 +48,8 @@ export default function Footer() {
                     </div>
                     <div className={styles.footer__block}>
                         <a href="/" className={styles.footer__link}>О нас</a>
-                        <a href="/" className={styles.footer__link}>Проекты</a>
-                        <a href="/" className={styles.footer__link}>Услуги</a>
+                        <Link href="/projects" className={styles.footer__link}>Проекты</Link>
+                        <Link href="/servives" className={styles.footer__link}>Услуги</Link>
                         <a href="/" className={styles.footer__link}>Контакты</a>
                     </div>
                 </div>
@@ -56,9 +57,9 @@ export default function Footer() {
                     <div className={styles.footer__block}>
                         <a href="tel:79195105601" className={styles.footer__link}>+7 (919) 510-56-01</a>
                         <div className={styles.footer__socials}>
-                            <a href="https://instagram.com/samoyed.biz" target="_blank" className={styles.footer__link}><Insta /></a>
-                            <a href="https://vk.com/kalashnikov.prod" target="_blank" className={styles.footer__link}><VK /></a>
-                            <a href="https://t.me/kalashnikovk" target="_blank" className={styles.footer__link}><TG /></a>
+                            <a href="https://instagram.com/samoyed.biz" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><Insta /></a>
+                            <a href="https://vk.com/kalashnikov.prod" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><VK /></a>
+                            <a href="https://t.me/kalashnikovk" target="_blank" className={`${styles.footer__link} ${styles.footer__social}`}><TG /></a>
                         </div>
                     </div>
                     <div className={styles.footer__block}>

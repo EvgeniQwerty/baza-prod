@@ -7,7 +7,7 @@ export default function Home() {
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
       <PageName imageUrl="/projects/header.png" title="Проекты"/>
-      <VideosBlock displayCount={8} />
+      <VideosBlock displayCount={8} enableLoadMore={true}/>
     </main>
   );
 }

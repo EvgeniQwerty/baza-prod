@@ -37,7 +37,7 @@ export default function Header() {
     const menuItems = [
         { label: 'О нас', href: '/#' },
         { label: 'Проекты', href: '/projects' },
-        { label: 'Услуги', href: '/#' },
+        { label: 'Услуги', href: '/services' },
         { label: 'Контакты', href: '/#' },
         { label: 'Showreel', href: '/#' }
     ];
