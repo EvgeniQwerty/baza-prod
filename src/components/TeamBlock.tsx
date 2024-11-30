@@ -82,6 +82,18 @@ export default function TeamBlock() {
                     </div>
                 </div>
             ))}
+            <div className={styles.team__member}>
+                <Image
+                    src="/persons/person-who.png"
+                    alt="Who's next?"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                    className={styles.team__image}
+                />
+                <p className={styles.team__whosnext}>Кто<br />следующий?</p>
+                <a href="https://t.me/kalashnikovk" target="_blank" className={styles.team__sendresume}>Отправить резюме</a>
+            </div>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 .team {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки на десктопе */
+    grid-template-columns: repeat(5, 1fr);
     width: 100%;
 }
 
@@ -69,11 +69,30 @@
     color: rgb(var(--primary)); /* Основной цвет сайта */
 }
 
-/* Адаптивность */
-@media (max-width: 900px) {
-    .team {
-        grid-template-columns: 1fr 1fr; /* 2 колонки на планшетах */
-    }
+.team__whosnext {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 350%);
+    z-index: 10;
+}
+
+.team__sendresume {
+    width: 100%;
+    font-size: 1.2rem;    
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -250%);
+    z-index: 10;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
