@@ -60,7 +60,7 @@ export default function TeamBlock() {
                         className={styles.team__image}
                     />
                     <div className={styles.team__overlay}>
-                        <div className={styles.team__name}>{member.name}</div>
+                        <div className={styles.team__name}>{member.name.split(" ")[0]}<br/>{member.name.split(" ")[1]}</div>
                         <div className={styles.team__socials}>
                             {member.socials.map((social, idx) => (
                                 <a

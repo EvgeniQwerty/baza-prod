@@ -77,7 +77,8 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
 
     useEffect(() => {
         if (sliderRef.current) {
-            sliderRef.current.style.transform = `translateX(-${currentSlide * 100}%)`;
+            const slideOffset = 36; // Фиксированное значение сдвига для каждого слайда
+            sliderRef.current.style.transform = `translateX(-${currentSlide * slideOffset + currentSlide * 5}dvw)`;
         }
     }, [currentSlide]);
 

@@ -162,6 +162,7 @@ export default function VideosBlock({ displayCount = 4, enableLoadMore = false }
     };
 
     const showLoadMoreButton = enableLoadMore && visibleCount < filteredVideos.length;
+    const showWatchAllButton = !enableLoadMore;
 
     return (
         <div className={styles.videos}>
@@ -179,7 +180,7 @@ export default function VideosBlock({ displayCount = 4, enableLoadMore = false }
                     ))}
                 </div>
 
-                {!showLoadMoreButton && (
+                {showWatchAllButton && (
                     <Link href="/projects" className={`${styles.categories__button} ${styles.categories__watchall}`}>
                         Смотреть все
                     </Link>
@@ -210,7 +211,7 @@ export default function VideosBlock({ displayCount = 4, enableLoadMore = false }
                 </button>
             )}
 
-            {!showLoadMoreButton && (
+            {showWatchAllButton && (
                 <Link href="/projects" className={`${styles.categories__button} ${styles.categories__watchall_mobile}`}>
                     Смотреть все
                 </Link>
