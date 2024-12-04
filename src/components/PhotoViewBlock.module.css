@@ -1,14 +1,15 @@
 .photo {
   width: 100%;
-  padding: 2rem 4rem;
+  padding: 2rem 1rem;
 }
 
 .photo__title {
   color: white;
-  font-size: 2rem;
+  font-size: 1.4rem;
   margin-bottom: 2rem;
   font-weight: 600;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .photo__grid {
@@ -65,5 +66,9 @@
 
   .photo__item_large {
     grid-column: span 1;
+  }
+
+  .photo__title {
+    text-align: left;
   }
 }

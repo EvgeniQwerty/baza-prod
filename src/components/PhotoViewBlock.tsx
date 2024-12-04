@@ -134,7 +134,7 @@ const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
 
     return (
         <div className={styles.photo}>
-            <h2 className={styles.photo__title}>Взгляд изнутри</h2>
+            <h2 className={styles.photo__title}>Ваши проекты нашими глазами</h2>
 
             <div className={styles.photo__grid}>
                 {visiblePhotos.map((photo, index) => (
