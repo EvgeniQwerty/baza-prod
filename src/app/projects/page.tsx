@@ -2,7 +2,7 @@ import PageName from "@/components/PageName";
 import styles from "./page.module.css";
 import VideosBlock from "@/components/VideosBlock";
 
-export default function Home() {
+export default function Projects() {
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>

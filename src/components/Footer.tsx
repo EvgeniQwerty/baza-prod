@@ -47,7 +47,7 @@ export default function Footer() {
                         <p className={styles.footer__coords}>58.5966, 49.6601</p>
                     </div>
                     <div className={styles.footer__block}>
-                        <a href="/" className={styles.footer__link}>О нас</a>
+                        <Link href="/about" className={styles.footer__link}>О нас</Link>
                         <Link href="/projects" className={styles.footer__link}>Проекты</Link>
                         <Link href="/servives" className={styles.footer__link}>Услуги</Link>
                         <a href="/" className={styles.footer__link}>Контакты</a>

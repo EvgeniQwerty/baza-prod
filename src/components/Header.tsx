@@ -35,7 +35,7 @@ export default function Header() {
     };
 
     const menuItems = [
-        { label: 'О нас', href: '/#' },
+        { label: 'О нас', href: '/about' },
         { label: 'Проекты', href: '/projects' },
         { label: 'Услуги', href: '/services' },
         { label: 'Контакты', href: '/#' },
