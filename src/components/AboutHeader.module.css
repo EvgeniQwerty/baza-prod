@@ -106,7 +106,62 @@
 
 @media (max-width: 900px) {
     .showreel__year {
-        margin-left: 0;
         margin-top: 1rem;
     }
+}
+
+@media (max-width: 600px) {
+    .showreel__button {
+        font-size: 3.6rem;
+    }    
+
+    .quote__h2 {
+        font-size: 1.2rem;    
+    }
+
+    .quote__h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .showreel__button {
+        font-size: 4.4rem;
+    }    
+
+    .quote__h2 {
+        font-size: 1.6rem;    
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+
+    .quote__h3 {
+        font-size: 1.4rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .showreel__button {
+        font-size: 3.8rem;
+    }    
+}
+
+@media (max-width: 400px) {
+    .showreel__button {
+        font-size: 3.6rem;
+    }    
+}
+
+@media (max-width: 350px) {
+    .showreel__button {
+        font-size: 3rem;
+    }    
+}
+
+@media (max-width: 300px) {
+    .showreel__button {
+        font-size: 2.6rem;
+    }    
 }

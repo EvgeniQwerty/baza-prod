@@ -12,7 +12,7 @@ export default function TeamBlock() {
                 { href: "https://t.me/kalashnikovk", icon: <VK /> },
                 { href: "https://t.me/kalashnikovk", icon: <IG /> },
             ],
-            imgSrc: "/persons/person-1.png",
+            imgSrc: "/persons/person-1.jpg",
             imgAlt: "CEO",
         },
         {
@@ -22,7 +22,7 @@ export default function TeamBlock() {
                 { href: "https://t.me/darya", icon: <VK /> },
                 { href: "https://t.me/darya", icon: <IG /> },
             ],
-            imgSrc: "/persons/person-2.png",
+            imgSrc: "/persons/person-2.jpg",
             imgAlt: "COO",
         },
         {
@@ -32,7 +32,7 @@ export default function TeamBlock() {
                 { href: "https://t.me/mikhail", icon: <VK /> },
                 { href: "https://t.me/mikhail", icon: <IG /> },
             ],
-            imgSrc: "/persons/person-3.png",
+            imgSrc: "/persons/person-3.jpg",
             imgAlt: "Director",
         },
         {
@@ -42,7 +42,7 @@ export default function TeamBlock() {
                 { href: "https://t.me/alex", icon: <VK /> },
                 { href: "https://t.me/alex", icon: <IG /> },
             ],
-            imgSrc: "/persons/person-4.png",
+            imgSrc: "/persons/person-4.jpg",
             imgAlt: "Cinematographer",
         },
     ];

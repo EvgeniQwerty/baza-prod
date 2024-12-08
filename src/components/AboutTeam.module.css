@@ -12,3 +12,96 @@
     height: 100%;
     object-fit: cover;
 }
+
+.team__grid {
+    display: grid;
+    grid-template-columns: repeat(30, 0.1fr) 0.5fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    gap: 1rem;
+    padding: 6rem 8rem;
+    position: relative;
+    z-index: 11;
+    height: 100%;
+}
+
+.grid__span1 {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.grid__span5 {
+    grid-column: span 5;
+}
+
+.grid__span6 {
+    grid-column: span 6;
+}
+
+.grid__position {
+    font-size: 0.8rem;
+    font-weight: 200;
+    color: rgb(var(--accent));
+    margin-bottom: 0.5rem;
+}
+
+.grid__name {
+    margin-bottom: 0.2rem;
+}
+
+@media (max-width: 800px) {
+    .team__grid {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 3rem 4rem;
+    }
+
+    .grid__span1 {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .grid__span5 {
+        grid-column: span 1;
+    }
+
+    .grid__span6 {
+        grid-column: span 1;
+    }
+
+    .team {
+        height: 90dvh;
+    }
+}
+
+@media (max-width: 780px) {
+    .grid__position {
+        font-size: 1rem;
+    }
+
+    .grid__name {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .team {
+        height: 100dvh;
+    }
+}
+
+@media (max-width: 500px) {
+    .team__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid__position {
+        font-size: 1.4rem;
+    }
+
+    .grid__name {
+        font-size: 1.6rem;
+    }
+
+    .team {
+        height: 120dvh;
+    }
+}
