@@ -61,10 +61,10 @@ a {
   transition: .3s all;
 }
 
-a:hover {
+/* a:hover {
   color: rgb(var(--accent));
   font-weight: 800;
-}
+} */
 
 svg {
   color: rgb(var(--primary)) !important;

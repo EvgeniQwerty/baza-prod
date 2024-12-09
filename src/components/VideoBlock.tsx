@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './VideoBlock.module.css';
+import Link from 'next/link';
 
 interface VideoBlockProps {
     folderPath: string;
@@ -41,30 +42,32 @@ const VideoBlock: FC<VideoBlockProps> = ({ folderPath, name, org, type, typeCode
     };
 
     return (
-        <div
-            className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
-            data-type={typeCode}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
-            <p className={styles.videoblock__type}>{type}</p>
-            <div className={styles.videoblock__imageWrapper}>
-                <Image
-                    src={`${folderPath}/${currentImageIndex}.png`}
-                    alt={name}
-                    layout="fill"
-                    objectFit="cover"
-                    quality={100}
-                    className={`${styles.videoblock__image}`}
-                />
+        <Link href={folderPath} className={styles.videoblock__link}>
+            <div
+                className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
+                data-type={typeCode}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <p className={styles.videoblock__type}>{type}</p>
+                <div className={styles.videoblock__imageWrapper}>
+                    <Image
+                        src={`${folderPath}/${currentImageIndex}.png`}
+                        alt={name}
+                        layout="fill"
+                        objectFit="cover"
+                        quality={100}
+                        className={`${styles.videoblock__image}`}
+                    />
+                </div>
+                <div className={styles.videoblock__buttons}>
+                    <a className={styles.videoblock__button}>
+                        {name} <span className={styles.videoblock__year}>{year}</span>
+                    </a>
+                    <p className={styles.videoblock__org}>{org}</p>
+                </div>
             </div>
-            <div className={styles.videoblock__buttons}>
-                <a className={styles.videoblock__button}>
-                    {name} <span className={styles.videoblock__year}>{year}</span>
-                </a>
-                <p className={styles.videoblock__org}>{org}</p>
-            </div>
-        </div>
+        </Link>
     );
 };
 
