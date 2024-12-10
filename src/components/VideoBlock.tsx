@@ -42,8 +42,8 @@ const VideoBlock: FC<VideoBlockProps> = ({ folderPath, name, org, type, typeCode
     };
 
     return (
-        <Link href={folderPath} className={styles.videoblock__link}>
-            <div
+        // <Link href={folderPath} className={styles.videoblock__link}>
+            <Link href={folderPath}
                 className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
                 data-type={typeCode}
                 onMouseEnter={handleMouseEnter}
@@ -66,8 +66,8 @@ const VideoBlock: FC<VideoBlockProps> = ({ folderPath, name, org, type, typeCode
                     </a>
                     <p className={styles.videoblock__org}>{org}</p>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        // </Link>
     );
 };
 

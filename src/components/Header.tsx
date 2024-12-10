@@ -39,7 +39,7 @@ export default function Header() {
         { label: 'Проекты', href: '/projects' },
         { label: 'Услуги', href: '/services' },
         { label: 'Контакты', href: '/#' },
-        { label: 'Showreel', href: '/#' }
+        { label: 'Showreel', href: '/projects/showreel' }
     ];
 
     return (

@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import Project from "@/components/Project";
 
-export default function Projects() {
+export default function ProjectPage() {
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>

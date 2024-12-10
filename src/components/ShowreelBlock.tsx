@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "./ShowreelBlock.module.css";
+import Link from "next/link";
 
 type ButtonType = 'baza' | 'showreel';
 
@@ -103,18 +104,17 @@ export default function ShowreelBlock() {
             />
 
             <div className={styles.showreel__buttons}>
-                <a
+                <Link href="/about"
                     className={`${styles.showreel__button} ${activeButton === 'baza' ? styles.button_active : ''}`}
-                    onClick={() => handleClick('baza')}
                 >
                     Baza «Мы вас видим» <span className={styles.showreel__year}>2024</span>
-                </a>
-                <a
+                </Link>
+                <Link href="/projects/showreel"
                     className={`${styles.showreel__button} ${activeButton === 'showreel' ? styles.button_active : ''}`}
                     onClick={() => handleClick('showreel')}
                 >
                     Showreel <span className={styles.showreel__year}>2024</span>
-                </a>
+                </Link>
             </div>
         </div>
     );
