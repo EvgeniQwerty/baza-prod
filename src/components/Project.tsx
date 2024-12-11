@@ -1,7 +1,9 @@
-// components/Project.tsx
-import React from 'react';
+"use client"
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Project.module.css';
+import ArrowLeft from "@/svg/arrow-left.svg";
+import ArrowRight from "@/svg/arrow-right.svg";
 
 interface ProjectProps {
   vimeoLink: string;
@@ -30,6 +32,44 @@ const Project: React.FC<ProjectProps> = ({
   backstageVimeoLink,
   team,
 }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const images = [img1, img2, img3, img4];
+
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const difference = touchStartX.current - touchEndX.current;
+    if (Math.abs(difference) > 50) {
+      if (difference > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+  };
+
+  // Автоматическая прокрутка
+  useEffect(() => {
+    const timer = setInterval(handleNext, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className={styles.project}>
       <header className={styles.project__header}>
@@ -56,18 +96,38 @@ const Project: React.FC<ProjectProps> = ({
       <section className={styles.project__content}>
         <div className={styles.project__content_left}>
           <h3 className={styles.project__content_title}>Как это было</h3>
-          <div className={styles.project__photos}>
-            {[img1, img2, img3, img4].map((img, idx) => (
+          <div 
+            className={styles.project__photos}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {images.map((img, idx) => (
               <Image
                 key={idx}
                 src={img}
                 alt={`Проект Фото ${idx + 1}`}
-                className={styles.project__photos_img}
+                className={`${styles.project__photos_img} ${styles.carousel__slide}`}
+                data-active={idx === currentSlide}
                 width={1200}
                 height={800}
                 priority={idx === 0}
               />
             ))}
+            <button 
+              className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
+              onClick={handlePrev}
+              aria-label="Previous slide"
+            >
+              <ArrowLeft/>
+            </button>
+            <button 
+              className={`${styles.carousel__button} ${styles.carousel__button_next}`}
+              onClick={handleNext}
+              aria-label="Next slide"
+            >
+              <ArrowRight/>
+            </button>
           </div>
           <div className={styles.project__content_video}>
             <iframe

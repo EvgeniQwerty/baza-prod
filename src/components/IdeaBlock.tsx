@@ -6,11 +6,25 @@ export default function IdeaBlock() {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.load(); // Принудительно загружаем видео
-            videoRef.current.play().catch((error) => {
-                console.error("Ошибка при воспроизведении видео:", error);
-            });
+        const videoElement = videoRef.current;
+        if (videoElement) {
+            // Используем декларативный подход с async/await
+            const playVideo = async () => {
+                try {
+                    await videoElement.play();
+                } catch (error) {
+                    console.warn("Автовоспроизведение видео заблокировано:", error);
+                }
+            };
+            
+            playVideo();
+
+            // Очистка эффекта
+            return () => {
+                if (videoElement) {
+                    videoElement.pause();
+                }
+            };
         }
     }, []);
 
@@ -19,11 +33,12 @@ export default function IdeaBlock() {
             <video
                 ref={videoRef}
                 className={styles.ideablock__video}
-                src="/ideas/ideas_video.webm" // Путь к вашему видео
-                preload="auto"
+                src="/ideas/ideas_video.webm"
+                preload="metadata"
                 playsInline
                 muted
                 loop
+                aria-label="Фоновое видео с анимацией"
             />
             <p className={styles.ideablock__title}>Мы<br />вас<br />видим</p>
             <div className={styles.ideablock__title_mobile}>

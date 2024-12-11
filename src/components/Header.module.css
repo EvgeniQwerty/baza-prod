@@ -1,3 +1,4 @@
+/* Header Styles */
 .header {
     width: 100%;
     height: 6rem;
@@ -20,6 +21,9 @@
     display: flex;
     gap: 1rem;
     z-index: 150;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .burger__button:hover {
@@ -48,7 +52,7 @@
 }
 
 .header__logo:hover {
-    scale: 1.05;
+    transform: translate(-50%, -0.5rem) scale(1.05);
 }
 
 .menu {
@@ -96,29 +100,23 @@
     transition: 0.3s all;
 }
 
-/* Стили для кнопки бургера */
 .burger__button svg path {
     fill: rgb(var(--primary));
-    /* Белый цвет по умолчанию */
     transition: fill 0.3s ease;
 }
 
 .burger__button:hover svg path {
     fill: rgb(var(--accent));
-    /* Рыжий цвет при наведении */
 }
 
-/* Черный цвет при открытом меню */
 .burger_active .burger__button svg path {
     fill: rgb(var(--background));
 }
 
-/* Рыжий цвет при наведении на черную кнопку в открытом меню */
 .burger_active .burger__button:hover svg path {
     fill: rgb(var(--accent));
 }
 
-/* Анимация для оверлея */
 .menu__overlay {
     position: fixed;
     top: 0;
@@ -137,7 +135,6 @@
         opacity: 0;
         background-color: rgba(var(--background), 0);
     }
-
     to {
         opacity: 1;
         background-color: rgba(var(--background), 0.5);
@@ -153,7 +150,6 @@
         opacity: 1;
         background-color: rgba(var(--background), 0.5);
     }
-
     to {
         opacity: 0;
         background-color: rgba(var(--background), 0);
