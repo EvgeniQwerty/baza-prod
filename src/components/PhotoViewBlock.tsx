@@ -1,11 +1,14 @@
 "use client"
-import React, { useState } from 'react';
+
+import React, { useState, useCallback, memo } from 'react';
+import Image from 'next/image';
 import styles from './PhotoViewBlock.module.css';
+import { Suspense } from 'react';
 
 interface Photo {
     id: number;
     src: string;
-    alt?: string;
+    alt: string;
     isLarge?: boolean;
 }
 
@@ -14,7 +17,7 @@ interface PhotoViewBlockProps {
     initialCount?: number;
 }
 
-const photos = [
+const photos: Photo[] = [
     {
         id: 1,
         src: '/services/photos/002.jpg',
@@ -121,6 +124,43 @@ const photos = [
     },
 ];
 
+// Мемоизированный компонент для отдельной фотографии
+const PhotoItem = memo(({ photo, index }: { photo: Photo; index: number }) => (
+    <div
+        className={`${styles.photo__item} ${photo.isLarge ? styles['photo__item_large'] : ''}`}
+        data-testid={`photo-item-${index}`}
+    >
+        <Image
+            src={photo.src}
+            alt={photo.alt}
+            className={styles.photo__image}
+            fill
+            sizes={photo.isLarge ? 
+                "(max-width: 767px) 100vw, 100vw" : 
+                "(max-width: 767px) 100vw, 25vw"}
+            priority={index < 4} // Приоритетная загрузка первых 4 изображений
+            loading={index < 4 ? "eager" : "lazy"}
+            quality={75}
+        />
+    </div>
+));
+
+PhotoItem.displayName = 'PhotoItem';
+
+// Компонент кнопки "Показать ещё"
+const LoadMoreButton = memo(({ onClick, className }: { onClick: () => void; className: string }) => (
+    <button
+        className={className}
+        onClick={onClick}
+        type="button"
+        aria-label="Показать больше фотографий"
+    >
+        Смотреть еще
+    </button>
+));
+
+LoadMoreButton.displayName = 'LoadMoreButton';
+
 const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
     showMoreButton = false,
     initialCount = 9
@@ -128,40 +168,42 @@ const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
     const [visibleCount, setVisibleCount] = useState(initialCount);
     const visiblePhotos = photos.slice(0, visibleCount);
 
-    const handleShowMore = () => {
+    const handleShowMore = useCallback(() => {
         setVisibleCount(prevCount => prevCount + 9);
-    };
+    }, []);
 
     return (
-        <div className={styles.photo}>
-            <h2 className={styles.photo__title}>Ваши проекты нашими глазами</h2>
+        <section 
+            className={styles.photo}
+            aria-label="Галерея фотографий наших проектов"
+        >
+            <h2 className={styles.photo__title}>
+                Ваши проекты нашими глазами
+            </h2>
 
-            <div className={styles.photo__grid}>
-                {visiblePhotos.map((photo, index) => (
-                    <div
-                        key={photo.id}
-                        className={`${styles.photo__item} ${photo.isLarge ? styles['photo__item_large'] : ''
-                            }`}
-                    >
-                        <img
-                            src={photo.src}
-                            alt={photo.alt || `Photo ${index + 1}`}
-                            className={styles.photo__image}
+            <Suspense fallback={<div className={styles.photo__loading}>Загрузка галереи...</div>}>
+                <div 
+                    className={styles.photo__grid}
+                    role="grid"
+                >
+                    {visiblePhotos.map((photo, index) => (
+                        <PhotoItem
+                            key={photo.id}
+                            photo={photo}
+                            index={index}
                         />
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </Suspense>
 
             {showMoreButton && visibleCount < photos.length && (
-                <button
+                <LoadMoreButton
                     className={styles.photo__more}
                     onClick={handleShowMore}
-                >
-                    Смотреть еще
-                </button>
+                />
             )}
-        </div>
+        </section>
     );
 };
 
-export default PhotoViewBlock;
+export default memo(PhotoViewBlock);

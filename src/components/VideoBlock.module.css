@@ -1,10 +1,12 @@
+/* VideoBlock Styles */
 .videoblock {
     position: relative;
     width: 100%;
     aspect-ratio: 17/9;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
     opacity: 0.7;
+    will-change: opacity;
 }
 
 .videoblock_hovered {
@@ -24,22 +26,15 @@
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
-}
-
-.videoblock__image.fadeOut {
-    opacity: 0; /* Исчезает */
-}
-
-.videoblock__image.fadeIn {
-    opacity: 1; /* Появляется */
+    will-change: transform; 
 }
 
 .videoblock__buttons {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: var(--bottom-padding);
-    left: var(--left-padding);
+    bottom: var(--bottom-padding, 2rem);
+    left: var(--left-padding, 2rem);
     z-index: 3;
 }
 
@@ -51,11 +46,14 @@
     line-height: 1;
     transition: 0.3s all;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
-.videoblock__button:hover {
+.videoblock__button:hover,
+.videoblock__button:focus {
     font-weight: 800;
     color: rgb(var(--accent));
+    outline: 2px solid rgb(var(--accent));
 }
 
 .videoblock__type {

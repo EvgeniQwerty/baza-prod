@@ -1,7 +1,7 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
-import styles from './VideoBlock.module.css';
 import Link from 'next/link';
+import styles from './VideoBlock.module.css';
 
 interface VideoBlockProps {
     folderPath: string;
@@ -13,61 +13,84 @@ interface VideoBlockProps {
     imgs: number;
 }
 
-const VideoBlock: FC<VideoBlockProps> = ({ folderPath, name, org, type, typeCode, year, imgs }) => {
+const VideoBlock: FC<VideoBlockProps> = ({ 
+    folderPath, 
+    name, 
+    org, 
+    type, 
+    typeCode, 
+    year, 
+    imgs 
+}) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(1);
 
+    const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+    const handleMouseLeave = useCallback(() => {
+        setIsHovered(false);
+        setCurrentImageIndex(1);
+    }, []);
+
     useEffect(() => {
-        let interval: NodeJS.Timeout | null = null;
+        if (!isHovered) return;
 
-        if (isHovered) {
-            interval = setInterval(() => {
-                setCurrentImageIndex((prevIndex) => {
-                    const nextIndex = prevIndex < imgs ? prevIndex + 1 : 1;
-                    return nextIndex;
-                });
-            }, 1000); // Длительность показа одного кадра
-        }
+        const interval = setInterval(() => {
+            setCurrentImageIndex(prevIndex => 
+                prevIndex < imgs ? prevIndex + 1 : 1
+            );
+        }, 1000);
 
-        return () => {
-            if (interval) clearInterval(interval);
-        };
+        return () => clearInterval(interval);
     }, [isHovered, imgs]);
 
-    const handleMouseEnter = () => setIsHovered(true);
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-        setCurrentImageIndex(1); // Сбрасываем на первый кадр
-    };
+    const imageSrc = useMemo(() => 
+        `${folderPath}/${currentImageIndex}.png`, 
+        [folderPath, currentImageIndex]
+    );
 
     return (
-        // <Link href={folderPath} className={styles.videoblock__link}>
-            <Link href={folderPath}
-                className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
-                data-type={typeCode}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+        <Link 
+            href={folderPath}
+            className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
+            data-type={typeCode}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            aria-label={`${name} ${type} проект ${year}`}
+            role="article"
+        >
+            <p 
+                className={styles.videoblock__type}
+                aria-hidden="true"
             >
-                <p className={styles.videoblock__type}>{type}</p>
-                <div className={styles.videoblock__imageWrapper}>
-                    <Image
-                        src={`${folderPath}/${currentImageIndex}.png`}
-                        alt={name}
-                        layout="fill"
-                        objectFit="cover"
-                        quality={100}
-                        className={`${styles.videoblock__image}`}
-                    />
-                </div>
-                <div className={styles.videoblock__buttons}>
-                    <a className={styles.videoblock__button}>
-                        {name} <span className={styles.videoblock__year}>{year}</span>
-                    </a>
-                    <p className={styles.videoblock__org}>{org}</p>
-                </div>
-            </Link>
-        // </Link>
+                {type}
+            </p>
+            
+            <div 
+                className={styles.videoblock__imageWrapper}
+                role="img" 
+                aria-label={`Изображение проекта ${name}`}
+            >
+                <Image
+                    src={imageSrc}
+                    alt={name}
+                    fill
+                    quality={75}
+                    priority={false}
+                    className={styles.videoblock__image}
+                />
+            </div>
+            
+            <div className={styles.videoblock__buttons}>
+                <span 
+                    className={styles.videoblock__button}
+                    tabIndex={0}
+                    role="button"
+                >
+                    {name} <span className={styles.videoblock__year}>{year}</span>
+                </span>
+                <p className={styles.videoblock__org}>{org}</p>
+            </div>
+        </Link>
     );
 };
 

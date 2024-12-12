@@ -2,7 +2,6 @@
 .videos {
     min-height: 0;
     height: auto;
-    /* padding: 2rem 0; */
 }
 
 .videos__blocks {
@@ -20,15 +19,16 @@
 
 .categories {
     display: flex;
-    margin-bottom: 1rem;
     margin: 3rem;
     justify-content: space-between;
     height: 2rem;
+    align-items: center;
 }
 
 .categories__filters {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .categories__button {
@@ -66,6 +66,14 @@
     padding: 1.5rem;
 }
 
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+/* Адаптивность */
 @media (max-width: 900px) {
     .videos {
         min-height: auto;
@@ -74,11 +82,7 @@
 
     .videos__blocks {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        /* height: 100%; */
-        /* height: auto;
-        max-height: auto; */
-        /* min-height: 150rem; */
+        grid-template-rows: repeat(4, 1fr);
     }
 }
 
@@ -89,10 +93,6 @@
 
     .categories__button {
         font-size: 1.4rem;
-    }
-
-    .categories__watchall {
-        display: flex;
     }
 
     .categories__watchall {
@@ -111,12 +111,10 @@
         flex-direction: column;
         justify-content: left;
         gap: 0.8rem;
-        height: 6rem;
+        height: auto;
     }
 
     .categories__filters {
-        display: flex;
-        flex-wrap: wrap;
         gap: 0.5rem;
         margin-bottom: 2rem;
     }
@@ -125,10 +123,10 @@
         font-size: 1.4rem;
         text-align: center;
     }
+}
 
-    /* Четвёртая кнопка переносится на новую строку */
-    .categories__filters > :nth-child(n+4) {
-        /* flex-basis: 100%; */
-        text-align: left;
+@media (max-width: 420px) {
+    .categories {
+        height: auto;
     }
 }

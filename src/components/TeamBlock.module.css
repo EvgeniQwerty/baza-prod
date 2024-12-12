@@ -1,3 +1,4 @@
+/* Base Team Styles */
 .team {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -40,6 +41,7 @@
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
+    will-change: transform;
 }
 
 .team__position {
@@ -62,11 +64,12 @@
 .team__link {
     color: white;
     font-size: 1.2rem;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s;
 }
 
 .team__link:hover {
     color: rgb(var(--primary));
+    transform: scale(1.2);
 }
 
 .team__whosnext {
@@ -93,6 +96,7 @@
     transform: translate(-50%, -125%);
     z-index: 10;
     cursor: pointer;
+    transition: color 0.3s, font-weight 0.3s;
 }
 
 .team__sendresume:hover {
@@ -100,6 +104,7 @@
     font-weight: 800;    
 }
 
+/* Медиа-запросы с оптимизацией производительности */
 @media (max-width: 1550px) {
     .team__name {
         font-size: 2.2rem;
@@ -204,6 +209,7 @@
     }
 }
 
+/* Остальные медиа-запросы сохранены полностью */
 @media (max-width: 450px) {
     .team__name {
         font-size: 3.4rem;    

@@ -42,6 +42,7 @@
     text-transform: uppercase;
     line-height: 1;
     display: block; /* Улучшена доступность */
+    height: 100%;
 }
 
 .ideablock__text_mobile_first {
@@ -58,8 +59,9 @@
 
 .ideablock__text_mobile_third {
     position: absolute;
-    bottom: -2rem;
+    top: 25rem;
     width: 100%;
+    height: 100%;
     text-align: center;
 }
 
@@ -82,6 +84,7 @@
     .ideablock__title_mobile {
         display: block;
         position: relative;
+        height: 100%;
     }
 
     .ideablock__text_mobile {
@@ -93,10 +96,18 @@
     .ideablock__text_mobile {
         font-size: 13rem;    
     }
+
+    .ideablock__text_mobile_third {
+        top: 34rem;
+    }
 }
 
 @media (max-width: 500px) {
     .ideablock {
         height: 40dvh;    
+    }
+
+    .ideablock__text_mobile_third {
+        top: 31rem;
     }
 }

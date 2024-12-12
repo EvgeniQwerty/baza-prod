@@ -20,8 +20,6 @@ const PageName: React.FC<PageNameProps> = ({ imageUrl, title, text }) => {
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         />
         <h1 className={styles.pagename__title}>{title}</h1>
         {text && (

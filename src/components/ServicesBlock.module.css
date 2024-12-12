@@ -1,27 +1,35 @@
+/* Модальное окно */
 .modal__overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  inset: 0;
+  background-color: rgb(0 0 0 / 50%);
+  display: grid;
+  place-items: center;
   z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
 }
 
-.modal__overlay.hidden {
-  display: none;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .modal__content {
   background: rgb(var(--gray));
-  padding: 8rem 4rem;
-  width: 90%;
-  max-width: 60rem;
+  padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 4vw, 4rem);
+  width: min(90%, 60rem);
   text-align: center;
   position: relative;
+  transform: translateY(20px);
+  animation: slideUp 0.3s ease forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
 }
 
 .modal__close {
@@ -31,13 +39,20 @@
   background: none;
   border: none;
   font-size: 2rem;
-  cursor: pointer;
   color: rgb(var(--primary));
   font-weight: 200;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.modal__close:hover {
+  transform: scale(1.1);
 }
 
 .modal__text {
-  margin-bottom: 2rem;
+  margin-block-end: 2rem;
   font-size: 1.2rem;
   line-height: 1.5;
 }
@@ -49,23 +64,26 @@
   text-transform: uppercase;
   text-decoration: none;
   font-size: 1.2rem;
-  transition: 0.3s all ease;
+  transition: transform 0.3s ease;
+  display: inline-block;
 }
 
 .modal__button:hover {
-  scale: 1.05;
+  transform: scale(1.05);
 }
 
+/* Основной контейнер */
 .services {
   width: 100%;
   position: relative;
+  contain: content;
 }
 
+/* Прогресс-бар */
 .services__progress {
   position: absolute;
   top: -3rem;
-  left: 10rem;
-  right: 10rem;
+  inset-inline: 10rem;
   display: none;
   gap: 1rem;
   z-index: 10;
@@ -75,27 +93,30 @@
   height: 0.2rem;
   background-color: rgb(var(--gray));
   flex: 1;
+  transition: background-color 0.3s ease;
 }
 
 .services__progressitem_active {
   background-color: rgb(var(--primary));
 }
 
+/* Мобильная версия */
 .services__mobile {
   display: none;
   width: 100%;
   overflow: hidden;
-  padding: 0 1rem;
+  padding-inline: 1rem;
 }
 
 .services__slider {
   display: flex;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .services__slide {
   flex: 0 0 50%;
-  padding-right: 1rem;
+  padding-inline-end: 1rem;
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
@@ -104,11 +125,13 @@
   opacity: 1;
 }
 
+/* Карточки услуг */
 .services__imagewrapper {
   position: relative;
   aspect-ratio: 2/3;
   width: 100%;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .services__image {
@@ -116,20 +139,21 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
-  transition: all 0.1s ease;
+  transition: opacity 0.1s ease;
+  transform: translateZ(0);
 }
 
 .services__overlay {
   position: absolute;
   inset: 0;
   transition: background-color 0.3s ease;
+  pointer-events: none;
 }
 
 .services__content {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset-block-end: 0;
+  inset-inline: 0;
   padding: 16px;
 }
 
@@ -139,14 +163,15 @@
   font-weight: 400;
   text-transform: uppercase;
   word-wrap: break-word;
+  margin: 0;
 }
 
+/* Сетка для десктопа */
 .services__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  margin-inline: 4rem;
 }
 
 .services__card {
@@ -158,6 +183,7 @@
   opacity: 1;
 }
 
+/* Медиа-запросы */
 @media (max-width: 1100px) {
   .services__title {
     font-size: 1.2rem;
@@ -177,7 +203,7 @@
 @media (max-width: 767px) {
   .services {
     padding: 0;
-    margin-top: 4rem;
+    margin-block-start: 4rem;
   }
 
   .services__progress {
@@ -199,6 +225,27 @@
 
 @media (max-width: 600px) {
   .services {
-    margin-top: 0;
+    margin-block-start: 0;
   }
+}
+
+/* Accessibility styles */
+@media (prefers-reduced-motion: reduce) {
+  .services__slider,
+  .modal__overlay,
+  .modal__content,
+  .modal__button,
+  .modal__close {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Focus styles */
+.services__progressitem:focus-visible,
+.modal__close:focus-visible,
+.modal__button:focus-visible,
+.services__imagewrapper:focus-visible {
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
 }

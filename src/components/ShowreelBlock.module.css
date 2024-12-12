@@ -1,32 +1,34 @@
+/* Container */
 .showreel {
-    height: 100dvh;
-    width: 100dvw;
     position: relative;
+    width: 100dvw;
+    height: 100dvh;
     background: rgb(var(--background));
-    /* background: radial-gradient(circle at top right, rgba(var(--accent), 0.5), rgba(var(--background), 1) 60%); */
+    overflow: hidden; /* Предотвращаем horizontal scroll */
 }
 
+/* Navigation buttons container */
 .showreel__buttons {
-    display: flex;
-    flex-direction: column;
     position: absolute;
     bottom: var(--bottom-padding);
     left: var(--left-padding);
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem; /* Используем gap вместо margin для лучшего контроля spacing */
 }
 
+/* Button styles */
 .showreel__button {
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
     font-size: 4rem;
+    font-weight: 600;
+    line-height: 1;
     text-transform: uppercase;
     color: rgb(var(--primary));
-    line-height: 1;
-    transition: 0.3s all;
-    margin-bottom: 1.6rem;
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    will-change: font-weight, color; /* Оптимизация производительности анимации */
+    transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
 .showreel__button:hover {
@@ -34,35 +36,40 @@
     color: rgb(var(--accent));
 }
 
-.showreel__image {
-    z-index: 1;
+/* Prevent layout shift on hover */
+.showreel__button::after {
+    content: attr(data-text);
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 800;
 }
 
+/* Year indicator */
 .showreel__year {
-    font-weight: 200;
     font-size: 1.8rem;
-    vertical-align: middle;
+    font-weight: 200;
     margin-left: 0.5rem;
 }
 
+/* Slideshow container */
 .showreel__slideshow {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0; /* Заменяем top, left, width, height */
     z-index: 1;
 }
 
+/* Image styles */
 .showreel__image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    will-change: opacity; /* Оптимизация производительности анимации */
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1); /* Улучшенный timing function */
+    z-index: 1;
 }
 
 .image_active {
@@ -70,11 +77,7 @@
     z-index: 2;
 }
 
-.image_inactive {
-    opacity: 0;
-    z-index: 1;
-}
-
+/* Video styles */
 .showreel__video {
     position: absolute;
     top: 0;
@@ -90,14 +93,57 @@
     opacity: 1;
 }
 
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .showreel__button {
+        font-size: 3.5rem;
+    }
+
+    .showreel__year {
+        font-size: 1.6rem;
+    }
+}
+
 @media (max-width: 900px) {
     .showreel__button {
-        flex-direction: column; /* Переключаемся на колонку для мобильных */
-        align-items: flex-start; /* Выравниваем текст по левому краю */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .showreel__year {
         margin-left: 0;
         margin-top: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .showreel__button {
+        font-size: 3rem;
+    }
+
+    .showreel__year {
+        font-size: 1.4rem;
+    }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    .showreel__button,
+    .showreel__image,
+    .showreel__video {
+        transition: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .showreel {
+        height: auto;
+        background: none;
+    }
+
+    .showreel__video,
+    .showreel__slideshow {
+        display: none;
     }
 }

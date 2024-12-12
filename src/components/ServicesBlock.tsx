@@ -1,5 +1,8 @@
 "use client"
+
 import React, { useState, useRef, useEffect, TouchEvent } from 'react';
+import { useCallback } from 'react';
+import Image from 'next/image';
 import styles from './ServicesBlock.module.css';
 
 interface Service {
@@ -30,7 +33,7 @@ const defaultServices: Service[] = [
     },
     {
         id: 4,
-        title: `Продюссирование`,
+        title: 'Продюсирование',
         image: '/services/prod.png',
     },
     {
@@ -43,13 +46,33 @@ const defaultServices: Service[] = [
 const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
+    // Обработчик нажатия Escape
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [onClose]);
+
     return (
-        <div className={styles.modal__overlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+        <div 
+            className={styles.modal__overlay} 
+            onClick={(e) => e.target === e.currentTarget && onClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+        >
             <div className={styles.modal__content}>
-                <button className={styles.modal__close} onClick={onClose}>
+                <button 
+                    className={styles.modal__close} 
+                    onClick={onClose}
+                    aria-label="Закрыть модальное окно"
+                >
                     &times;
                 </button>
-                <p className={styles.modal__text}>
+                <p className={styles.modal__text} id="modal-title">
                     Нажмите на эту кнопку, чтобы начать диалог по интересующей вас услуге в Telegram
                 </p>
                 <a
@@ -57,6 +80,7 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onC
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.modal__button}
+                    aria-label="Связаться с нами в Telegram"
                 >
                     Связаться с нами
                 </a>
@@ -65,19 +89,31 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onC
     );
 };
 
-const ServiceCard = ({ service, onClick }: { service: Service; onClick: () => void }) => (
-    <div className={styles.services__imagewrapper} onClick={onClick}>
-        <img
+const ServiceCard: React.FC<{ service: Service; onClick: () => void }> = React.memo(({ service, onClick }) => (
+    <div 
+        className={styles.services__imagewrapper} 
+        onClick={onClick}
+        role="button"
+        tabIndex={0}
+        onKeyPress={(e) => e.key === 'Enter' && onClick()}
+        aria-label={`Открыть информацию об услуге: ${service.title}`}
+    >
+        <Image
             src={service.image}
             alt={service.title}
             className={styles.services__image}
+            fill
+            sizes="(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 20vw"
+            priority={service.id <= 2} // Приоритетная загрузка только для первых двух изображений
         />
         <div className={styles.services__overlay} />
         <div className={styles.services__content}>
             <h3 className={styles.services__title}>{service.title}</h3>
         </div>
     </div>
-);
+));
+
+ServiceCard.displayName = 'ServiceCard';
 
 const ServicesBlock: React.FC<ServiceBlockProps> = ({
     services = defaultServices
@@ -89,31 +125,34 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
     const sliderRef = useRef<HTMLDivElement>(null);
     const minSwipeDistance = 50;
 
-    const handleOpenModal = () => setModalOpen(true);
-    const handleCloseModal = () => setModalOpen(false);
+    const handleOpenModal = useCallback(() => setModalOpen(true), []);
+    const handleCloseModal = useCallback(() => setModalOpen(false), []);
 
-    const onTouchStart = (e: TouchEvent) => {
+    const onTouchStart = useCallback((e: TouchEvent) => {
         setTouchEnd(null);
         setTouchStart(e.targetTouches[0].clientX);
-    };
+    }, []);
 
-    const onTouchMove = (e: TouchEvent) => {
+    const onTouchMove = useCallback((e: TouchEvent) => {
         setTouchEnd(e.targetTouches[0].clientX);
-    };
+    }, []);
 
-    const onTouchEnd = () => {
+    const onTouchEnd = useCallback(() => {
         if (!touchStart || !touchEnd) return;
         const distance = touchStart - touchEnd;
         
         if (Math.abs(distance) < minSwipeDistance) return;
         
-        if (distance > 0 && currentSlide < services.length - 1) {
-            setCurrentSlide(prev => prev + 1);
-        }
-        if (distance < 0 && currentSlide > 0) {
-            setCurrentSlide(prev => prev - 1);
-        }
-    };
+        setCurrentSlide(prev => {
+            if (distance > 0 && prev < services.length - 1) {
+                return prev + 1;
+            }
+            if (distance < 0 && prev > 0) {
+                return prev - 1;
+            }
+            return prev;
+        });
+    }, [touchStart, touchEnd, services.length]);
 
     useEffect(() => {
         if (sliderRef.current) {
@@ -124,14 +163,23 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
     }, [currentSlide]);
 
     return (
-        <div className={styles.services}>
-            <div className={styles.services__progress}>
+        <section className={styles.services} aria-label="Наши услуги">
+            <div 
+                className={styles.services__progress} 
+                role="tablist" 
+                aria-label="Прогресс просмотра услуг"
+            >
                 {services.map((_, index) => (
                     <div
                         key={index}
+                        role="tab"
+                        aria-selected={index === currentSlide}
                         className={`${styles.services__progressitem} ${
                             index === currentSlide ? styles.services__progressitem_active : ''
                         }`}
+                        tabIndex={0}
+                        onClick={() => setCurrentSlide(index)}
+                        onKeyPress={(e) => e.key === 'Enter' && setCurrentSlide(index)}
                     />
                 ))}
             </div>
@@ -143,6 +191,8 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
                     onTouchEnd={onTouchEnd}
+                    role="region"
+                    aria-label="Слайдер услуг"
                 >
                     {services.map((service, index) => (
                         <div 
@@ -150,6 +200,8 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                             className={`${styles.services__slide} ${
                                 index === currentSlide ? styles.active : ''
                             }`}
+                            role="tabpanel"
+                            aria-hidden={index !== currentSlide}
                         >
                             <ServiceCard service={service} onClick={handleOpenModal} />
                         </div>
@@ -157,17 +209,25 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                 </div>
             </div>
 
-            <div className={styles.services__grid}>
+            <div 
+                className={styles.services__grid}
+                role="grid"
+                aria-label="Сетка услуг"
+            >
                 {services.map((service) => (
-                    <div key={service.id} className={styles.services__card}>
+                    <div 
+                        key={service.id} 
+                        className={styles.services__card}
+                        role="gridcell"
+                    >
                         <ServiceCard service={service} onClick={handleOpenModal} />
                     </div>
                 ))}
             </div>
 
             <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
-        </div>
+        </section>
     );
 };
 
-export default ServicesBlock;
+export default React.memo(ServicesBlock);
