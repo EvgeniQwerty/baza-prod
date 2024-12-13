@@ -13,8 +13,7 @@
     "next": "^14.2.20",
     "next-sitemap": "^4.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "swiper": "^11.1.15"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^15.1.0",

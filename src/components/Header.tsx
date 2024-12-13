@@ -38,7 +38,7 @@ export default function Header() {
         { label: 'О нас', href: '/about' },
         { label: 'Проекты', href: '/projects' },
         { label: 'Услуги', href: '/services' },
-        { label: 'Контакты', href: '/#' },
+        { label: 'Контакты', href: '/contacts' },
         { label: 'Showreel', href: '/projects/showreel' }
     ];
 
