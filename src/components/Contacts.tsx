@@ -2,7 +2,7 @@ import styles from "./Contacts.module.css";
 import InstaSvg from "@/svg/insta.svg";
 import VkSvg from "@/svg/vk.svg";
 import TgSvg from "@/svg/telegram.svg";
-import Image from "next/image";
+import VimeoSvg from "@/svg/vimeo.svg";
 
 const socialLinks = [
     {
@@ -37,6 +37,7 @@ export default function Contacts() {
             </div>
 
             <div className={styles.contacts__icons}>
+                <a href="https://google.com" target="_blank" rel="noopener noreferrer" aria-label="Vimeo"><VimeoSvg width={112} height={48}/></a>
                 {socialLinks.map((social) => (
                     <a
                         key={social.href}
