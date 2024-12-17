@@ -37,7 +37,7 @@ export default function Contacts() {
             </div>
 
             <div className={styles.contacts__icons}>
-                <a href="https://google.com" target="_blank" rel="noopener noreferrer" aria-label="Vimeo"><VimeoSvg width={112} height={48}/></a>
+                <a href="https://google.com" target="_blank" rel="noopener noreferrer" aria-label="Vimeo"><VimeoSvg width={112} height={48} className={styles.contacts__svg}/></a>
                 {socialLinks.map((social) => (
                     <a
                         key={social.href}
@@ -47,7 +47,7 @@ export default function Contacts() {
                         className={`${styles.contacts__icon} ${styles.contacts__social}`}
                         aria-label={social.label}
                     >
-                        <social.icon width={48} height={48} />
+                        <social.icon width={48} height={48} className={styles.contacts__svg}/>
                     </a>
                 ))}
             </div>

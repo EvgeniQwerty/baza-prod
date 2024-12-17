@@ -6,7 +6,7 @@ export default function ProjectPage() {
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
       <Project
-        vimeoLink={"https://player.vimeo.com/video/121429401"}
+        vimeoLink={"https://kinescope.io/embed/0dQrnJYmPeu59G5aMX9dp1"}
         name={"Псих"}
         org={"Бренд одежды"}
         type={"Fashion-ролик"}
@@ -15,7 +15,7 @@ export default function ProjectPage() {
         img2={"/projects/psycho/2.png"}
         img3={"/projects/psycho/3.png"}
         img4={"/projects/psycho/4.png"}
-        backstageVimeoLink={"https://player.vimeo.com/video/121429401"}
+        backstageVimeoLink={"https://kinescope.io/embed/0dQrnJYmPeu59G5aMX9dp1"}
         team={"Production - BAZA\n\nDirector&DOP: Roman Milovanov\nExecutive producer: Ivan Stoletov\nExecutive producer: Egor Popel\n1AD: Alexandra Goludina\nCasting director: Darya Kolyadnaya\nStylist: Vika El'kova\nMUA: Elizabeth Tsvetkova\nVirtual Production: XO VP\nGaffer: Leonid Tashenberg\n1AC: Oleg Demkiv\nDolly: Pavel Shlyk\nAdministrator: Viktor Ermakov"} />
     </main>
   );

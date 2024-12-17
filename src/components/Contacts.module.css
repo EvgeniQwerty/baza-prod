@@ -1,5 +1,5 @@
 .contacts {
-    margin-top: 6rem;
+    margin-top: 10rem;
     margin-left: 3rem;
     margin-right: 3rem;
 }
@@ -59,10 +59,50 @@
     object-fit: cover;
 }
 
+.contacts__image {
+    width: 100%;
+}
+
 .contacts__description {
     text-align: center;
     font-size: 1.4rem;
     text-transform: uppercase;
     font-weight: 400;    
     transform: translateY(-8rem);
+}
+
+@media (max-width: 780px) { 
+    .contacts__links {
+        flex-direction: column;
+        font-size: 1.4rem;
+        gap: 1rem;
+    }
+
+    .contacts__svg {
+        height: 40px !important;
+        width: auto !important;
+    }
+
+    .contacts__title {
+        font-size: 3.6rem;
+    }
+    
+    .contacts__title2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 500px) { 
+    .contacts__svg {
+        height: 30px !important;
+        width: auto !important;
+    }
+
+    .contacts__links {
+        font-size: 1.6rem;
+    }
+
+    .contacts__description {
+        font-size: 2rem;
+    }
 }
