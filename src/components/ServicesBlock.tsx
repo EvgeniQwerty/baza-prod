@@ -19,17 +19,17 @@ const defaultServices: Service[] = [
     {
         id: 1,
         title: 'Рекламные ролики',
-        image: '/services/comm.png',
+        image: '/services/comm.jpg',
     },
     {
         id: 2,
         title: 'Креатив',
-        image: '/services/creative.png',
+        image: '/services/creative.jpg',
     },
     {
         id: 3,
         title: 'Музыкальные клипы',
-        image: '/services/music.png',
+        image: '/services/music.jpg',
     },
     {
         id: 4,
@@ -39,7 +39,7 @@ const defaultServices: Service[] = [
     {
         id: 5,
         title: 'Скоро появится',
-        image: '/services/wip.png',
+        image: '/services/wip.jpg',
     }
 ];
 
