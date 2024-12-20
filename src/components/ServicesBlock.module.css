@@ -128,7 +128,7 @@
 /* Карточки услуг */
 .services__imagewrapper {
   position: relative;
-  aspect-ratio: 2/3;
+  aspect-ratio: 1/2;
   width: 100%;
   cursor: pointer;
   overflow: hidden;

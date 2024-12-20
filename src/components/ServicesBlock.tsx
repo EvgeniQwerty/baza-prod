@@ -18,23 +18,23 @@ interface ServiceBlockProps {
 const defaultServices: Service[] = [
     {
         id: 1,
-        title: 'Рекламные ролики',
-        image: '/services/comm.jpg',
-    },
-    {
-        id: 2,
-        title: 'Креатив',
-        image: '/services/creative.jpg',
-    },
-    {
-        id: 3,
         title: 'Музыкальные клипы',
         image: '/services/music.jpg',
     },
     {
-        id: 4,
+        id: 2,
+        title: 'Рекламные ролики',
+        image: '/services/comm.jpg',
+    },
+    {
+        id: 3,
         title: 'Продюсирование',
         image: '/services/prod.png',
+    },
+    {
+        id: 4,
+        title: 'Креатив',
+        image: '/services/creative.jpg',
     },
     {
         id: 5,

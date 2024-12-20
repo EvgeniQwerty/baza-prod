@@ -1,8 +1,8 @@
 /* Container */
 .showreel {
     position: relative;
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     background: rgb(var(--background));
     overflow: hidden; /* Предотвращаем horizontal scroll */
 }
@@ -113,6 +113,12 @@
     .showreel__year {
         margin-left: 0;
         margin-top: 1rem;
+    }
+}
+
+@media (max-width: 780px) {
+    .showreel {
+        height: 90vh;
     }
 }
 

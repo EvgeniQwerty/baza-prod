@@ -1,6 +1,6 @@
 .ideablock {
-    width: 100dvw;
-    height: 90dvh;
+    width: 100vw;
+    height: 90vh;
     position: relative;
     overflow: hidden;
     will-change: transform; /* Оптимизация рендеринга */
@@ -74,7 +74,7 @@
 
 @media (max-width: 1024px) {
     .ideablock {
-        height: 60dvh;    
+        height: 60vh;    
     }
 
     .ideablock__title {
@@ -104,7 +104,7 @@
 
 @media (max-width: 500px) {
     .ideablock {
-        height: 40dvh;    
+        height: 40vh;    
     }
 
     .ideablock__text_mobile_third {
