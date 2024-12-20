@@ -53,7 +53,7 @@
 .videoblock__button:focus {
     font-weight: 800;
     color: rgb(var(--accent));
-    outline: 2px solid rgb(var(--accent));
+    /* outline: 2px solid rgb(var(--accent)); */
 }
 
 .videoblock__type {
