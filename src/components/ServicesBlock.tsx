@@ -9,6 +9,7 @@ interface Service {
     id: number;
     title: string;
     image: string;
+    video: string;
 }
 
 interface ServiceBlockProps {
@@ -20,26 +21,31 @@ const defaultServices: Service[] = [
         id: 1,
         title: 'Музыкальные клипы',
         image: '/services/music.jpg',
+        video: '/services/music.webm'
     },
     {
         id: 2,
         title: 'Рекламные ролики',
         image: '/services/comm.jpg',
+        video: '/services/comm.webm'
     },
     {
         id: 3,
         title: 'Продюсирование',
         image: '/services/prod.png',
+        video: '/services/prod.webm'
     },
     {
         id: 4,
         title: 'Креатив',
         image: '/services/creative.jpg',
+        video: '/services/creative.webm'
     },
     {
         id: 5,
         title: 'Скоро появится',
         image: '/services/wip.jpg',
+        video: '/services/wip.webm'
     }
 ];
 
@@ -89,29 +95,110 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onC
     );
 };
 
-const ServiceCard: React.FC<{ service: Service; onClick: () => void }> = React.memo(({ service, onClick }) => (
-    <div 
-        className={styles.services__imagewrapper} 
-        onClick={onClick}
-        role="button"
-        tabIndex={0}
-        onKeyPress={(e) => e.key === 'Enter' && onClick()}
-        aria-label={`Открыть информацию об услуге: ${service.title}`}
-    >
-        <Image
-            src={service.image}
-            alt={service.title}
-            className={styles.services__image}
-            fill
-            sizes="(max-width: 767px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            priority={service.id <= 2} // Приоритетная загрузка только для первых двух изображений
-        />
-        <div className={styles.services__overlay} />
-        <div className={styles.services__content}>
-            <h3 className={styles.services__title}>{service.title}</h3>
+const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: boolean }> = React.memo(({ 
+    service, 
+    onClick,
+    isActive = false 
+}) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Проверка мобильного устройства
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 500);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Предзагрузка видео
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        video.preload = 'auto';
+        video.muted = true;
+        video.playsInline = true;
+        video.loop = true;
+
+        const handleCanPlay = () => {
+            setIsVideoLoaded(true);
+        };
+
+        video.addEventListener('canplay', handleCanPlay);
+        
+        return () => {
+            video.removeEventListener('canplay', handleCanPlay);
+        };
+    }, []);
+
+    // Управление воспроизведением
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video || !isVideoLoaded) return;
+
+        if (isMobile) {
+            if (isActive) {
+                video.play().catch(() => {
+                    // Обработка ошибок автовоспроизведения
+                });
+            } else {
+                video.pause();
+            }
+        }
+    }, [isActive, isVideoLoaded, isMobile]);
+
+    const handleMouseEnter = useCallback(() => {
+        if (isMobile || !videoRef.current || !isVideoLoaded) return;
+        videoRef.current.play().catch(() => {
+            // Обработка ошибок автовоспроизведения
+        });
+    }, [isMobile, isVideoLoaded]);
+
+    const handleMouseLeave = useCallback(() => {
+        if (isMobile || !videoRef.current) return;
+        videoRef.current.pause();
+    }, [isMobile]);
+
+    return (
+        <div 
+            className={styles.services__imagewrapper} 
+            onClick={onClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => e.key === 'Enter' && onClick()}
+            aria-label={`Открыть информацию об услуге: ${service.title}`}
+        >
+            <Image
+                src={service.image}
+                alt={service.title}
+                className={`${styles.services__image} ${isVideoLoaded ? styles.services__image_hidden : ''}`}
+                fill
+                priority={service.id <= 2}
+            />
+            <video
+                ref={videoRef}
+                className={`${styles.services__video} ${isVideoLoaded ? styles.services__video_visible : ''}`}
+                src={service.video}
+                muted
+                playsInline
+                loop
+                aria-hidden="true"
+            />
+            <div className={styles.services__overlay} />
+            <div className={styles.services__content}>
+                <h3 className={styles.services__title}>{service.title}</h3>
+            </div>
         </div>
-    </div>
-));
+    );
+});
 
 ServiceCard.displayName = 'ServiceCard';
 
@@ -179,7 +266,7 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                         }`}
                         tabIndex={0}
                         onClick={() => setCurrentSlide(index)}
-                        onKeyPress={(e) => e.key === 'Enter' && setCurrentSlide(index)}
+                        onKeyUp={(e) => e.key === 'Enter' && setCurrentSlide(index)}
                     />
                 ))}
             </div>
@@ -203,7 +290,7 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                             role="tabpanel"
                             aria-hidden={index !== currentSlide}
                         >
-                            <ServiceCard service={service} onClick={handleOpenModal} />
+                            <ServiceCard service={service} onClick={handleOpenModal} isActive={index === currentSlide} />
                         </div>
                     ))}
                 </div>

@@ -77,7 +77,6 @@ export default function TeamBlock() {
             src={member.imgSrc}
             alt={member.imgAlt}
             fill
-            sizes="(max-width: 900px) 100vw, 20vw"
             priority={index < 2}
             className={styles.team__image}
           />
