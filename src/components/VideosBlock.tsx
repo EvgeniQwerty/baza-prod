@@ -29,7 +29,7 @@ const VideoData: VideoData[] = [
         folderPath: "/projects/servicecar",
         name: "Servicecar",
         org: "Servicecar",
-        type: "Реклама на ТВ",
+        type: "Реклама",
         typeCode: "commercial",
         year: "2023",
         imgs: 4,
@@ -60,43 +60,7 @@ const VideoData: VideoData[] = [
         typeCode: "photo",
         year: "2023",
         imgs: 6,
-    },
-    {
-        folderPath: "/projects/servicecar",
-        name: "Servicecar",
-        org: "Servicecar",
-        type: "Реклама на ТВ",
-        typeCode: "commercial",
-        year: "2023",
-        imgs: 4,
-    },
-    {
-        folderPath: "/projects/smena",
-        name: "Первая работа",
-        org: "Кинотеатр Смена",
-        type: "HR-видео",
-        typeCode: "commercial",
-        year: "2023",
-        imgs: 8,
-    },
-    {
-        folderPath: "/projects/supergoats",
-        name: "Суперкозлы",
-        org: "Суперкозлы",
-        type: "Музыкальный клип",
-        typeCode: "clip",
-        year: "2023",
-        imgs: 9,
-    },
-    {
-        folderPath: "/projects/psycho",
-        name: "Псих",
-        org: "Бренд одежды",
-        type: "Fashion-ролик",
-        typeCode: "photo",
-        year: "2023",
-        imgs: 6,
-    },
+    }
 ];
 
 type FilterType = "all" | "clip" | "commercial" | "photo";

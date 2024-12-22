@@ -39,8 +39,8 @@
 }
 
 .videoblock__button {
-    font-weight: 400;
-    font-size: 4rem;
+    font-weight: 600;
+    font-size: 1.6rem;
     text-transform: uppercase;
     color: rgb(var(--primary));
     line-height: 1;
@@ -56,14 +56,14 @@
     /* outline: 2px solid rgb(var(--accent)); */
 }
 
-.videoblock__type {
+/* .videoblock__type {
     font-weight: 200;
     font-size: 1.2rem;
     position: absolute;
     top: 3rem;
     left: 3rem;
     z-index: 4;
-}
+} */
 
 .videoblock__year {
     font-weight: 300;
@@ -71,14 +71,15 @@
     vertical-align: middle;
 }
 
-.videoblock__org {
-    font-size: 1.4rem;
-    text-transform: uppercase;   
+.videoblock__type {
+    font-size: 1.6rem;
+    text-transform: uppercase;  
+    font-weight: 600; 
 }
 
 @media (max-width: 1280px) {
     .videoblock__button {
-        font-size: 3.2rem;
+        font-size: 1.6rem;
     }
 }
 

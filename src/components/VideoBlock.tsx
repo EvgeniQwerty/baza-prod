@@ -58,12 +58,12 @@ const VideoBlock: FC<VideoBlockProps> = ({
             aria-label={`${name} ${type} проект ${year}`}
             role="article"
         >
-            <p 
+            {/* <p 
                 className={styles.videoblock__type}
                 aria-hidden="true"
             >
                 {type}
-            </p>
+            </p> */}
             
             <div 
                 className={styles.videoblock__imageWrapper}
@@ -81,14 +81,14 @@ const VideoBlock: FC<VideoBlockProps> = ({
             </div>
             
             <div className={styles.videoblock__buttons}>
+                <p className={styles.videoblock__type}>{type}</p>
                 <span 
                     className={styles.videoblock__button}
                     tabIndex={0}
                     role="button"
                 >
-                    {name} <span className={styles.videoblock__year}>{year}</span>
+                    {name}
                 </span>
-                <p className={styles.videoblock__org}>{org}</p>
             </div>
         </Link>
     );
