@@ -15,6 +15,7 @@ interface TeamMember {
   position: string;
   socials: SocialLink[];
   imgSrc: string;
+  imgSrcMobile: string;
   imgAlt: string;
 }
 
@@ -28,6 +29,7 @@ export default function TeamBlock() {
         { href: "https://t.me/kalashnikovk", icon: <Instagram aria-label="Instagram Profile" /> },
       ],
       imgSrc: "/persons/person-1.jpg",
+      imgSrcMobile: "/persons/person-1-mobile.jpg",
       imgAlt: "Влад Калашников - CEO",
     },
     {
@@ -38,6 +40,7 @@ export default function TeamBlock() {
         { href: "https://t.me/darya", icon: <Instagram aria-label="Instagram Profile" /> },
       ],
       imgSrc: "/persons/person-2.jpg",
+      imgSrcMobile: "/persons/person-2-mobile.jpg",
       imgAlt: "Дарья Огорельцева - COO",
     },
     {
@@ -48,6 +51,7 @@ export default function TeamBlock() {
         { href: "https://t.me/mikhail", icon: <Instagram aria-label="Instagram Profile" /> },
       ],
       imgSrc: "/persons/person-3.jpg",
+      imgSrcMobile: "/persons/person-3-mobile.jpg",
       imgAlt: "Михаил Шамриков - Режиссёр",
     },
     {
@@ -58,6 +62,7 @@ export default function TeamBlock() {
         { href: "https://t.me/alex", icon: <Instagram aria-label="Instagram Profile" /> },
       ],
       imgSrc: "/persons/person-4.jpg",
+      imgSrcMobile: "/persons/person-4-mobile.jpg",
       imgAlt: "Александр Артеев - Оператор",
     },
   ];
@@ -78,7 +83,14 @@ export default function TeamBlock() {
             alt={member.imgAlt}
             fill
             priority={index < 2}
-            className={styles.team__image}
+            className={`${styles.team__image} ${styles.team__image_desktop}`}
+          />
+          <Image
+            src={member.imgSrcMobile}
+            alt={member.imgAlt}
+            fill
+            priority={index < 2}
+            className={`${styles.team__image} ${styles.team__image_mobile}`}
           />
           <div className={styles.team__overlay}>
             <h2 className={styles.team__name}>
@@ -116,7 +128,6 @@ export default function TeamBlock() {
           src="/persons/person-who.png"
           alt="Вакансия открыта"
           fill
-          sizes="(max-width: 900px) 100vw, 20vw"
           className={styles.team__image}
         />
         <p className={styles.team__whosnext}>

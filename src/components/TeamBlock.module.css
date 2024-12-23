@@ -105,7 +105,10 @@
     font-weight: 800;    
 }
 
-/* Медиа-запросы с оптимизацией производительности */
+.team__image_mobile {
+    display: none;
+}
+
 @media (max-width: 1550px) {
     .team__name {
         font-size: 2.2rem;
@@ -179,6 +182,14 @@
     .team__sendresume {
         transform: translate(-50%, -50%);  
         font-size: 1.4rem;  
+    }
+
+    .team__image_mobile {
+        display: block;
+    }
+
+    .team__image_desktop {
+        display: none;
     }
 }
 
