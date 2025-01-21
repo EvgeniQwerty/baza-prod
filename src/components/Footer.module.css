@@ -22,6 +22,10 @@
     gap: 1rem;
 }
 
+.footer__logo {
+    transform: translateX(-8px);
+}
+
 /* Typography and Links */
 .footer__copyright {
     font-size: 1rem;
@@ -140,6 +144,10 @@
 
     .footer__copyright {
         font-size: 1.2rem;     
+    }
+
+    .footer__link_logo {
+        transform: translateX(-8px);
     }
 }
 

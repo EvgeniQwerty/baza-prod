@@ -92,7 +92,7 @@ export default function ShowreelBlock() {
                 </div>
             )}
 
-            {/* Видео с оптимизированными атрибутами */}
+            {/* Видео */}
             <video
                 ref={videoRef}
                 preload="metadata"
@@ -112,7 +112,6 @@ export default function ShowreelBlock() {
                     aria-current={activeButton === 'baza' ? 'page' : undefined}
                 >
                     <span>Baza «Мы вас видим»</span>
-                    <time className={styles.showreel__year} dateTime="2024">2024</time>
                 </Link>
                 <Link 
                     href="/projects/showreel"
@@ -121,7 +120,6 @@ export default function ShowreelBlock() {
                     aria-current={activeButton === 'showreel' ? 'page' : undefined}
                 >
                     <span>Showreel</span>
-                    <time className={styles.showreel__year} dateTime="2024">2024</time>
                 </Link>
             </nav>
         </section>

@@ -26,24 +26,6 @@ interface VideosBlockProps {
 
 const VideoData: VideoData[] = [
     {
-        folderPath: "/projects/servicecar",
-        name: "Servicecar",
-        org: "Servicecar",
-        type: "Реклама",
-        typeCode: "commercial",
-        year: "2023",
-        imgs: 4,
-    },
-    {
-        folderPath: "/projects/smena",
-        name: "Первая работа",
-        org: "Кинотеатр Смена",
-        type: "HR-видео",
-        typeCode: "commercial",
-        year: "2023",
-        imgs: 8,
-    },
-    {
         folderPath: "/projects/supergoats",
         name: "Суперкозлы",
         org: "Суперкозлы",
@@ -57,9 +39,27 @@ const VideoData: VideoData[] = [
         name: "Псих",
         org: "Бренд одежды",
         type: "Fashion-ролик",
-        typeCode: "photo",
+        typeCode: "commercial",
         year: "2023",
         imgs: 6,
+    },
+    {
+        folderPath: "/projects/smena",
+        name: "Смена",
+        org: "Кинотеатр Смена",
+        type: "HR-видео",
+        typeCode: "commercial",
+        year: "2023",
+        imgs: 8,
+    },
+    {
+        folderPath: "/projects/servicecar",
+        name: "Servicecar",
+        org: "Servicecar",
+        type: "Реклама",
+        typeCode: "commercial",
+        year: "2023",
+        imgs: 4,
     }
 ];
 
@@ -69,7 +69,7 @@ const Categories = [
     { label: "Все категории", value: "all" },
     { label: "Музыкальные клипы", value: "clip" },
     { label: "Реклама", value: "commercial" },
-    { label: "Фотографии", value: "photo" }
+    // { label: "Фотографии", value: "photo" }
 ] as const;
 
 export default function VideosBlock({ 

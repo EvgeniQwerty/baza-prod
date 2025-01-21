@@ -59,7 +59,7 @@
     position: fixed;
     top: 0;
     left: -100%;
-    width: 50%;
+    width: 25%;
     height: 100dvh;
     background-color: rgb(var(--primary));
     z-index: 100;

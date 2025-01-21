@@ -44,7 +44,7 @@ export default function Footer() {
               className={`${styles.footer__link} ${styles.footer__link_logo}`} 
               aria-label="Главная страница"
             >
-              <LogoSvg width={90} height={40} alt="Логотип компании" />
+              <LogoSvg width={90} height={40} className={styles.footer__logo} alt="Логотип компании" />
             </Link>
             <p className={styles.footer__copyright}>
               Все права защищены © {new Date().getFullYear()}
@@ -65,13 +65,6 @@ export default function Footer() {
           </div>
 
           <div className={styles.footer__block}>
-            <a 
-              href="tel:79195105601" 
-              className={styles.footer__link}
-              aria-label="Позвонить нам"
-            >
-              +7 (919) 510-56-01
-            </a>
             <div className={styles.footer__socials}>
               {socialLinks.map((social) => (
                 <a
@@ -135,13 +128,6 @@ export default function Footer() {
 
         <div className={styles.footer__bottom}>
           <div className={styles.footer__block}>
-            <a 
-              href="tel:79195105601" 
-              className={styles.footer__link}
-              aria-label="Позвонить нам"
-            >
-              +7 (919) 510-56-01
-            </a>
             <div className={styles.footer__socials}>
               {socialLinks.map((social) => (
                 <a

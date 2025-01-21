@@ -6,7 +6,7 @@ export default function ProjectPage() {
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
       <Project
-        vimeoLink={"https://player.vimeo.com/video/179519510"}
+        vimeoLink={"https://player.vimeo.com/video/179519510?autoplay=1&loop=1&autopause=0"}
         name={"Суперкозлы"}
         org={"Суперкозлы"}
         type={"Музыкальный клип"}

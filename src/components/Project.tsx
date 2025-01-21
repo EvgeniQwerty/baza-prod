@@ -75,7 +75,7 @@ const Project: React.FC<ProjectProps> = ({
       <header className={styles.project__header}>
         <div>
           <h2 className={styles.project__name}>
-            {name} <span className={styles.project__name_year}>{year}</span>
+            {name}
           </h2>
         </div>
         <div className={styles.project__details}>
@@ -87,7 +87,7 @@ const Project: React.FC<ProjectProps> = ({
       <div className={styles.project__video}>
         <iframe
           src={vimeoLink}
-          allow="autoplay; fullscreen; picture-in-picture"
+          allow="autoplay; fullscreen; picture-in-picture;autoplay"
           allowFullScreen
           title="Project Video"
         ></iframe>

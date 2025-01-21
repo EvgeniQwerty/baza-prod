@@ -3,6 +3,7 @@ import styles from "./TeamBlock.module.css";
 import Image from "next/image";
 import VK from "@/svg/vk-solid.svg";
 import Instagram from "@/svg/instagram-solid.svg";
+import Telegram from "@/svg/telegram-solid.svg";
 
 
 interface SocialLink {
@@ -23,10 +24,11 @@ export default function TeamBlock() {
   const members: TeamMember[] = [
     {
       name: "Влад Калашников",
-      position: "Founder\nГенеральный продюсер",
+      position: "Основатель\nГенеральный продюсер",
       socials: [
         { href: "https://t.me/kalashnikovk", icon: <VK aria-label="VK Profile" /> },
         { href: "https://t.me/kalashnikovk", icon: <Instagram aria-label="Instagram Profile" /> },
+        { href: "https://t.me/kalashnikovk", icon: <Telegram aria-label="Telegram Profile" /> },
       ],
       imgSrc: "/persons/person-1.jpg",
       imgSrcMobile: "/persons/person-1-mobile.jpg",
@@ -34,7 +36,7 @@ export default function TeamBlock() {
     },
     {
       name: "Дарья Огорельцева",
-      position: "Операционный директор",
+      position: "Исполнительный продюсер",
       socials: [
         { href: "https://t.me/darya", icon: <VK aria-label="VK Profile" /> },
         { href: "https://t.me/darya", icon: <Instagram aria-label="Instagram Profile" /> },
@@ -45,7 +47,7 @@ export default function TeamBlock() {
     },
     {
       name: "Михаил Шамриков",
-      position: "Основной режиссёр\nСценарист",
+      position: "Основной режиссёр",
       socials: [
         { href: "https://t.me/mikhail", icon: <VK aria-label="VK Profile" /> },
         { href: "https://t.me/mikhail", icon: <Instagram aria-label="Instagram Profile" /> },
