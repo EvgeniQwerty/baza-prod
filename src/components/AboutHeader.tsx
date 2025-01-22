@@ -86,7 +86,7 @@ export default function AboutHeader() {
 
         <div className={styles.showreel__buttons}>
           <h1 className={styles.showreel__button}>
-            Baza «Мы вас видим» <span className={styles.showreel__year}>2024</span>
+            Baza «Мы вас видим»
           </h1>
         </div>
       </div>
