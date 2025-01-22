@@ -139,7 +139,8 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
-  transition: opacity 0.1s ease;
+  filter: saturate(0.2);
+  transition: all 0.3s ease;
   transform: translateZ(0);
 }
 
@@ -155,7 +156,9 @@
   inset-block-end: 0;
   inset-inline: 0;
   padding: 1rem;
+  z-index: 3;
 }
+
 
 .services__title {
   color: rgb(var(--primary));
@@ -164,6 +167,7 @@
   text-transform: uppercase;
   word-wrap: break-word;
   margin: 0;
+  opacity: 1;
 }
 
 /* Сетка для десктопа */
@@ -181,6 +185,7 @@
 
 .services__card:hover .services__image {
   opacity: 1;
+  filter: saturate(1);
 }
 
 .services__video {
@@ -195,15 +200,16 @@
 }
 
 .services__video_visible {
-  opacity: 0.9;
+  opacity: 1;
+}
+
+
+.services__imagewrapper:hover .services__video_visible {
+  opacity: 1;
 }
 
 .services__image_hidden {
   opacity: 0;
-}
-
-.services__imagewrapper:hover .services__video_visible {
-  opacity: 1;
 }
 
 /* Медиа-запросы */

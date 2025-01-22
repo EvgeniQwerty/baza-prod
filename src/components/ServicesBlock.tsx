@@ -102,21 +102,10 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
 }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [videoError, setVideoError] = useState<string | null>(null);
 
-    // Проверка мобильного устройства
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 500);
-        };
-        
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
-    // Предзагрузка видео
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
@@ -126,42 +115,48 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
         video.playsInline = true;
         video.loop = true;
 
+        // console.log(`Loading video for: ${service.title}`);
+
         const handleCanPlay = () => {
+            console.log(`Video loaded for: ${service.title}`);
             setIsVideoLoaded(true);
         };
 
+        const handleError = (e: ErrorEvent) => {
+            console.error(`Video error for ${service.title}:`, e);
+            setVideoError(e.message);
+        };
+
+        const handleLoadStart = () => {
+            console.log(`Started loading video for: ${service.title}`);
+        };
+
+        video.addEventListener('loadstart', handleLoadStart);
         video.addEventListener('canplay', handleCanPlay);
+        video.addEventListener('error', handleError as any);
         
         return () => {
+            video.removeEventListener('loadstart', handleLoadStart);
             video.removeEventListener('canplay', handleCanPlay);
+            video.removeEventListener('error', handleError as any);
         };
-    }, []);
-
-    // Управление воспроизведением
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video || !isVideoLoaded) return;
-
-        if (isMobile) {
-            if (isActive) {
-                video.play().catch(() => {
-                    // Обработка ошибок автовоспроизведения
-                });
-            } else {
-                video.pause();
-            }
-        }
-    }, [isActive, isVideoLoaded, isMobile]);
+    }, [service.title]);
 
     const handleMouseEnter = useCallback(() => {
-        if (isMobile || !videoRef.current || !isVideoLoaded) return;
-        videoRef.current.play().catch(() => {
-            // Обработка ошибок автовоспроизведения
+        if (isMobile || !videoRef.current || !isVideoLoaded) {
+            console.log(`Mouse enter ignored - Mobile: ${isMobile}, Video loaded: ${isVideoLoaded}`);
+            return;
+        }
+        console.log(`Playing video for: ${service.title}`);
+        setIsHovered(true);
+        videoRef.current.play().catch(err => {
+            console.error(`Play error for ${service.title}:`, err);
         });
-    }, [isMobile, isVideoLoaded]);
+    }, [isMobile, isVideoLoaded, service.title]);
 
     const handleMouseLeave = useCallback(() => {
         if (isMobile || !videoRef.current) return;
+        setIsHovered(false);
         videoRef.current.pause();
     }, [isMobile]);
 
@@ -173,19 +168,19 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
             onMouseLeave={handleMouseLeave}
             role="button"
             tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && onClick()}
+            onKeyUp={(e) => e.key === 'Enter' && onClick()}
             aria-label={`Открыть информацию об услуге: ${service.title}`}
         >
             <Image
                 src={service.image}
                 alt={service.title}
-                className={`${styles.services__image} ${isVideoLoaded ? styles.services__image_hidden : ''}`}
+                className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
                 fill
                 priority={service.id <= 2}
             />
             <video
                 ref={videoRef}
-                className={`${styles.services__video} ${isVideoLoaded ? styles.services__video_visible : ''}`}
+                className={`${styles.services__video} ${isHovered ? styles.services__video_visible : ''}`}
                 src={service.video}
                 muted
                 playsInline
