@@ -97,6 +97,7 @@ export default function AboutTeam() {
                 quality={85}
                 priority
                 className={styles.team__image}
+                unoptimized 
             />
         </section>
     );

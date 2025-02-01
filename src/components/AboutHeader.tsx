@@ -57,6 +57,7 @@ const Slideshow = ({ currentImage }: { currentImage: number }) => (
           ${styles.showreel__image} 
           ${currentImage === imgNum ? styles.image_active : styles.image_inactive}
         `}
+        unoptimized 
       />
     ))}
   </div>

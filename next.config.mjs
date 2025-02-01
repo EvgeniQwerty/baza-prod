@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+    output: "export", // Включаем статический экспорт
+
     webpack(config, { isServer }) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
@@ -20,7 +22,7 @@ const nextConfig = {
                 use: ["@svgr/webpack"],
             },
             {
-                test: /\.(webm|mp4)$/,
+                test: /\.(webm|mp4)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -42,4 +44,5 @@ const nextConfig = {
 
     // ...other config
 };
+
 export default nextConfig;

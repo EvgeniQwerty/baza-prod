@@ -112,6 +112,7 @@ const Project: React.FC<ProjectProps> = ({
                 width={1200}
                 height={800}
                 priority={idx === 0}
+                unoptimized 
               />
             ))}
             <button 

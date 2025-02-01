@@ -77,6 +77,7 @@ const VideoBlock: FC<VideoBlockProps> = ({
                     quality={75}
                     priority={false}
                     className={styles.videoblock__image}
+                    unoptimized 
                 />
             </div>
             

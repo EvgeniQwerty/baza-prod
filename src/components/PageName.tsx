@@ -20,6 +20,7 @@ const PageName: React.FC<PageNameProps> = ({ imageUrl, title, text }) => {
           priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           quality={100}
+          unoptimized 
         />
         <h1 className={styles.pagename__title}>{title}</h1>
         {text && (

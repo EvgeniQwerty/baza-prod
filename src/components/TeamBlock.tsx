@@ -86,6 +86,7 @@ export default function TeamBlock() {
             fill
             priority={index < 2}
             className={`${styles.team__image} ${styles.team__image_desktop}`}
+            unoptimized 
           />
           <Image
             src={member.imgSrcMobile}
@@ -93,6 +94,7 @@ export default function TeamBlock() {
             fill
             priority={index < 2}
             className={`${styles.team__image} ${styles.team__image_mobile}`}
+            unoptimized 
           />
           <div className={styles.team__overlay}>
             <h2 className={styles.team__name}>
@@ -131,6 +133,7 @@ export default function TeamBlock() {
           alt="Вакансия открыта"
           fill
           className={styles.team__image}
+          unoptimized 
         />
         <p className={styles.team__whosnext}>
           Кто

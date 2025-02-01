@@ -177,6 +177,7 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
                 className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
                 fill
                 priority={service.id <= 2}
+                unoptimized 
             />
             <video
                 ref={videoRef}

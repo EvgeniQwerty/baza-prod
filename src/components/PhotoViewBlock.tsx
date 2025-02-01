@@ -141,6 +141,7 @@ const PhotoItem = memo(({ photo, index }: { photo: Photo; index: number }) => (
             priority={index < 4} // Приоритетная загрузка первых 4 изображений
             loading={index < 4 ? "eager" : "lazy"}
             quality={75}
+            unoptimized 
         />
     </div>
 ));
