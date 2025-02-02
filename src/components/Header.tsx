@@ -1,92 +1,100 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import styles from "./Header.module.css";
 import Burger from "@/svg/burger.svg";
 import Logo from "@/svg/logo.svg";
 
+const menuItems = [
+    { label: 'О нас', href: '/about' },
+    { label: 'Проекты', href: '/projects' },
+    { label: 'Услуги', href: '/services' },
+    { label: 'Контакты', href: '/contacts' },
+    { label: 'Showreel', href: '/projects/showreel' }
+];
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showOverlay, setShowOverlay] = useState(false);
-    const [isClosing, setIsClosing] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
 
-    const toggleMenu = () => {
+    const toggleMenu = useCallback(() => {
         if (!isMenuOpen) {
             setIsMenuOpen(true);
-            setShowOverlay(true);
-            setIsClosing(false);
+            setIsAnimating(true);
         } else {
-            setIsClosing(true);
-            setIsMenuOpen(false);
-            setTimeout(() => {
-                setShowOverlay(false);
-                setIsClosing(false);
-            }, 500);
+            startClosingAnimation();
         }
-    };
+    }, [isMenuOpen]);
 
-    const closeMenu = () => {
-        setIsClosing(true);
-        setIsMenuOpen(false);
+    const startClosingAnimation = useCallback(() => {
+        setIsAnimating(true);
         setTimeout(() => {
-            setShowOverlay(false);
-            setIsClosing(false);
+            setIsMenuOpen(false);
+            setIsAnimating(false);
         }, 500);
-    };
+    }, []);
 
-    const menuItems = [
-        { label: 'О нас', href: '/about' },
-        { label: 'Проекты', href: '/projects' },
-        { label: 'Услуги', href: '/services' },
-        { label: 'Контакты', href: '/contacts' },
-        { label: 'Showreel', href: '/projects/showreel' }
-    ];
+    const handleLinkClick = useCallback(() => {
+        if (isMenuOpen) startClosingAnimation();
+    }, [isMenuOpen, startClosingAnimation]);
+
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && isMenuOpen) startClosingAnimation();
+        };
+
+        document.addEventListener('keydown', handleEscape);
+        return () => document.removeEventListener('keydown', handleEscape);
+    }, [isMenuOpen, startClosingAnimation]);
 
     return (
         <header className={styles.header}>
             <div className={styles.header__wrapper}>
-                <div
-                    className={`
-                        ${styles.header__burger} 
-                        ${isMenuOpen ? styles.burger_active : ''}
-                    `}
+                <button
+                    className={`${styles.header__burger} ${isMenuOpen ? styles.burger_active : ''}`}
                     onClick={toggleMenu}
+                    aria-expanded={isMenuOpen}
+                    aria-label="Меню навигации"
                 >
                     <div className={styles.burger__button}>
-                        <Burger />
+                        <Burger aria-hidden="true" />
                     </div>
                     <p className={styles.burger__text}>Menu</p>
-                </div>
-                <a href="/" className={styles.header__logo}>
-                        <Logo className={styles.logo} />
-                </a>
+                </button>
+                
+                <Link 
+                    href="/" 
+                    className={styles.header__logo}
+                    aria-label="Главная страница"
+                    prefetch={false}
+                >
+                    <Logo className={styles.logo} aria-hidden="true" />
+                </Link>
             </div>
 
             {/* Оверлей меню */}
-            {showOverlay && (
+            {isMenuOpen && (
                 <div
-                    className={`
-                        ${styles.menu__overlay}
-                        ${isClosing ? styles.menu__overlay_closing : ''}
-                    `}
-                    onClick={closeMenu}
+                    className={`${styles.menu__overlay} ${isAnimating ? styles.menu__overlay_closing : ''}`}
+                    onClick={startClosingAnimation}
+                    role="presentation"
+                    aria-hidden="true"
                 />
             )}
 
             {/* Выплывающее меню */}
             <nav
-                className={`
-                    ${styles.menu} 
-                    ${isMenuOpen ? styles.menu_open : ''}
-                `}
+                className={`${styles.menu} ${isMenuOpen ? styles.menu_open : ''} ${isAnimating ? styles.menu_closing : ''}`}
+                aria-label="Основная навигация"
             >
                 <ul className={styles.menu__list}>
                     {menuItems.map((item, index) => (
-                        <li key={index} className={styles.menu__item}>
+                        <li key={item.href} className={styles.menu__item}>
                             <Link
                                 href={item.href}
                                 className={styles.menu__link}
-                                onClick={closeMenu}
+                                onClick={handleLinkClick}
+                                prefetch={false}
                             >
                                 {item.label}
                             </Link>

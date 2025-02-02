@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import styles from "./Footer.module.css";
 import LogoSvg from "@/svg/logo.svg";
@@ -8,21 +7,9 @@ import VkSvg from "@/svg/vk.svg";
 import TgSvg from "@/svg/telegram.svg";
 
 const socialLinks = [
-  {
-    href: "https://instagram.com/samoyed.biz", 
-    icon: InstaSvg, 
-    label: "Instagram"
-  },
-  {
-    href: "https://vk.com/kalashnikov.prod", 
-    icon: VkSvg, 
-    label: "VKontakte"
-  },
-  {
-    href: "https://t.me/kalashnikovk", 
-    icon: TgSvg, 
-    label: "Telegram"
-  }
+  { href: "https://instagram.com/samoyed.biz", Icon: InstaSvg, label: "Instagram" },
+  { href: "https://vk.com/kalashnikov.prod", Icon: VkSvg, label: "VKontakte" },
+  { href: "https://t.me/kalashnikovk", Icon: TgSvg, label: "Telegram" }
 ];
 
 const navigationLinks = [
@@ -34,7 +21,7 @@ const navigationLinks = [
 
 export default function Footer() {
   return (
-    <footer className={styles.footer} aria-label="Подвал сайта">
+    <footer className={styles.footer}>
       {/* Десктоп версия */}
       <div className={styles.footer__wrapper}>
         <div className={styles.footer__left}>
@@ -75,7 +62,7 @@ export default function Footer() {
                   className={`${styles.footer__link} ${styles.footer__social}`}
                   aria-label={social.label}
                 >
-                  <social.icon width={48} height={48} />
+                  <social.Icon width={48} height={48} />
                 </a>
               ))}
             </div>
@@ -138,7 +125,7 @@ export default function Footer() {
                   className={`${styles.footer__link} ${styles.footer__social}`}
                   aria-label={social.label}
                 >
-                  <social.icon width={48} height={48} />
+                  <social.Icon width={48} height={48} />
                 </a>
               ))}
             </div>

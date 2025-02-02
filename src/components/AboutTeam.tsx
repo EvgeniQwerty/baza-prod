@@ -1,14 +1,14 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import Image from "next/image";
 import styles from "./AboutTeam.module.css";
 
 interface TeamMember {
-    position: string;
-    names: string[];
-    span: number;
+  position: string;
+  names: string[];
+  span: number;
 }
 
-// Вынесем данные в отдельный файл teamData.ts в будущем
+//позже вынести в teamData.ts
 const teamData: TeamMember[] = [
     { position: "Продюсер", names: ["Калашников Владислав"], span: 6 },
     { position: "Режиссер", names: ["Шамриков Михаил"], span: 6 },
@@ -43,62 +43,89 @@ const teamData: TeamMember[] = [
     { position: "Backstage", names: ["Илья Урс"], span: 5 },
 ];
 
-// Мемоизированный компонент для отображения члена команды
 const TeamMemberCard = memo(({ member }: { member: TeamMember }) => {
-    if (!member.position && !member.names[0]) return null;
-
-    return (
-        <div 
-            className={`${styles[`grid__span${member.span}`]}`}
+  const hasContent = member.position || member.names.some(name => name.trim());
+  
+  return hasContent ? (
+    <li 
+      className={styles[`grid__span${member.span}`]}
+      role="listitem"
+      aria-label={member.position || 'Член команды'}
+    >
+      {member.position && (
+        <p className={styles.grid__position} role="heading" aria-level={3}>
+          {member.position}
+        </p>
+      )}
+      <div role="list" aria-label="Имена участников">
+        {member.names.filter(name => name.trim()).map((name, index) => (
+          <p 
+            key={`${name}-${index}`}
+            className={styles.grid__name}
             role="listitem"
-        >
-            {member.position && (
-                <p className={styles.grid__position} aria-label="Должность">
-                    {member.position}
-                </p>
-            )}
-            {member.names.map((name, nameIndex) => (
-                name && (
-                    <p 
-                        key={`${name}-${nameIndex}`} 
-                        className={styles.grid__name}
-                        aria-label="Имя"
-                    >
-                        {name}
-                    </p>
-                )
-            ))}
-        </div>
-    );
+          >
+            {name}
+          </p>
+        ))}
+      </div>
+    </li>
+  ) : null;
 });
 
 TeamMemberCard.displayName = 'TeamMemberCard';
 
 export default function AboutTeam() {
-    return (
-        <section className={styles.team} aria-label="Команда проекта">
-            <div 
-                className={styles.team__grid}
-                role="list"
-                aria-label="Список членов команды"
-            >
-                {teamData.map((member, index) => (
-                    <TeamMemberCard
-                        key={`${member.position}-${index}`}
-                        member={member}
-                    />
-                ))}
-            </div>
-            <Image
-                src="/about/about_team.png"
-                alt="Фотография команды проекта"
-                fill
-                sizes="100vw"
-                quality={85}
-                priority
-                className={styles.team__image}
-                unoptimized 
-            />
-        </section>
-    );
+  const filteredTeamData = useMemo(() => 
+    teamData.filter(member => 
+      member.position.trim() || member.names.some(name => name.trim())
+    ), []);
+
+  return (
+    <section 
+      className={styles.team} 
+      aria-labelledby="team-heading"
+      role="region"
+    >
+      <h2 id="team-heading" className="sr-only">Команда проекта</h2>
+      
+      <ul 
+        className={styles.team__grid}
+        role="list"
+        aria-label="Состав команды"
+      >
+        {filteredTeamData.map((member, index) => (
+          <TeamMemberCard
+            key={`${member.position}-${member.names.join('-')}-${index}`}
+            member={member}
+          />
+        ))}
+      </ul>
+
+      <div className={styles.team__image_wrapper}>
+        <picture>
+          <source
+            srcSet="/about/about_team.avif"
+            type="image/avif"
+          />
+          <source
+            srcSet="/about/about_team.webp"
+            type="image/webp"
+          />
+          <Image
+            src="/about/about_team.jpg"
+            alt="Фотография команды проекта"
+            fill
+            sizes="(max-width: 768px) 100vw, 80vw"
+            quality={80}
+            priority
+            loading="eager"
+            decoding="sync"
+            className={styles.team__image}
+            unoptimized
+            aria-hidden="true"
+          />
+        </picture>
+      </div>
+    </section>
+  );
 }

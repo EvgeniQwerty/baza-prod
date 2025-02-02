@@ -106,3 +106,31 @@
         font-size: 2rem;
     }
 }
+
+/* Добавить только эти изменения */
+.contacts__imagewrapper picture {
+    display: block;
+    width: 100%;
+  }
+  
+  .contacts__imagewrapper img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .contacts__social img {
+    height: 48px;
+    width: 48px;
+  }
+  
+  @media (max-width: 780px) {
+    .contacts__social img {
+      height: 40px !important;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .contacts__social img {
+      height: 30px !important;
+    }
+  }
