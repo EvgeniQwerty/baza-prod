@@ -1,8 +1,11 @@
 /* Модальное окно */
 .modal__overlay {
   position: fixed;
-  inset: 0;
-  background-color: rgb(0 0 0 / 50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: grid;
   place-items: center;
   z-index: 1000;
@@ -52,7 +55,7 @@
 }
 
 .modal__text {
-  margin-block-end: 2rem;
+  margin-bottom: 2rem;
   font-size: 1.2rem;
   line-height: 1.5;
 }
@@ -76,14 +79,14 @@
 .services {
   width: 100%;
   position: relative;
-  contain: content;
 }
 
 /* Прогресс-бар */
 .services__progress {
   position: absolute;
   top: -3rem;
-  inset-inline: 10rem;
+  left: 10rem;
+  right: 10rem;
   display: none;
   gap: 1rem;
   z-index: 10;
@@ -105,7 +108,7 @@
   display: none;
   width: 100%;
   overflow: hidden;
-  padding-inline: 1rem;
+  padding: 0 1rem;
 }
 
 .services__slider {
@@ -116,7 +119,7 @@
 
 .services__slide {
   flex: 0 0 50%;
-  padding-inline-end: 1rem;
+  padding-right: 1rem;
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
@@ -141,24 +144,26 @@
   opacity: 0.9;
   filter: saturate(0.2);
   transition: all 0.3s ease;
-  transform: translateZ(0);
 }
 
 .services__overlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   transition: background-color 0.3s ease;
   pointer-events: none;
 }
 
 .services__content {
   position: absolute;
-  inset-block-end: 0;
-  inset-inline: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 1rem;
   z-index: 3;
 }
-
 
 .services__title {
   color: rgb(var(--primary));
@@ -167,7 +172,6 @@
   text-transform: uppercase;
   word-wrap: break-word;
   margin: 0;
-  opacity: 1;
 }
 
 /* Сетка для десктопа */
@@ -175,7 +179,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
-  margin-inline: 4rem;
+  margin: 0 4rem;
 }
 
 .services__card {
@@ -190,7 +194,8 @@
 
 .services__video {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -200,11 +205,6 @@
 }
 
 .services__video_visible {
-  opacity: 1;
-}
-
-
-.services__imagewrapper:hover .services__video_visible {
   opacity: 1;
 }
 
@@ -232,7 +232,7 @@
 @media (max-width: 767px) {
   .services {
     padding: 0;
-    margin-block-start: 4rem;
+    margin-top: 4rem;
   }
 
   .services__progress {
@@ -254,11 +254,10 @@
 
 @media (max-width: 600px) {
   .services {
-    margin-block-start: 0;
+    margin-top: 0;
   }
 }
 
-/* Accessibility styles */
 @media (prefers-reduced-motion: reduce) {
   .services__slider,
   .modal__overlay,

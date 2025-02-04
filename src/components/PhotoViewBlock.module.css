@@ -1,44 +1,55 @@
 .photo {
+  --photo-padding: 2rem 1rem;
+  --title-color: var(--color-white, #fff);
+  --title-size: clamp(1.4rem, 2.5vw, 2rem);
+  --grid-gap: 1rem;
+  --grid-columns: 4;
+  --item-aspect: 16/9;
+  --large-aspect: 21/9;
+  --button-border: 0.1rem solid var(--color-white, #fff);
+  
   width: 100%;
-  padding: 2rem 1rem;
+  padding: var(--photo-padding);
   container-type: inline-size;
 }
 
 .photo__title {
-  color: var(--color-white, white);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--title-color);
+  font-size: var(--title-size);
   margin-block-end: 2rem;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
+  line-height: 1.2;
 }
 
 .photo__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
   container-type: inline-size;
 }
 
 .photo__item {
   position: relative;
-  aspect-ratio: 16/9;
+  aspect-ratio: var(--item-aspect);
   overflow: hidden;
   border-radius: 4px;
+  will-change: transform;
 }
 
 .photo__item_large {
   grid-column: 1 / -1;
-  aspect-ratio: 21/9;
+  aspect-ratio: var(--large-aspect);
 }
 
 .photo__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.9;
-  will-change: opacity;
+  backface-visibility: hidden;
 }
 
 .photo__image:hover {
@@ -53,55 +64,69 @@
   padding: 1rem;
   margin-block-start: 1.6rem;
   background: transparent;
-  border: 0.1rem solid var(--color-white, white);
-  color: var(--color-white, white);
-  font-weight: bold;
+  border: var(--button-border);
+  color: var(--title-color);
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.2s ease;
+  will-change: transform;
 }
 
 .photo__more:hover {
   background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 .photo__loading {
   text-align: center;
   padding: 2rem;
-  color: var(--color-white, white);
+  color: var(--title-color);
 }
 
 /* Медиа-запросы */
 @media (max-width: 1000px) {
-  .photo__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .photo {
+      --grid-columns: 2;
+      --item-aspect: 3/2;
+      --large-aspect: 16/9;
   }
 }
 
 @media (max-width: 600px) {
-  .photo__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .photo__item_large {
-    grid-column: 1;
+  .photo {
+      --grid-columns: 1;
+      --item-aspect: 1.5/1;
   }
 
   .photo__title {
-    text-align: left;
+      text-align: left;
   }
 }
 
 @media (max-width: 500px) {
   .photo__title {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 }
 
 /* Доступность */
 @media (prefers-reduced-motion: reduce) {
-
   .photo__image,
   .photo__more {
-    transition: none;
+      transition: none !important;
+  }
+  
+  .photo__more:hover {
+      transform: none;
+  }
+}
+
+/* Оптимизация рендеринга */
+@media (max-resolution: 1.5dppx) {
+  .photo__image {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
   }
 }

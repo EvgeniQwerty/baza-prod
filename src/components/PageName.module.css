@@ -1,8 +1,19 @@
 .pagename {
-  margin-top: 7.5rem;
-  padding: 0 1rem;
+  --page-margin-top: 7.5rem;
+  --page-padding: 0 1rem;
+  --page-margin-bottom: 2rem;
+  --image-height: 18.75rem;
+  --title-font-size: 3rem;
+  --title-bottom: 3rem;
+  --title-left: 3rem;
+  --text-width: 45%;
+  --mobile-font-size: 1.6rem;
+  --mobile-padding: 3rem;
+  
+  margin-top: var(--page-margin-top);
+  padding: var(--page-padding);
   background-color: rgb(var(--background));
-  margin-bottom: 2rem;
+  margin-bottom: var(--page-margin-bottom);
   will-change: transform;
 }
 
@@ -10,7 +21,7 @@
   position: relative;
   max-width: 100%;
   margin: 0 auto;
-  height: 18.75rem;
+  height: var(--image-height);
   overflow: hidden;
 }
 
@@ -18,52 +29,62 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .pagename__title {
   position: absolute;
-  bottom: 3rem;
-  left: 3rem;
+  bottom: var(--title-bottom);
+  left: var(--title-left);
   color: rgb(var(--primary));
-  font-size: 3rem;
+  font-size: var(--title-font-size);
   font-weight: 600;
   text-transform: uppercase;
   margin: 0;
   z-index: 1;
+  pointer-events: none;
 }
 
 .pagename__text {
   position: absolute;
-  bottom: 3rem;
-  right: 3rem;
-  width: 45%;
+  bottom: var(--title-bottom);
+  right: var(--title-left);
+  width: var(--text-width);
   text-align: justify;
   font-weight: 200;
   color: rgb(var(--primary));
   z-index: 1;
+  pointer-events: none;
 }
 
 .pagename__text_mobile {
   display: none;
   text-align: justify;
-  padding: 3rem;
-  font-size: 1.6rem;
+  padding: var(--mobile-padding);
+  font-size: var(--mobile-font-size);
   font-weight: 200;
 }
 
 @media (max-width: 600px) {
+  .pagename {
+      --title-font-size: 2.5rem;
+      --title-bottom: 2rem;
+      --title-left: 2rem;
+  }
+
   .pagename__text_mobile {
-    display: block;
+      display: block;
   }
 
   .pagename__text {
-    display: none;
+      display: none;
   }
+}
 
-  .pagename__title {
-    font-size: 2.5rem;
-    bottom: 2rem;
-    left: 2rem;
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .pagename__image {
+      transition: none;
   }
 }

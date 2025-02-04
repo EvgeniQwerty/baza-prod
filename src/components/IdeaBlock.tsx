@@ -7,25 +7,23 @@ export default function IdeaBlock() {
 
     useEffect(() => {
         const videoElement = videoRef.current;
-        if (videoElement) {
-            // Используем декларативный подход с async/await
-            const playVideo = async () => {
-                try {
-                    await videoElement.play();
-                } catch (error) {
-                    console.warn("Автовоспроизведение видео заблокировано:", error);
-                }
-            };
-            
-            playVideo();
+        if (!videoElement) return;
 
-            // Очистка эффекта
-            return () => {
-                if (videoElement) {
-                    videoElement.pause();
-                }
-            };
-        }
+        const playVideo = async () => {
+            try {
+                await videoElement.play();
+            } catch (error) {
+                console.log("Автовоспроизведение видео заблокировано");
+            }
+        };
+
+        playVideo();
+
+        return () => {
+            if (videoElement) {
+                videoElement.pause();
+            }
+        };
     }, []);
 
     return (

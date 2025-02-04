@@ -3,12 +3,13 @@
 import React, { useState, useCallback, memo } from 'react';
 import Image from 'next/image';
 import styles from './PhotoViewBlock.module.css';
-import { Suspense } from 'react';
 
 interface Photo {
     id: number;
     src: string;
     alt: string;
+    width: number;
+    height: number;
     isLarge?: boolean;
 }
 
@@ -17,141 +18,182 @@ interface PhotoViewBlockProps {
     initialCount?: number;
 }
 
+// Оптимизированный массив фотографий с уникальными данными
 const photos: Photo[] = [
     {
         id: 1,
-        src: '/services/photos/002.jpg',
-        alt: 'Work'
+        src: '/services/photos/002.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 2,
-        src: '/services/photos/063.jpg',
-        alt: 'Work'
+        src: '/services/photos/063.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 3,
-        src: '/services/photos/070.jpg',
-        alt: 'Work'
+        src: '/services/photos/070.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 4,
-        src: '/services/photos/121.jpg',
-        alt: 'Work'
+        src: '/services/photos/121.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 5,
-        src: '/services/photos/134.jpg',
+        src: '/services/photos/134.avif',
         alt: 'Work',
-        isLarge: true
+        width: 1200,
+        height: 800
     },
     {
         id: 6,
-        src: '/services/photos/063.jpg',
-        alt: 'Work'
+        src: '/services/photos/063.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 7,
-        src: '/services/photos/070.jpg',
-        alt: 'Work'
+        src: '/services/photos/070.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 8,
-        src: '/services/photos/121.jpg',
-        alt: 'Work'
+        src: '/services/photos/121.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 9,
-        src: '/services/photos/134.jpg',
+        src: '/services/photos/134.avif',
         alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 10,
-        src: '/services/photos/002.jpg',
+        src: '/services/photos/002.avif',
         alt: 'Work',
-        isLarge: true
+        width: 1200,
+        height: 800
     },
     {
         id: 11,
-        src: '/services/photos/002.jpg',
-        alt: 'Work'
+        src: '/services/photos/002.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 12,
-        src: '/services/photos/063.jpg',
-        alt: 'Work'
+        src: '/services/photos/063.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 13,
-        src: '/services/photos/070.jpg',
-        alt: 'Work'
+        src: '/services/photos/070.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 14,
-        src: '/services/photos/121.jpg',
-        alt: 'Work'
+        src: '/services/photos/121.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 15,
-        src: '/services/photos/134.jpg',
+        src: '/services/photos/134.avif',
         alt: 'Work',
-        isLarge: true
+        width: 1200,
+        height: 800
     },
     {
         id: 16,
-        src: '/services/photos/063.jpg',
-        alt: 'Work'
+        src: '/services/photos/063.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 17,
-        src: '/services/photos/070.jpg',
-        alt: 'Work'
+        src: '/services/photos/070.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 18,
-        src: '/services/photos/121.jpg',
-        alt: 'Work'
+        src: '/services/photos/121.avif',
+        alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 19,
-        src: '/services/photos/134.jpg',
+        src: '/services/photos/134.avif',
         alt: 'Work',
+        width: 1200,
+        height: 800
     },
     {
         id: 20,
-        src: '/services/photos/002.jpg',
+        src: '/services/photos/002.avif',
         alt: 'Work',
-        isLarge: true
+        width: 1200,
+        height: 800
     },
-];
+].map((photo, index) => ({
+    ...photo,
+    isLarge: index % 5 === 0 // Автоматическое определение больших фото
+}));
 
-// Мемоизированный компонент для отдельной фотографии
-const PhotoItem = memo(({ photo, index }: { photo: Photo; index: number }) => (
+const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }) => (
     <div
         className={`${styles.photo__item} ${photo.isLarge ? styles['photo__item_large'] : ''}`}
-        data-testid={`photo-item-${index}`}
+        data-testid={`photo-item-${photo.id}`}
     >
         <Image
             src={photo.src}
             alt={photo.alt}
             className={styles.photo__image}
-            fill
+            width={photo.width}
+            height={photo.height}
             sizes={photo.isLarge ? 
                 "(max-width: 767px) 100vw, 100vw" : 
                 "(max-width: 767px) 100vw, 25vw"}
-            priority={index < 4} // Приоритетная загрузка первых 4 изображений
-            loading={index < 4 ? "eager" : "lazy"}
-            quality={75}
-            unoptimized 
+            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            quality={80}
+            placeholder="blur"
+            blurDataURL={`${photo.src}?q=10&w=50`}
+            unoptimized
         />
     </div>
 ));
 
 PhotoItem.displayName = 'PhotoItem';
 
-// Компонент кнопки "Показать ещё"
-const LoadMoreButton = memo(({ onClick, className }: { onClick: () => void; className: string }) => (
+const LoadMoreButton = memo(({ onClick }: { onClick: () => void }) => (
     <button
-        className={className}
+        className={styles.photo__more}
         onClick={onClick}
         type="button"
         aria-label="Показать больше фотографий"
@@ -164,44 +206,41 @@ LoadMoreButton.displayName = 'LoadMoreButton';
 
 const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
     showMoreButton = false,
-    initialCount = 9
+    initialCount = 12
 }) => {
     const [visibleCount, setVisibleCount] = useState(initialCount);
     const visiblePhotos = photos.slice(0, visibleCount);
 
     const handleShowMore = useCallback(() => {
-        setVisibleCount(prevCount => prevCount + 9);
+        setVisibleCount(prev => Math.min(prev + 12, photos.length));
     }, []);
 
     return (
         <section 
             className={styles.photo}
             aria-label="Галерея фотографий наших проектов"
+            role="region"
         >
             <h2 className={styles.photo__title}>
                 Ваши проекты нашими глазами
             </h2>
 
-            <Suspense fallback={<div className={styles.photo__loading}>Загрузка галереи...</div>}>
-                <div 
-                    className={styles.photo__grid}
-                    role="grid"
-                >
-                    {visiblePhotos.map((photo, index) => (
-                        <PhotoItem
-                            key={photo.id}
-                            photo={photo}
-                            index={index}
-                        />
-                    ))}
-                </div>
-            </Suspense>
+            <div 
+                className={styles.photo__grid}
+                role="grid"
+                aria-live="polite"
+            >
+                {visiblePhotos.map((photo, index) => (
+                    <PhotoItem
+                        key={photo.id}
+                        photo={photo}
+                        priority={index < 4}
+                    />
+                ))}
+            </div>
 
             {showMoreButton && visibleCount < photos.length && (
-                <LoadMoreButton
-                    className={styles.photo__more}
-                    onClick={handleShowMore}
-                />
+                <LoadMoreButton onClick={handleShowMore} />
             )}
         </section>
     );

@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useState, useRef, useEffect, TouchEvent } from 'react';
-import { useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './ServicesBlock.module.css';
 
@@ -26,25 +25,25 @@ const defaultServices: Service[] = [
     {
         id: 2,
         title: 'Рекламные ролики',
-        image: '/services/comm.jpg',
+        image: '/services/comm.avif',
         video: '/services/comm.webm'
     },
     {
         id: 3,
         title: 'Продюсирование',
-        image: '/services/prod.png',
+        image: '/services/prod.avif',
         video: '/services/prod.webm'
     },
     {
         id: 4,
         title: 'Креатив',
-        image: '/services/creative.jpg',
+        image: '/services/creative.avif',
         video: '/services/creative.webm'
     },
     {
         id: 5,
         title: 'Скоро появится',
-        image: '/services/wip.jpg',
+        image: '/services/wip.avif',
         video: '/services/wip.webm'
     }
 ];
@@ -52,7 +51,6 @@ const defaultServices: Service[] = [
 const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
-    // Обработчик нажатия Escape
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') onClose();
@@ -95,16 +93,14 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onC
     );
 };
 
-const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: boolean }> = React.memo(({ 
-    service, 
-    onClick,
-    isActive = false 
-}) => {
+const ServiceCard: React.FC<{ 
+    service: Service; 
+    onClick: () => void; 
+    isActive?: boolean 
+}> = React.memo(({ service, onClick, isActive = false }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-    const [videoError, setVideoError] = useState<string | null>(null);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -115,50 +111,29 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
         video.playsInline = true;
         video.loop = true;
 
-        // console.log(`Loading video for: ${service.title}`);
+        const handleCanPlay = () => setIsVideoLoaded(true);
+        const handleError = () => console.error(`Ошибка загрузки видео: ${service.title}`);
 
-        const handleCanPlay = () => {
-            console.log(`Video loaded for: ${service.title}`);
-            setIsVideoLoaded(true);
-        };
-
-        const handleError = (e: ErrorEvent) => {
-            console.error(`Video error for ${service.title}:`, e);
-            setVideoError(e.message);
-        };
-
-        const handleLoadStart = () => {
-            console.log(`Started loading video for: ${service.title}`);
-        };
-
-        video.addEventListener('loadstart', handleLoadStart);
         video.addEventListener('canplay', handleCanPlay);
-        video.addEventListener('error', handleError as any);
+        video.addEventListener('error', handleError);
         
         return () => {
-            video.removeEventListener('loadstart', handleLoadStart);
             video.removeEventListener('canplay', handleCanPlay);
-            video.removeEventListener('error', handleError as any);
+            video.removeEventListener('error', handleError);
         };
     }, [service.title]);
 
     const handleMouseEnter = useCallback(() => {
-        if (isMobile || !videoRef.current || !isVideoLoaded) {
-            console.log(`Mouse enter ignored - Mobile: ${isMobile}, Video loaded: ${isVideoLoaded}`);
-            return;
-        }
-        console.log(`Playing video for: ${service.title}`);
+        if (!videoRef.current || !isVideoLoaded) return;
         setIsHovered(true);
-        videoRef.current.play().catch(err => {
-            console.error(`Play error for ${service.title}:`, err);
-        });
-    }, [isMobile, isVideoLoaded, service.title]);
+        videoRef.current.play().catch(console.error);
+    }, [isVideoLoaded]);
 
     const handleMouseLeave = useCallback(() => {
-        if (isMobile || !videoRef.current) return;
+        if (!videoRef.current) return;
         setIsHovered(false);
         videoRef.current.pause();
-    }, [isMobile]);
+    }, []);
 
     return (
         <div 
@@ -177,7 +152,9 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
                 className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
                 fill
                 priority={service.id <= 2}
-                unoptimized 
+                quality={80}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized
             />
             <video
                 ref={videoRef}
@@ -211,12 +188,12 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
     const handleOpenModal = useCallback(() => setModalOpen(true), []);
     const handleCloseModal = useCallback(() => setModalOpen(false), []);
 
-    const onTouchStart = useCallback((e: TouchEvent) => {
+    const onTouchStart = useCallback((e: React.TouchEvent) => {
         setTouchEnd(null);
         setTouchStart(e.targetTouches[0].clientX);
     }, []);
 
-    const onTouchMove = useCallback((e: TouchEvent) => {
+    const onTouchMove = useCallback((e: React.TouchEvent) => {
         setTouchEnd(e.targetTouches[0].clientX);
     }, []);
 
@@ -247,22 +224,13 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
 
     return (
         <section className={styles.services} aria-label="Наши услуги">
-            <div 
-                className={styles.services__progress} 
-                role="tablist" 
-                aria-label="Прогресс просмотра услуг"
-            >
+            <div className={styles.services__progress}>
                 {services.map((_, index) => (
                     <div
                         key={index}
-                        role="tab"
-                        aria-selected={index === currentSlide}
                         className={`${styles.services__progressitem} ${
                             index === currentSlide ? styles.services__progressitem_active : ''
                         }`}
-                        tabIndex={0}
-                        onClick={() => setCurrentSlide(index)}
-                        onKeyUp={(e) => e.key === 'Enter' && setCurrentSlide(index)}
                     />
                 ))}
             </div>
@@ -274,8 +242,6 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
                     onTouchEnd={onTouchEnd}
-                    role="region"
-                    aria-label="Слайдер услуг"
                 >
                     {services.map((service, index) => (
                         <div 
@@ -283,26 +249,20 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
                             className={`${styles.services__slide} ${
                                 index === currentSlide ? styles.active : ''
                             }`}
-                            role="tabpanel"
-                            aria-hidden={index !== currentSlide}
                         >
-                            <ServiceCard service={service} onClick={handleOpenModal} isActive={index === currentSlide} />
+                            <ServiceCard 
+                                service={service} 
+                                onClick={handleOpenModal} 
+                                isActive={index === currentSlide} 
+                            />
                         </div>
                     ))}
                 </div>
             </div>
 
-            <div 
-                className={styles.services__grid}
-                role="grid"
-                aria-label="Сетка услуг"
-            >
+            <div className={styles.services__grid}>
                 {services.map((service) => (
-                    <div 
-                        key={service.id} 
-                        className={styles.services__card}
-                        role="gridcell"
-                    >
+                    <div key={service.id} className={styles.services__card}>
                         <ServiceCard service={service} onClick={handleOpenModal} />
                     </div>
                 ))}

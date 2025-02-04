@@ -2,10 +2,6 @@
 
 const nextConfig = {
     output: "export", // Включаем статический экспорт
-    experimental: {
-  	optimizeCss: true,
-  	optimizeSvgs: true
-	},
     webpack(config, { isServer }) {
         // Grab the existing rule that handles SVG imports
         const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
