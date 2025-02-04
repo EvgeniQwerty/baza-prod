@@ -123,6 +123,21 @@ const ServiceCard: React.FC<{
         };
     }, [service.title]);
 
+    // Автоматический запуск видео для активного блока на мобильном
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+    
+        console.log(`Service: ${service.title}, isActive: ${isActive}, isVideoLoaded: ${isVideoLoaded}`);
+    
+        if (isActive && isVideoLoaded) {
+            video.play().catch(err => console.error("Ошибка при автозапуске видео:", err));
+        } else if (!isActive) {
+            video.pause();
+            video.currentTime = 0;
+        }
+    }, [isActive, isVideoLoaded]);
+
     const handleMouseEnter = useCallback(() => {
         if (!videoRef.current || !isVideoLoaded) return;
         setIsHovered(true);

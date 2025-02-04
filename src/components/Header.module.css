@@ -1,14 +1,7 @@
 /* Header Styles */
 .header {
-    --header-height: 6rem;
-    --burger-gap: 1rem;
-    --burger-left: 4rem;
-    --logo-size: 90px;
-    --menu-width: 25%;
-    --link-size: 2.5rem;
-    
     width: 100%;
-    height: var(--header-height);
+    height: 6rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,24 +13,17 @@
     height: 100%;
 }
 
-/* Burger Button */
 .header__burger {
     position: absolute;
-    top: 50%;
-    left: var(--burger-left);
-    transform: translateY(-50%);
+    top: 3rem;
+    left: 4rem;
+    transition: .3s all;
     display: flex;
-    gap: var(--burger-gap);
+    gap: 1rem;
     z-index: 150;
     background: none;
     border: none;
     cursor: pointer;
-    will-change: transform;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.burger__button {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .burger__button:hover {
@@ -49,35 +35,32 @@
     font-weight: 200;
     font-size: 0.8rem;
     vertical-align: middle;
-    transform: translateY(-1px);
-    color: white;
+    transform: translateY(0px);
+    color: white
 }
 
-/* Logo */
 .logo {
-    width: var(--logo-size);
+    width: 90px;
     height: auto;
     display: block;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header__logo {
     position: absolute;
-    top: 50%;
+    top: 3rem;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -0.5rem);
 }
 
 .header__logo:hover {
-    transform: translate(-50%, -50%) scale(1.05);
+    transform: translate(-50%, -0.5rem) scale(1.05);
 }
 
-/* Menu */
 .menu {
     position: fixed;
     top: 0;
     left: -100%;
-    width: var(--menu-width);
+    width: 25%;
     height: 100dvh;
     background-color: rgb(var(--primary));
     z-index: 100;
@@ -104,11 +87,9 @@
 .menu__link {
     text-decoration: none;
     color: rgb(var(--background));
-    font-size: var(--link-size);
+    font-size: 2.5rem;
     font-weight: 400;
-    transition: 
-        color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        font-weight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: 0.3s all;
 }
 
 .menu__link:hover {
@@ -116,10 +97,13 @@
     font-weight: 800;
 }
 
-/* Burger Icon Colors */
+.burger__button {
+    transition: 0.3s all;
+}
+
 .burger__button svg path {
     fill: rgb(var(--primary));
-    transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 0.3s ease;
 }
 
 .burger__button:hover svg path {
@@ -134,76 +118,88 @@
     fill: rgb(var(--accent));
 }
 
-/* Overlay */
 .menu__overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(var(--background), 0.5);
+    background-color: rgba(var(--background), 0);
     opacity: 0;
     z-index: 50;
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+    animation: overlayFadeIn 0.5s forwards;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+        background-color: rgba(var(--background), 0);
+    }
+    to {
+        opacity: 1;
+        background-color: rgba(var(--background), 0.5);
+    }
 }
 
 .menu__overlay_closing {
-    opacity: 0;
+    animation: overlayFadeOut 0.5s forwards;
 }
 
-.menu__overlay[data-visible="true"] {
-    opacity: 1;
-    pointer-events: all;
+/* Оптимизация анимации */
+@media (prefers-reduced-motion: reduce) {
+    .menu,
+    .menu__overlay {
+        transition: none;
+    }
 }
 
-/* Responsive */
+@keyframes overlayFadeOut {
+    from {
+        opacity: 1;
+        background-color: rgba(var(--background), 0.5);
+    }
+    to {
+        opacity: 0;
+        background-color: rgba(var(--background), 0);
+    }
+}
+
 @media (max-width: 1024px) {
     .burger__text {
         font-size: 1rem;
-        transform: translateY(-2px);
     }
 }
 
 @media (max-width: 780px) {
-    .header {
-        --logo-size: 70px;
-    }
-    
     .burger__text {
         font-size: 1.2rem;
-        transform: translateY(-1px);
+    }
+
+    .logo {
+        width: 70px;
+    }
+
+    .menu {
+        width: 100%;
     }
 }
 
 @media (max-width: 500px) {
-    .header {
-        --menu-width: 100%;
-        --link-size: 8rem;
-        --logo-size: 60px;
-    }
-    
     .burger__text {
         font-size: 1.6rem;
-        transform: translateY(0px);
     }
 
     .header__burger {
         flex-direction: column;
         gap: 0.5rem;
     }
-}
 
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    .menu,
-    .menu__overlay,
-    .burger__button,
     .logo {
-        transition: none !important;
+        width: 60px;
     }
-    
-    .burger__button:hover {
-        transform: none !important;
+
+    .menu__link {
+        font-size: 8rem;
     }
 }

@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Project.module.css';
 import ArrowLeft from "@/svg/arrow-left.svg";
@@ -36,19 +36,17 @@ const Project: React.FC<ProjectProps> = ({
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const images = [img1, img2, img3, img4];
-  const timerRef = useRef<NodeJS.Timeout>();
 
-  const handleNext = useCallback(() => {
-    setCurrentSlide(prev => (prev + 1) % images.length);
-  }, [images.length]);
+  const handleNext = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
 
-  const handlePrev = useCallback(() => {
-    setCurrentSlide(prev => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+  const handlePrev = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
-    clearInterval(timerRef.current);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -58,22 +56,22 @@ const Project: React.FC<ProjectProps> = ({
   const handleTouchEnd = () => {
     const difference = touchStartX.current - touchEndX.current;
     if (Math.abs(difference) > 50) {
-      difference > 0 ? handleNext() : handlePrev();
+      if (difference > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
     }
-    startAutoScroll();
   };
 
-  const startAutoScroll = useCallback(() => {
-    timerRef.current = setInterval(handleNext, 5000);
-  }, [handleNext]);
-
+  // Автоматическая прокрутка
   useEffect(() => {
-    startAutoScroll();
-    return () => clearInterval(timerRef.current);
-  }, [startAutoScroll]);
+    const timer = setInterval(handleNext, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <article className={styles.project}>
+    <div className={styles.project}>
       <header className={styles.project__header}>
         <div>
           <h2 className={styles.project__name}>
@@ -89,11 +87,10 @@ const Project: React.FC<ProjectProps> = ({
       <div className={styles.project__video}>
         <iframe
           src={vimeoLink}
-          allow="autoplay; fullscreen; picture-in-picture"
+          allow="autoplay; fullscreen; picture-in-picture;autoplay"
           allowFullScreen
-          title={`Видео проекта: ${name}`}
-          loading="lazy"
-        />
+          title="Project Video"
+        ></iframe>
       </div>
 
       <section className={styles.project__content}>
@@ -104,66 +101,55 @@ const Project: React.FC<ProjectProps> = ({
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            role="region"
-            aria-label="Галерея проекта"
           >
             {images.map((img, idx) => (
               <Image
                 key={idx}
                 src={img}
-                alt={`Фото проекта ${name} - ${idx + 1}`}
+                alt={`Проект Фото ${idx + 1}`}
                 className={`${styles.project__photos_img} ${styles.carousel__slide}`}
                 data-active={idx === currentSlide}
                 width={1200}
                 height={800}
                 priority={idx === 0}
-                quality={80}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
+                unoptimized 
               />
             ))}
             <button 
               className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
               onClick={handlePrev}
-              aria-label="Предыдущее фото"
+              aria-label="Previous slide"
             >
-              <ArrowLeft aria-hidden="true"/>
+              <ArrowLeft/>
             </button>
             <button 
               className={`${styles.carousel__button} ${styles.carousel__button_next}`}
               onClick={handleNext}
-              aria-label="Следующее фото"
+              aria-label="Next slide"
             >
-              <ArrowRight aria-hidden="true"/>
+              <ArrowRight/>
             </button>
           </div>
           <div className={styles.project__content_video}>
             <iframe
               src={backstageVimeoLink}
-              allow="fullscreen; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
-              title={`Backstage проекта: ${name}`}
-              loading="lazy"
-            />
+              title="Backstage Video"
+            ></iframe>
           </div>
         </div>
 
         <div className={styles.project__content_right}>
           <h3 className={styles.project__content_title}>Команда проекта</h3>
-          <div role="list">
-            {team.split('\n').map((line, index) => (
-              <p 
-                key={index} 
-                className={styles.project__content_team_line}
-                role="listitem"
-              >
-                {line}
-              </p>
-            ))}
-          </div>
+          {team.split('\n').map((line, index) => (
+            <p key={index} className={styles.project__content_team_line}>
+              {line}
+            </p>
+          ))}
         </div>
       </section>
-    </article>
+    </div>
   );
 };
 

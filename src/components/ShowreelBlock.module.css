@@ -123,6 +123,10 @@
 }
 
 @media (max-width: 600px) {
+    .showreel__buttons {
+        margin-bottom: 4rem;
+    }
+    
     .showreel__button {
         font-size: 3rem;
     }
