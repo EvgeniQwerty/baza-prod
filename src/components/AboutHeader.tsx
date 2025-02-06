@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import styles from "./AboutHeader.module.css";
 
 interface VideoPlayerProps {
@@ -16,7 +15,6 @@ const VideoPlayer = ({ onLoad }: VideoPlayerProps) => {
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        videoElement.src = '/showreel/main_video.webm';
         videoElement.preload = 'metadata';
       }
     }, { threshold: 0.1 });
@@ -41,7 +39,7 @@ const VideoPlayer = ({ onLoad }: VideoPlayerProps) => {
   return (
     <video
       ref={videoRef}
-      className={`${styles.showreel__video} ${styles.video_visible}`}
+      className={styles.showreel__video}
       playsInline
       muted
       loop
@@ -50,7 +48,16 @@ const VideoPlayer = ({ onLoad }: VideoPlayerProps) => {
       disablePictureInPicture
       disableRemotePlayback
     >
-      <source src="/showreel/main_video.webm" type="video/webm" />
+      <source
+        src="/showreel/main_video-mobile.webm"
+        type="video/webm"
+        media="(max-width: 768px)"
+      />
+      <source
+        src="/showreel/main_video.webm"
+        type="video/webm"
+        media="(min-width: 769px)"
+      />
       <track kind="metadata" src="/showreel/captions.vtt" default />
     </video>
   );
@@ -61,29 +68,26 @@ const Slideshow = ({ currentImage }: { currentImage: number }) => (
     {[1, 2, 3, 4, 5].map((imgNum) => {
       const isActive = currentImage === imgNum;
       return (
-        <picture key={imgNum} className={styles.image__wrapper}>
+        <picture key={imgNum}>
           <source
-            srcSet={`/showreel/imgs/${imgNum}.avif`}
+            media="(max-width: 768px)"
+            srcSet={`/showreel/imgs/${imgNum}-mobile.avif`}
             type="image/avif"
           />
           <source
-            srcSet={`/showreel/imgs/${imgNum}.webp`}
-            type="image/webp"
+            media="(min-width: 769px)"
+            srcSet={`/showreel/imgs/${imgNum}.avif`}
+            type="image/avif"
           />
-          <Image
-            src={`/showreel/imgs/${imgNum}.jpg`}
+          <img
+            src={`/showreel/imgs/${imgNum}.avif`} // Фолбэк для старых браузеров
             alt={isActive ? `Кадр ${imgNum} из шоурила Baza` : ''}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority={imgNum === 1}
-            quality={85}
             className={`
               ${styles.showreel__image} 
               ${isActive ? styles.image_active : styles.image_inactive}
             `}
             loading={imgNum <= 2 ? 'eager' : 'lazy'}
             decoding={isActive ? 'auto' : 'async'}
-            unoptimized 
           />
         </picture>
       );

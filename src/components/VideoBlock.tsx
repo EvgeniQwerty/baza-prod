@@ -13,14 +13,14 @@ interface VideoBlockProps {
   imgs: number;
 }
 
-const VideoBlock: FC<VideoBlockProps> = ({ 
-  folderPath, 
-  name, 
-  org, 
-  type, 
-  typeCode, 
-  year, 
-  imgs 
+const VideoBlock: FC<VideoBlockProps> = ({
+  folderPath,
+  name,
+  org,
+  type,
+  typeCode,
+  year,
+  imgs
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
@@ -39,10 +39,10 @@ const VideoBlock: FC<VideoBlockProps> = ({
     return () => clearInterval(interval);
   }, [isHovered, imgs]);
 
-  const imageSrc = useMemo(() => `${folderPath}/${currentImageIndex}.png`, [folderPath, currentImageIndex]);
+  const imageSrc = useMemo(() => `${folderPath}/${currentImageIndex}.avif`, [folderPath, currentImageIndex]);
 
   return (
-    <Link 
+    <Link
       href={folderPath}
       className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
       data-type={typeCode}
@@ -51,26 +51,27 @@ const VideoBlock: FC<VideoBlockProps> = ({
       aria-label={`${name} ${type} проект ${year}`}
       role="article"
     >
-      <div 
+      <div
         className={styles.videoblock__imageWrapper}
-        role="img" 
+        role="img"
         aria-label={`Изображение проекта ${name}`}
       >
-        <Image
-          src={imageSrc}
-          alt={name}
-          fill
-          sizes="100vw"
-          quality={75}
-          priority={false}
-          className={styles.videoblock__image}
-          unoptimized
-        />
+        <picture>
+          {/* Для мобильных устройств */}
+          <source srcSet={imageSrc.replace('.avif', '-mobile.avif')} media="(max-width: 768px)" />
+          <img
+            src={imageSrc}
+            alt={name}
+            className={styles.videoblock__image}
+            loading="lazy"
+          />
+        </picture>
       </div>
-      
+
+
       <div className={styles.videoblock__buttons}>
         <p className={styles.videoblock__type}>{type}</p>
-        <span 
+        <span
           className={styles.videoblock__button}
           tabIndex={0}
           role="button"

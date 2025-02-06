@@ -125,3 +125,9 @@
         height: 90vh;
     }
 }
+
+@media (max-width: 500px) {
+    .showreel__buttons {
+        margin-bottom: 4rem;
+    }
+}

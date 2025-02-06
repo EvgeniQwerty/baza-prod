@@ -96,38 +96,42 @@ const Project: React.FC<ProjectProps> = ({
       <section className={styles.project__content}>
         <div className={styles.project__content_left}>
           <h3 className={styles.project__content_title}>Как это было</h3>
-          <div 
+          <div
             className={styles.project__photos}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             {images.map((img, idx) => (
-              <Image
-                key={idx}
-                src={img}
-                alt={`Проект Фото ${idx + 1}`}
-                className={`${styles.project__photos_img} ${styles.carousel__slide}`}
-                data-active={idx === currentSlide}
-                width={1200}
-                height={800}
-                priority={idx === 0}
-                unoptimized 
-              />
+              <picture>
+                <source
+                  srcSet={`${img.replace(".avif", "-mobile.avif")}`}
+                  media="(max-width: 767px)"
+                  type="image/avif"
+                />
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Проект Фото ${idx + 1}`}
+                  className={`${styles.project__photos_img} ${styles.carousel__slide}`}
+                  data-active={idx === currentSlide}
+                />
+              </picture>
+
             ))}
-            <button 
+            <button
               className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
               onClick={handlePrev}
               aria-label="Previous slide"
             >
-              <ArrowLeft/>
+              <ArrowLeft />
             </button>
-            <button 
+            <button
               className={`${styles.carousel__button} ${styles.carousel__button_next}`}
               onClick={handleNext}
               aria-label="Next slide"
             >
-              <ArrowRight/>
+              <ArrowRight />
             </button>
           </div>
           <div className={styles.project__content_video}>

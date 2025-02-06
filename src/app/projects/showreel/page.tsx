@@ -11,10 +11,10 @@ export default function ProjectPage() {
         org={"BAZA"}
         type={"Реклама"}
         year={"2023"}
-        img1={"/projects/showreel/1.png"}
-        img2={"/projects/showreel/2.png"}
-        img3={"/projects/showreel/3.png"}
-        img4={"/projects/showreel/4.png"}
+        img1={"/projects/showreel/1.avif"}
+        img2={"/projects/showreel/2.avif"}
+        img3={"/projects/showreel/3.avif"}
+        img4={"/projects/showreel/4.avif"}
         backstageVimeoLink={"https://player.vimeo.com/video/278479808"}
         team={"Production - BAZA\n\nDirector&DOP: Roman Milovanov\nExecutive producer: Ivan Stoletov\nExecutive producer: Egor Popel\n1AD: Alexandra Goludina\nCasting director: Darya Kolyadnaya\nStylist: Vika El'kova\nMUA: Elizabeth Tsvetkova\nVirtual Production: XO VP\nGaffer: Leonid Tashenberg\n1AC: Oleg Demkiv\nDolly: Pavel Shlyk\nAdministrator: Viktor Ermakov"} />
     </main>

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
@@ -8,7 +8,8 @@ import styles from "./ShowreelBlock.module.css";
 type ButtonType = 'baza' | 'showreel';
 const SLIDE_INTERVAL = 3000;
 const TOTAL_SLIDES = 5;
-const VIDEO_PATH = '/showreel/main_video.webm';
+const MOBILE_VIDEO_PATH = '/showreel/main_video-mobile.webm';
+const DESKTOP_VIDEO_PATH = '/showreel/main_video.webm';
 
 export default function ShowreelBlock() {
     const [activeButton, setActiveButton] = useState<ButtonType>('showreel');
@@ -17,12 +18,19 @@ export default function ShowreelBlock() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const observerRef = useRef<IntersectionObserver>();
 
-    // Оптимизация загрузки видео
+    // Функция инициализации видео
     const initVideo = useCallback(() => {
         const videoElement = videoRef.current;
         if (!videoElement) return;
 
-        videoElement.src = VIDEO_PATH;
+        // Определяем, какое видео загружать
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const videoPath = isMobile ? MOBILE_VIDEO_PATH : DESKTOP_VIDEO_PATH;
+
+        if (videoElement.src !== videoPath) {
+            videoElement.src = videoPath;
+        }
+
         videoElement.preload = 'metadata';
     }, []);
 
@@ -34,6 +42,7 @@ export default function ShowreelBlock() {
         observerRef.current = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 initVideo();
+                videoElement.play().catch(console.error);
             }
         }, { threshold: 0.1 });
 
@@ -44,12 +53,13 @@ export default function ShowreelBlock() {
         };
     }, [initVideo]);
 
+    // Видео загружено
     const handleVideoCanPlay = useCallback(() => {
         setIsVideoLoaded(true);
         videoRef.current?.play().catch(console.error);
     }, []);
 
-    // Слайдшоу с оптимизированными изображениями
+    // Слайдшоу работает, пока видео не загружено
     useEffect(() => {
         if (isVideoLoaded) return;
 
@@ -65,40 +75,46 @@ export default function ShowreelBlock() {
     }, []);
 
     return (
-        <section 
+        <section
             className={styles.showreel}
             aria-label="Видеопрезентация проекта"
             data-video-loaded={isVideoLoaded}
         >
-            {/* Оптимизированное слайд-шоу с современными форматами */}
+            {/* Слайдшоу пока видео не загружено */}
             {!isVideoLoaded && (
-                <div 
+                <div
                     className={styles.showreel__slideshow}
-                    role="region" 
+                    role="region"
                     aria-live="polite"
                 >
                     {Array.from({ length: TOTAL_SLIDES }, (_, i) => i + 1).map((imgNum) => (
-                        <Image
-                        key={imgNum}
-                        src={`/showreel/imgs/${imgNum}.avif`}
-                        alt={`Демонстрация проекта - кадр ${imgNum}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        quality={80}
-                        priority={imgNum === 1}
-                        loading={imgNum <= 2 ? 'eager' : 'lazy'}
-                        decoding="async"
-                        className={`
-                            ${styles.showreel__image} 
-                            ${currentImage === imgNum ? styles.image_active : styles.image_inactive}
-                        `}
-                        unoptimized
-                    />
+                        <picture>
+                            <source
+                                media="(max-width: 768px)"
+                                srcSet={`/showreel/imgs/${imgNum}-mobile.avif`}
+                                type="image/avif"
+                            />
+                            <source
+                                media="(min-width: 769px)"
+                                srcSet={`/showreel/imgs/${imgNum}.avif`}
+                                type="image/avif"
+                            />
+                            <img
+                                src={`/showreel/imgs/${imgNum}.avif`}  // fallback для старых браузеров
+                                alt={`Демонстрация проекта - кадр ${imgNum}`}
+                                loading={imgNum <= 2 ? 'eager' : 'lazy'}
+                                decoding="async"
+                                className={`  
+                                ${styles.showreel__image} 
+                                ${currentImage === imgNum ? styles.image_active : styles.image_inactive}
+                            `}
+                            />
+                        </picture>
                     ))}
                 </div>
             )}
 
-            {/* Оптимизированное видео с отложенной загрузкой */}
+            {/* Видео с динамической загрузкой по устройству */}
             <video
                 ref={videoRef}
                 className={`${styles.showreel__video} ${isVideoLoaded ? styles.video_visible : ''}`}
@@ -113,12 +129,12 @@ export default function ShowreelBlock() {
             >
             </video>
 
-            {/* Навигация с семантической разметкой */}
-            <nav 
-                className={styles.showreel__buttons} 
+            {/* Навигация */}
+            <nav
+                className={styles.showreel__buttons}
                 aria-label="Навигация по разделам"
             >
-                <Link 
+                <Link
                     href="/about"
                     className={`${styles.showreel__button} ${activeButton === 'baza' ? styles.button_active : ''}`}
                     aria-current={activeButton === 'baza' ? 'page' : undefined}
@@ -126,7 +142,7 @@ export default function ShowreelBlock() {
                 >
                     <span>Baza «Мы вас видим»</span>
                 </Link>
-                <Link 
+                <Link
                     href="/projects/showreel"
                     className={`${styles.showreel__button} ${activeButton === 'showreel' ? styles.button_active : ''}`}
                     onClick={() => handleClick('showreel')}

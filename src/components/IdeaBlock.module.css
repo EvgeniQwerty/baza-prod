@@ -59,9 +59,8 @@
 
 .ideablock__text_mobile_third {
     position: absolute;
-    top: 35rem;
+    bottom: -2rem;
     width: 100%;
-    height: 100%;
     text-align: center;
 }
 
@@ -96,18 +95,10 @@
     .ideablock__text_mobile {
         font-size: 13rem;    
     }
-
-    .ideablock__text_mobile_third {
-        top: 46rem;
-    }
 }
 
 @media (max-width: 500px) {
     .ideablock {
         height: 40vh;    
-    }
-
-    .ideablock__text_mobile_third {
-        top: 43rem;
     }
 }

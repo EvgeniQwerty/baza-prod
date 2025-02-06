@@ -102,30 +102,28 @@ export default function AboutTeam() {
       </ul>
 
       <div className={styles.team__image_wrapper}>
-        <picture>
-          <source
-            srcSet="/about/about_team.avif"
-            type="image/avif"
-          />
-          <source
-            srcSet="/about/about_team.webp"
-            type="image/webp"
-          />
-          <Image
-            src="/about/about_team.jpg"
-            alt="Фотография команды проекта"
-            fill
-            sizes="(max-width: 768px) 100vw, 80vw"
-            quality={80}
-            priority
-            loading="eager"
-            decoding="sync"
-            className={styles.team__image}
-            unoptimized
-            aria-hidden="true"
-          />
-        </picture>
-      </div>
+  <picture>
+    <source
+      srcSet="/about/about_team.avif"
+      type="image/avif"
+      media="(min-width: 769px)"
+    />
+    <source
+      srcSet="/about/about_team-mobile.avif"
+      type="image/avif"
+      media="(max-width: 768px)"
+    />
+    <img
+      src="/about/about_team.avif"
+      alt="Фотография команды проекта"
+      className={styles.team__image}
+      loading="eager"
+      decoding="sync"
+      sizes="(max-width: 768px) 100vw, 80vw"
+      aria-hidden="true"
+    />
+  </picture>
+</div>
     </section>
   );
 }

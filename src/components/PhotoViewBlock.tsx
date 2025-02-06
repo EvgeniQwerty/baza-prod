@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useCallback, memo } from 'react';
 import Image from 'next/image';
@@ -7,6 +7,7 @@ import styles from './PhotoViewBlock.module.css';
 interface Photo {
     id: number;
     src: string;
+    srcMobile: string; // Добавляем свойство для мобильной версии
     alt: string;
     width: number;
     height: number;
@@ -22,144 +23,44 @@ interface PhotoViewBlockProps {
 const photos: Photo[] = [
     {
         id: 1,
-        src: '/services/photos/002.avif',
+        src: '/services/photos/1.avif',
+        srcMobile: '/services/photos/1-mobile.avif', // Мобильная версия
         alt: 'Work',
         width: 1200,
         height: 800
     },
     {
         id: 2,
-        src: '/services/photos/063.avif',
+        src: '/services/photos/2.avif',
+        srcMobile: '/services/photos/2-mobile.avif', // Мобильная версия
         alt: 'Work',
         width: 1200,
         height: 800
     },
     {
         id: 3,
-        src: '/services/photos/070.avif',
+        src: '/services/photos/3.avif',
+        srcMobile: '/services/photos/3-mobile.avif', // Мобильная версия
         alt: 'Work',
         width: 1200,
         height: 800
     },
     {
         id: 4,
-        src: '/services/photos/121.avif',
+        src: '/services/photos/4.avif',
+        srcMobile: '/services/photos/4-mobile.avif', // Мобильная версия
         alt: 'Work',
         width: 1200,
         height: 800
     },
     {
         id: 5,
-        src: '/services/photos/134.avif',
+        src: '/services/photos/5.avif',
+        srcMobile: '/services/photos/5-mobile.avif', // Мобильная версия
         alt: 'Work',
         width: 1200,
         height: 800
-    },
-    {
-        id: 6,
-        src: '/services/photos/063.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 7,
-        src: '/services/photos/070.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 8,
-        src: '/services/photos/121.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 9,
-        src: '/services/photos/134.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 10,
-        src: '/services/photos/002.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 11,
-        src: '/services/photos/002.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 12,
-        src: '/services/photos/063.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 13,
-        src: '/services/photos/070.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 14,
-        src: '/services/photos/121.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 15,
-        src: '/services/photos/134.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 16,
-        src: '/services/photos/063.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 17,
-        src: '/services/photos/070.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 18,
-        src: '/services/photos/121.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 19,
-        src: '/services/photos/134.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 20,
-        src: '/services/photos/002.avif',
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
+    }
 ].map((photo, index) => ({
     ...photo,
     isLarge: index % 5 === 0 // Автоматическое определение больших фото
@@ -170,22 +71,31 @@ const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }
         className={`${styles.photo__item} ${photo.isLarge ? styles['photo__item_large'] : ''}`}
         data-testid={`photo-item-${photo.id}`}
     >
-        <Image
-            src={photo.src}
-            alt={photo.alt}
-            className={styles.photo__image}
-            width={photo.width}
-            height={photo.height}
-            sizes={photo.isLarge ? 
-                "(max-width: 767px) 100vw, 100vw" : 
-                "(max-width: 767px) 100vw, 25vw"}
-            priority={priority}
-            loading={priority ? "eager" : "lazy"}
-            quality={80}
-            placeholder="blur"
-            blurDataURL={`${photo.src}?q=10&w=50`}
-            unoptimized
-        />
+        <picture>
+            {/* Добавляем источник для мобильной версии */}
+            <source
+                srcSet={photo.srcMobile}
+                media="(max-width: 767px)"
+                type="image/avif"
+            />
+            <Image
+                src={photo.src}
+                alt={photo.alt}
+                className={styles.photo__image}
+                width={photo.width}
+                height={photo.height}
+                sizes={photo.isLarge ?
+                    "(max-width: 767px) 100vw, 100vw" :
+                    "(max-width: 767px) 100vw, 25vw"
+                }
+                priority={priority}
+                loading={priority ? "eager" : "lazy"}
+                quality={80}
+                placeholder="blur"
+                blurDataURL={`${photo.src}?q=10&w=50`}
+                unoptimized
+            />
+        </picture>
     </div>
 ));
 

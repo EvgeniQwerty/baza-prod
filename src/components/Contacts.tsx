@@ -32,14 +32,14 @@ export default function Contacts() {
       </div>
 
       <div className={styles.contacts__links}>
-        <a 
-          href="mailto:kalashnikov.ksv@gmail.com" 
+        <a
+          href="mailto:kalashnikov.ksv@gmail.com"
           className={styles.contacts__link}
         >
           kalashnikov.ksv@gmail.com
         </a>
-        <a 
-          href="tel:+79195105601" 
+        <a
+          href="tel:+79195105601"
           className={styles.contacts__link}
         >
           +7 (919) 510 56-01
@@ -48,14 +48,14 @@ export default function Contacts() {
       </div>
 
       <div className={styles.contacts__icons}>
-        <a 
-          href="https://google.com" 
+        <a
+          href="https://google.com"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.contacts__icon}
           aria-label="Vimeo"
         >
-          <VimeoSvg 
+          <VimeoSvg
             className={styles.contacts__svg}
             width={112}
             height={48}
@@ -70,7 +70,7 @@ export default function Contacts() {
             className={styles.contacts__social}
             aria-label={label}
           >
-            <Icon 
+            <Icon
               className={styles.contacts__svg}
               width={48}
               height={48}
@@ -81,19 +81,28 @@ export default function Contacts() {
 
       <div className={styles.contacts__imagewrapper}>
         <picture>
-          <source srcSet="/contacts/background.avif" type="image/avif" />
-          <source srcSet="/contacts/background.webp" type="image/webp" />
+          <source
+            srcSet="/contacts/background-mobile.avif"
+            type="image/avif"
+            media="(max-width: 768px)"
+          />
+          <source
+            srcSet="/contacts/background.avif"
+            type="image/avif"
+            media="(min-width: 769px)"
+          />
           <img
-            src="/contacts/background.png"
+            src="/contacts/background.avif"
             alt="Декоративный фон"
             className={styles.contacts__image}
             loading="lazy"
             decoding="async"
           />
         </picture>
+
         <p className={styles.contacts__description}>
-          Работа с нами - залог 100% результата<br/>
-          Если у вас возникли вопросы или предложения,<br/>
+          Работа с нами - залог 100% результата<br />
+          Если у вас возникли вопросы или предложения,<br />
           свяжитесь с нами любым удобным способом
         </p>
       </div>

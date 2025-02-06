@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import Image from 'next/image';
 import styles from './ServicesBlock.module.css';
 
 interface Service {
@@ -19,7 +18,7 @@ const defaultServices: Service[] = [
     {
         id: 1,
         title: 'Музыкальные клипы',
-        image: '/services/music.jpg',
+        image: '/services/music.avif',
         video: '/services/music.webm'
     },
     {
@@ -123,21 +122,6 @@ const ServiceCard: React.FC<{
         };
     }, [service.title]);
 
-    // Автоматический запуск видео для активного блока на мобильном
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-    
-        console.log(`Service: ${service.title}, isActive: ${isActive}, isVideoLoaded: ${isVideoLoaded}`);
-    
-        if (isActive && isVideoLoaded) {
-            video.play().catch(err => console.error("Ошибка при автозапуске видео:", err));
-        } else if (!isActive) {
-            video.pause();
-            video.currentTime = 0;
-        }
-    }, [isActive, isVideoLoaded]);
-
     const handleMouseEnter = useCallback(() => {
         if (!videoRef.current || !isVideoLoaded) return;
         setIsHovered(true);
@@ -161,25 +145,24 @@ const ServiceCard: React.FC<{
             onKeyUp={(e) => e.key === 'Enter' && onClick()}
             aria-label={`Открыть информацию об услуге: ${service.title}`}
         >
-            <Image
-                src={service.image}
-                alt={service.title}
-                className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
-                fill
-                priority={service.id <= 2}
-                quality={80}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                unoptimized
-            />
+            <picture>
+                <source srcSet={service.image.replace('.avif', '-mobile.avif')} media="(max-width: 768px)" />
+                <img
+                    src={service.image}
+                    alt={service.title}
+                    className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
+                />
+            </picture>
+
             <video
                 ref={videoRef}
                 className={`${styles.services__video} ${isHovered ? styles.services__video_visible : ''}`}
-                src={service.video}
-                muted
-                playsInline
-                loop
                 aria-hidden="true"
-            />
+            >
+                <source src={service.video.replace('.webm', '-mobile.webm')} type="video/webm" />
+                <source src={service.video} type="video/webm" />
+            </video>
+
             <div className={styles.services__overlay} />
             <div className={styles.services__content}>
                 <h3 className={styles.services__title}>{service.title}</h3>
