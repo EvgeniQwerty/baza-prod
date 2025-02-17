@@ -1,33 +1,30 @@
-/* Container */
 .showreel {
     position: relative;
     width: 100vw;
     height: 100vh;
     background: rgb(var(--background));
-    overflow: hidden; /* Предотвращаем horizontal scroll */
+    overflow: hidden;
 }
 
-/* Navigation buttons container */
 .showreel__buttons {
     position: absolute;
-    bottom: var(--bottom-padding);
+    bottom: var(--bottom-padding6);
     left: var(--left-padding);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 1.6rem; /* Используем gap вместо margin для лучшего контроля spacing */
+    gap: 1rem;
 }
 
-/* Button styles */
 .showreel__button {
     display: inline-flex;
     align-items: center;
     font-size: 4rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     text-transform: uppercase;
     color: rgb(var(--primary));
-    will-change: font-weight, color; /* Оптимизация производительности анимации */
+    will-change: font-weight, color;
     transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
@@ -36,7 +33,6 @@
     color: rgb(var(--accent));
 }
 
-/* Prevent layout shift on hover */
 .showreel__button::after {
     content: attr(data-text);
     height: 0;
@@ -47,21 +43,18 @@
     font-weight: 800;
 }
 
-/* Year indicator */
 .showreel__year {
     font-size: 1.8rem;
     font-weight: 200;
     margin-left: 0.5rem;
 }
 
-/* Slideshow container */
 .showreel__slideshow {
     position: absolute;
-    inset: 0; /* Заменяем top, left, width, height */
+    inset: 0;
     z-index: 1;
 }
 
-/* Image styles */
 .showreel__image {
     position: absolute;
     inset: 0;
@@ -81,7 +74,6 @@
     z-index: 2;
 }
 
-/* Video styles */
 .showreel__video {
     position: absolute;
     top: 0;
@@ -97,7 +89,6 @@
     opacity: 1;
 }
 
-/* Responsive styles */
 @media (max-width: 1200px) {
     .showreel__button {
         font-size: 3.5rem;
@@ -140,7 +131,6 @@
     }
 }
 
-/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
     .showreel__button,
     .showreel__image,
@@ -149,7 +139,6 @@
     }
 }
 
-/* Print styles */
 @media print {
     .showreel {
         height: auto;

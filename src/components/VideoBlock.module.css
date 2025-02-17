@@ -39,13 +39,12 @@
 }
 
 .videoblock__button {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.6rem;
     text-transform: uppercase;
     color: rgb(var(--primary));
     line-height: 1;
     transition: 0.3s all;
-    margin-bottom: 1rem;
     cursor: pointer;
 }
 
@@ -53,17 +52,7 @@
 .videoblock__button:focus {
     font-weight: 800;
     color: rgb(var(--accent));
-    /* outline: 2px solid rgb(var(--accent)); */
 }
-
-/* .videoblock__type {
-    font-weight: 200;
-    font-size: 1.2rem;
-    position: absolute;
-    top: 3rem;
-    left: 3rem;
-    z-index: 4;
-} */
 
 .videoblock__year {
     font-weight: 300;
@@ -72,9 +61,9 @@
 }
 
 .videoblock__type {
-    font-size: 1.6rem;
+    font-size: 1rem;
     text-transform: uppercase;  
-    font-weight: 600; 
+    font-weight: 300; 
 }
 
 @media (max-width: 1280px) {

@@ -1,4 +1,3 @@
-/* Основные стили */
 .ideablock {
     width: 100vw;
     height: 90vh;
@@ -17,83 +16,25 @@
     z-index: -1;
 }
 
-/* Заголовок для десктопа */
 .ideablock__title {
     position: absolute;
-    color: rgb(var(--gray));
-    font-weight: 800;
-    font-size: 13rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(var(--primary));
+    font-weight: 300;
+    font-size: 2.125rem;
     text-transform: uppercase;
     line-height: 1;
-    top: 3rem;
-    left: -3rem;
     z-index: 1;
     margin: 0;
-}
-
-/* Мобильный заголовок */
-.ideablock__title_mobile {
-    display: none;
-}
-
-.ideablock__text_mobile {
-    color: rgb(var(--gray));
-    font-weight: 800;
-    font-size: 13rem;
-    text-transform: uppercase;
-    line-height: 1;
-    display: block;
-}
-
-.ideablock__text_mobile_first {
-    position: absolute;
-    top: -4rem;
-    left: -4rem;
-}
-
-.ideablock__text_mobile_second {
-    position: absolute;
-    top: -4rem;
-    right: -4rem;
-}
-
-.ideablock__text_mobile_third {
-    position: absolute;
-    bottom: -2rem;
-    width: 100%;
     text-align: center;
-}
-
-/* Медиа-запросы */
-@media (max-width: 1280px) {
-    .ideablock__title {
-        font-size: 15rem;
-    }    
+    width: 100%;
 }
 
 @media (max-width: 1024px) {
     .ideablock {
         height: 60vh;    
-    }
-
-    .ideablock__title {
-        display: none;
-    }
-
-    .ideablock__title_mobile {
-        display: block;
-        position: relative;
-        height: 100%;
-    }
-
-    .ideablock__text_mobile {
-        font-size: 15rem;    
-    }
-}
-
-@media (max-width: 780px) {
-    .ideablock__text_mobile {
-        font-size: 13rem;    
     }
 }
 

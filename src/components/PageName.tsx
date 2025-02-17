@@ -12,7 +12,6 @@ const PageName: React.FC<PageNameProps> = ({ imageUrl, title, text }) => {
     <section className={styles.pagename} aria-labelledby="page-title">
       <div className={styles.pagename__imagewrapper}>
         <picture>
-          {/* Добавляем source для мобильной версии */}
           <source srcSet={imageUrl.replace(".avif", "-mobile.avif")} media="(max-width: 768px)" type="image/avif" />
           <img
             src={imageUrl}

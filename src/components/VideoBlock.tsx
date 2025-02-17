@@ -70,7 +70,6 @@ const VideoBlock: FC<VideoBlockProps> = ({
 
 
       <div className={styles.videoblock__buttons}>
-        <p className={styles.videoblock__type}>{type}</p>
         <span
           className={styles.videoblock__button}
           tabIndex={0}
@@ -78,6 +77,7 @@ const VideoBlock: FC<VideoBlockProps> = ({
         >
           {name}
         </span>
+        <p className={styles.videoblock__type}>{type}</p>
       </div>
     </Link>
   );

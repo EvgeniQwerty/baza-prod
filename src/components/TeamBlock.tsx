@@ -36,7 +36,7 @@ export default function TeamBlock() {
     },
     {
       name: "Дарья Огорельцева",
-      position: "Исполнительный продюсер",
+      position: "Исполнительный\nпродюсер",
       socials: [
         { href: "https://t.me/darya", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/darya", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
@@ -47,7 +47,7 @@ export default function TeamBlock() {
     },
     {
       name: "Михаил Шамриков",
-      position: "Основной режиссёр",
+      position: "Основной\nрежиссёр",
       socials: [
         { href: "https://t.me/mikhail", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/mikhail", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
@@ -58,7 +58,7 @@ export default function TeamBlock() {
     },
     {
       name: "Александр Артеев",
-      position: "Оператор-постановщик",
+      position: "Оператор-\nпостановщик",
       socials: [
         { href: "https://t.me/alex", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/alex", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
