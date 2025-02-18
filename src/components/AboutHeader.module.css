@@ -30,7 +30,7 @@
 }
 
 .showreel__button:hover {
-    font-weight: 800;
+    /* font-weight: 800; */
     color: rgb(var(--accent));
 }
 

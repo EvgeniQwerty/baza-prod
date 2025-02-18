@@ -85,7 +85,6 @@
   color: var(--title-color);
 }
 
-/* Медиа-запросы */
 @media (max-width: 1000px) {
   .photo {
       --grid-columns: 2;
@@ -111,7 +110,6 @@
   }
 }
 
-/* Доступность */
 @media (prefers-reduced-motion: reduce) {
   .photo__image,
   .photo__more {
@@ -123,7 +121,6 @@
   }
 }
 
-/* Оптимизация рендеринга */
 @media (max-resolution: 1.5dppx) {
   .photo__image {
       image-rendering: -webkit-optimize-contrast;

@@ -29,7 +29,7 @@
 }
 
 .showreel__button:hover {
-    font-weight: 800;
+    /* font-weight: 800; */
     color: rgb(var(--accent));
 }
 
@@ -40,7 +40,7 @@
     overflow: hidden;
     user-select: none;
     pointer-events: none;
-    font-weight: 800;
+    /* font-weight: 800; */
 }
 
 .showreel__year {

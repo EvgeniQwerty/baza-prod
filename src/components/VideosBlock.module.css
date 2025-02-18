@@ -1,4 +1,3 @@
-/* VideosBlock.module.css */
 .videos {
     min-height: 0;
     height: auto;
@@ -73,7 +72,6 @@
     font-size: 2rem;
 }
 
-/* Адаптивность */
 @media (max-width: 900px) {
     .videos {
         min-height: auto;

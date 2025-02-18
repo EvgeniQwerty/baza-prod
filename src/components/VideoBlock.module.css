@@ -1,4 +1,3 @@
-/* VideoBlock Styles */
 .videoblock {
     position: relative;
     width: 100%;
@@ -50,7 +49,7 @@
 
 .videoblock__button:hover,
 .videoblock__button:focus {
-    font-weight: 800;
+    /* font-weight: 800; */
     color: rgb(var(--accent));
 }
 

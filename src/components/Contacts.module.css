@@ -35,7 +35,7 @@
 
 .contacts__link:hover {
     color: rgb(var(--accent));
-    font-weight: 800;
+    /* font-weight: 800; */
 }
 
 .contacts__link_desc {
@@ -107,7 +107,6 @@
     }
 }
 
-/* Добавить только эти изменения */
 .contacts__imagewrapper picture {
     display: block;
     width: 100%;
