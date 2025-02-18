@@ -58,7 +58,6 @@ const VideoPlayer = ({ onLoad }: VideoPlayerProps) => {
         type="video/webm"
         media="(min-width: 769px)"
       />
-      <track kind="metadata" src="/showreel/captions.vtt" default />
     </video>
   );
 };
@@ -124,7 +123,7 @@ export default function AboutHeader() {
 
         <div className={styles.showreel__buttons} role="region" aria-live="polite">
           <h1 id="about-heading" className={styles.showreel__button}>
-            Baza «Мы вас видим»
+            «Мы вас видим»
           </h1>
         </div>
       </div>
