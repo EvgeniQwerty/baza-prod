@@ -47,7 +47,7 @@ export default function TeamBlock() {
     },
     {
       name: "Михаил Шамриков",
-      position: "Основной\nрежиссёр",
+      position: "Режиссёр",
       socials: [
         { href: "https://t.me/mikhail", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/mikhail", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },

@@ -132,7 +132,7 @@ const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
             role="region"
         >
             <h2 className={styles.photo__title}>
-                Ваши проекты нашими глазами
+                Ваши проекты<br/>нашими глазами
             </h2>
 
             <div 

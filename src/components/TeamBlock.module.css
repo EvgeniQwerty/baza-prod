@@ -10,6 +10,8 @@
     height: 30vw;
     overflow: hidden;
     margin: 1rem;
+    filter: saturate(0);
+    transition: .3s all ease-in;
 }
 
 .team__image {
@@ -20,11 +22,9 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    filter: saturate(0);
-    transition: .3s all ease-in;
 }
 
-.team__image:hover {
+.team__member:hover {
     filter: saturate(1);
 }
 
@@ -140,6 +140,7 @@
     .team__member {
         height: 20rem;
         margin: 0;
+        filter: saturate(1);
     }
 
     .team__overlay {

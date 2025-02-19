@@ -129,16 +129,14 @@ export default function AboutHeader() {
       </div>
 
       <div className={styles.quote} role="article">
-        <h2 className={styles.quote__h2}>
-          «Мы видим ваши переживания, ваш талант и желание. Нам важно дать место, где вы
-          <span aria-hidden="true"> </span>
-          <span className="sr-only"> сможете</span>
-          максимально себя проявите. Baza - это место, где талант приобретает выражение»
-        </h2>
-
-        <h3 className={styles.quote__h3} aria-label="Каждый важен, каждый внес свою лепту в эту историю">
-          Каждый важен, каждый внес свою лепту в эту историю
-        </h3>
+        <div className={styles.quote__left}>
+          <h4 className={`${styles.quote__h4} ${styles.quote__h4_accent}`}>Мы взяли свои страхи, свою силу, свою страсть и создали этот ролик 
+          как визуальное выражение того, кем мы являемся. </h4>
+          <h4 className={styles.quote__h4}>Этот процесс помогает нам лучше понять, как раскрывать вас.</h4>
+        </div> 
+        <div className={styles.quote__right}>
+          <h3 className={styles.quote__h3}>Мы видим ваши<br/>переживания, талант<br/>и желание<br/>самовыражаться</h3>
+        </div>   
       </div>
     </section>
   );

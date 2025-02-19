@@ -1,7 +1,7 @@
 .photo {
   --photo-padding: 2rem 1rem;
   --title-color: var(--color-white, #fff);
-  --title-size: clamp(1.4rem, 2.5vw, 2rem);
+  --title-size: 2.5rem;
   --grid-gap: 1rem;
   --grid-columns: 4;
   --item-aspect: 16/9;
@@ -17,10 +17,11 @@
   color: var(--title-color);
   font-size: var(--title-size);
   margin-block-end: 2rem;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   line-height: 1.2;
+  margin-left: 2rem;
 }
 
 .photo__grid {

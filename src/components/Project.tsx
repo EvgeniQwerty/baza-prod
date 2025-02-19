@@ -15,7 +15,6 @@ interface ProjectProps {
   img2: string;
   img3: string;
   img4: string;
-  backstageVimeoLink: string;
   team: string;
 }
 
@@ -29,7 +28,6 @@ const Project: React.FC<ProjectProps> = ({
   img2,
   img3,
   img4,
-  backstageVimeoLink,
   team,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -85,12 +83,18 @@ const Project: React.FC<ProjectProps> = ({
       </header>
 
       <div className={styles.project__video}>
-        <iframe
+        {/* <iframe
           src={vimeoLink}
           allow="autoplay; fullscreen; picture-in-picture;autoplay"
           allowFullScreen
           title="Project Video"
-        ></iframe>
+        ></iframe> */}
+        <iframe
+          src={vimeoLink}
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          allowFullScreen
+          title="Project Video"></iframe>
+        <script src="https://player.vimeo.com/api/player.js"></script>
       </div>
 
       <section className={styles.project__content}>
@@ -133,14 +137,6 @@ const Project: React.FC<ProjectProps> = ({
             >
               <ArrowRight />
             </button>
-          </div>
-          <div className={styles.project__content_video}>
-            <iframe
-              src={backstageVimeoLink}
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              title="Backstage Video"
-            ></iframe>
           </div>
         </div>
 
