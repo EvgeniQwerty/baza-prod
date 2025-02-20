@@ -4,6 +4,38 @@
     position: relative;
 }
 
+.team__quotes {
+    position: relative;
+    z-index: 3;
+    padding-top: 9rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.team__quote1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.team__quotes_right {
+    align-self: end;
+}
+
+.team__quote2 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.accent {
+    color: rgb(var(--accent));
+}
+
 .team__image {
     position: absolute;
     inset: 0;
@@ -16,13 +48,12 @@
 
 .team__grid {
     display: grid;
-    grid-template-columns: repeat(30, 0.1fr) 1.5fr;
+    grid-template-columns: repeat(30, 1fr);
     grid-template-rows: repeat(5, auto);
-    gap: 1rem;
-    padding: 6rem 8rem;
+    gap: 2rem;
+    padding: 6rem 4rem;
     position: relative;
     z-index: 2;
-    height: 100%;
     color: rgb(var(--primary));
 }
 
@@ -42,13 +73,31 @@
 
 .grid__position {
     font-size: 0.8rem;
-    font-weight: 200;
-    color: rgb(var(--accent));
+    font-weight: 300;
+    color: rgb(var(--primary));
     margin-block-end: 0.5rem;
 }
 
 .grid__name {
     margin-block-end: 0.2rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+@media (max-width: 900px) {
+    .team__quotes {
+        flex-direction: column;
+    }    
+
+    .team__quotes_left {
+        width: 100%;
+    }
+
+    .team__quotes_right {
+        width: 100%;
+        display: flex;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 800px) {
@@ -84,6 +133,10 @@
 }
 
 @media (max-width: 600px) {
+    .team__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .team {
         height: 100dvh;
     }
@@ -103,6 +156,6 @@
     }
 
     .team {
-        height: 120vh;
+        height: 80vh;
     }
 }

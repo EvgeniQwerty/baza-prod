@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Formular";
-  src: url("/font/Formular-Light.woff2") format("woff2");
+  src: url("/font/Formular-Light.ttf") format("ttf");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "Formular";
-  src: url("/font/Formular-Regular.woff2") format("woff2");
+  src: url("/font/Formular-Regular.ttf") format("ttf");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: "Formular";
-  src: url("/font/Formular-Medium.woff2") format("woff2");
+  src: url("/font/Formular-Medium.ttf") format("ttf");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: "Formular";
-  src: url("/font/Formular-Bold.woff2") format("woff2");
+  src: url("/font/Formular-Bold.ttf") format("ttf");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
   font-family: "Formular";
-  src: url("/font/Formular-Black.woff2") format("woff2");
+  src: url("/font/Formular-Black.ttf") format("ttf");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -40,8 +40,8 @@
 
 :root {
   --background: 17, 17, 17;
-  --primary: 255, 255, 255;
-  --accent: 255, 74, 2;
+  --primary: 239, 239, 239;
+  --accent: 218, 36, 39;
   --gray: 47, 46, 46;
 
   --left-padding: 4rem;
