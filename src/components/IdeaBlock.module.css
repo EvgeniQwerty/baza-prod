@@ -41,14 +41,8 @@
     color: rgb(var(--accent));
 }
 
-/* @media (max-width: 1024px) {
-    .ideablock {
-        height: 60vh;    
-    }
-}
-
 @media (max-width: 500px) {
     .ideablock {
-        height: 40vh;    
+        height: 30vh;    
     }
-} */
+}

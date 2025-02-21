@@ -18,10 +18,8 @@ export default function IdeaBlock() {
             }
         };
 
-        // Убедитесь, что видео без звука
         videoElement.muted = true;
 
-        // Пробуем воспроизвести видео с асинхронной загрузкой
         videoElement.load();
 
         playVideo();
