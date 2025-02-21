@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef } from "react";
 import styles from "./IdeaBlock.module.css";
+import Link from "next/link";
 
 export default function IdeaBlock() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -38,7 +39,7 @@ export default function IdeaBlock() {
                 ref={videoRef}
                 className={styles.ideablock__video}
                 src="/ideas/ideas_video.webm"
-                preload="auto"  // Пробуем использовать "auto" вместо "metadata"
+                preload="auto"
                 playsInline
                 muted
                 loop
@@ -55,7 +56,13 @@ export default function IdeaBlock() {
                     media="(min-width: 769px)"
                 />
             </video>
-            <p className={styles.ideablock__title}>Мы вас видим</p>
+            <p className={styles.ideablock__title}>
+                <Link
+                    href="/about"
+                    className={styles.ideablock__link}
+                    prefetch={false}>Мы вас видим
+                </Link>
+            </p>
         </div>
     );
 }

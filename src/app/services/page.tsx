@@ -7,7 +7,7 @@ export default function Services() {
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
-      <PageName imageUrl="/services/header.avif" title="Услуги" text="«Мы видим ваши переживания, ваш талант и желание. Нам важно дать место, где вы максимально себя проявите. Baza - это место, где талант приобретает выражение»"/>
+      <PageName imageUrl="/services/header.avif" title="Услуги"/>
       <ServicesBlock/>
       <PhotoViewBlock initialCount={14}/>
     </main>

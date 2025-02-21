@@ -33,6 +33,14 @@
     width: 100%;
 }
 
+.ideablock__link {
+    transition: .3s all;
+}
+
+.ideablock__link:hover {
+    color: rgb(var(--accent));
+}
+
 /* @media (max-width: 1024px) {
     .ideablock {
         height: 60vh;    
