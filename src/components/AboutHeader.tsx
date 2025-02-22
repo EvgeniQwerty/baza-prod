@@ -2,63 +2,47 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./AboutHeader.module.css";
 
-interface VideoPlayerProps {
+interface VimeoPlayerProps {
   onLoad: () => void;
 }
 
-const VideoPlayer = ({ onLoad }: VideoPlayerProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+const VimeoPlayer = ({ onLoad }: VimeoPlayerProps) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        videoElement.preload = 'metadata';
-      }
-    }, { threshold: 0.1 });
-
-    observer.observe(videoElement);
-
-    const handleLoadedData = () => {
+    const handleLoad = () => {
       onLoad();
-      videoElement.play().catch(() => {
-        videoElement.muted = true;
-        videoElement.play();
-      });
     };
 
-    videoElement.addEventListener('loadeddata', handleLoadedData);
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.addEventListener('load', handleLoad);
+    }
+
     return () => {
-      observer.disconnect();
-      videoElement.removeEventListener('loadeddata', handleLoadedData);
+      if (iframe) {
+        iframe.removeEventListener('load', handleLoad);
+      }
     };
   }, [onLoad]);
 
   return (
-    <video
-      ref={videoRef}
-      className={styles.showreel__video}
-      playsInline
-      muted
-      loop
-      aria-hidden="true"
-      preload="none"
-      disablePictureInPicture
-      disableRemotePlayback
-    >
-      <source
-        src="/showreel/main_video-mobile.webm"
-        type="video/webm"
-        media="(max-width: 768px)"
-      />
-      <source
-        src="/showreel/main_video.webm"
-        type="video/webm"
-        media="(min-width: 769px)"
-      />
-    </video>
+    <div className={styles.showreel__video}>
+      <iframe
+        ref={iframeRef}
+        src="https://player.vimeo.com/video/1056798263"
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+        title="Baza Showreel"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+        }}
+      ></iframe>
+    </div>
   );
 };
 
@@ -79,7 +63,7 @@ const Slideshow = ({ currentImage }: { currentImage: number }) => (
             type="image/avif"
           />
           <img
-            src={`/showreel/imgs/${imgNum}.avif`} // Фолбэк для старых браузеров
+            src={`/showreel/imgs/${imgNum}.avif`}
             alt={isActive ? `Кадр ${imgNum} из шоурила Baza` : ''}
             className={`
               ${styles.showreel__image} 
@@ -119,7 +103,7 @@ export default function AboutHeader() {
     <section aria-labelledby="about-heading">
       <div className={styles.showreel}>
         {!isVideoLoaded && <Slideshow currentImage={currentImage} />}
-        <VideoPlayer onLoad={handleVideoLoad} />
+        <VimeoPlayer onLoad={handleVideoLoad} />
 
         <div className={styles.showreel__buttons} role="region" aria-live="polite">
           <h1 id="about-heading" className={styles.showreel__button}>
@@ -130,12 +114,18 @@ export default function AboutHeader() {
 
       <div className={styles.quote} role="article">
         <div className={styles.quote__left}>
-          <h4 className={`${styles.quote__h4} ${styles.quote__h4_accent}`}>Мы взяли свои страхи, свою силу, свою страсть и создали этот ролик 
-          как визуальное выражение того, кем мы являемся. </h4>
-          <h4 className={styles.quote__h4}>Этот процесс помогает нам лучше понять, как раскрывать вас.</h4>
+          <h4 className={`${styles.quote__h4} ${styles.quote__h4_accent}`}>
+            Мы взяли свои страхи, свою силу, свою страсть и создали этот ролик 
+            как визуальное выражение того, кем мы являемся.
+          </h4>
+          <h4 className={styles.quote__h4}>
+            Этот процесс помогает нам лучше понять, как раскрывать вас.
+          </h4>
         </div> 
         <div className={styles.quote__right}>
-          <h3 className={styles.quote__h3}>Мы видим ваши<br/>переживания, талант<br/>и желание<br/>самовыражаться</h3>
+          <h3 className={styles.quote__h3}>
+            Мы видим ваши<br/>переживания, талант<br/>и желание<br/>самовыражаться
+          </h3>
         </div>   
       </div>
     </section>

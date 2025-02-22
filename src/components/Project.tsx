@@ -1,9 +1,7 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import styles from './Project.module.css';
-import ArrowLeft from "@/svg/arrow-left.svg";
-import ArrowRight from "@/svg/arrow-right.svg";
 
 interface ProjectProps {
   vimeoLink: string;
@@ -30,42 +28,7 @@ const Project: React.FC<ProjectProps> = ({
   img4,
   team,
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
   const images = [img1, img2, img3, img4].filter(Boolean) as string[];
-
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = () => {
-    const difference = touchStartX.current - touchEndX.current;
-    if (Math.abs(difference) > 50) {
-      if (difference > 0) {
-        handleNext();
-      } else {
-        handlePrev();
-      }
-    }
-  };
-  
-  useEffect(() => {
-    const timer = setInterval(handleNext, 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   const hasImages = images.length > 0;
   const hasTeam = team?.trim();
@@ -97,15 +60,10 @@ const Project: React.FC<ProjectProps> = ({
         <section className={styles.project__content}>
           {hasImages && (
             <div className={styles.project__content_left}>
-              <h3 className={styles.project__content_title}>Как это было</h3>
-              <div
-                className={styles.project__photos}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-              >
+              <h3 className={styles.project__content_title}>Фото проекта</h3>
+              <div className={styles.project__photos}>
                 {images.map((img, idx) => (
-                  <picture key={idx}>
+                  <picture key={idx} className={styles.project__photo_item}>
                     <source
                       srcSet={`${img.replace(".avif", "-mobile.avif")}`}
                       media="(max-width: 767px)"
@@ -114,25 +72,10 @@ const Project: React.FC<ProjectProps> = ({
                     <img
                       src={img}
                       alt={`Проект Фото ${idx + 1}`}
-                      className={`${styles.project__photos_img} ${styles.carousel__slide}`}
-                      data-active={idx === currentSlide}
+                      className={styles.project__photos_img}
                     />
                   </picture>
                 ))}
-                <button
-                  className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
-                  onClick={handlePrev}
-                  aria-label="Previous slide"
-                >
-                  <ArrowLeft />
-                </button>
-                <button
-                  className={`${styles.carousel__button} ${styles.carousel__button_next}`}
-                  onClick={handleNext}
-                  aria-label="Next slide"
-                >
-                  <ArrowRight />
-                </button>
               </div>
             </div>
           )}

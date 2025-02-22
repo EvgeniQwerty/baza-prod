@@ -15,7 +15,7 @@ export default function ProjectPage() {
         img2={"/projects/smena/2.avif"}
         img3={"/projects/smena/3.avif"}
         img4={"/projects/smena/4.avif"}
-        team={"Production - BAZA\n\nDirector&DOP: Roman Milovanov\nExecutive producer: Ivan Stoletov\nExecutive producer: Egor Popel\n1AD: Alexandra Goludina\nCasting director: Darya Kolyadnaya\nStylist: Vika El'kova\nMUA: Elizabeth Tsvetkova\nVirtual Production: XO VP\nGaffer: Leonid Tashenberg\n1AC: Oleg Demkiv\nDolly: Pavel Shlyk\nAdministrator: Viktor Ermakov"} />
+        team={"Продюсер - Влад Калашников\nОператор-постановщик - Александр Артеев\nХудожник по гриму - Алена Игнатьева\nХудожник по костюмам - Дарья Огорельцева, Елизавета Балуева\nГаффер - Артемий Мищихин\nОсветитель - Иван Бабинцев\nМонтаж - Влад Калашников, Александр Артеев\nКомпозитор/SFX - Лев Лерум\nЦвет/Клинап - Александр Артеев\nБэкстейдж фото - Илья Урс\n"} />
     </main>
   );
 }

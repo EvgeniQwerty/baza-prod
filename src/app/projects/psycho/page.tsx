@@ -15,7 +15,7 @@ export default function ProjectPage() {
         img2={"/projects/psycho/2.avif"}
         img3={"/projects/psycho/3.avif"}
         img4={"/projects/psycho/4.avif"}
-        team={"Production - BAZA\n\nDirector&DOP: Roman Milovanov\nExecutive producer: Ivan Stoletov\nExecutive producer: Egor Popel\n1AD: Alexandra Goludina\nCasting director: Darya Kolyadnaya\nStylist: Vika El'kova\nMUA: Elizabeth Tsvetkova\nVirtual Production: XO VP\nGaffer: Leonid Tashenberg\n1AC: Oleg Demkiv\nDolly: Pavel Shlyk\nAdministrator: Viktor Ermakov"} />
+        team={"DIRECTED by Mikhail Shamrikov\nPRODUCED by Vladislav Kalashnikov\nART DIRECTION by Anna Romanova\nLine producer: Daria Ogoreltseva\nDirector of Photography: Vladislav Kalashnikov\nStyle by ПСИХ\nGaffer: Vladislav Kalashnikov\nMusic by dotbeats\nEdit: Mikhail Shamrikov\nTitles: Mikhail Shamrikov, Anna Romanova\nColor/VFX: Vladislav Kalashnikov\nMODEL: Artem Moshkin, Liza Smirnova\n"} />
     </main>
   );
 }

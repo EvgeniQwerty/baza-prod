@@ -15,7 +15,7 @@ export default function ProjectPage() {
       img2={"/projects/servicecar/2.avif"}
       img3={"/projects/servicecar/3.avif"}
       img4={"/projects/servicecar/4.avif"}
-      team={"Production - BAZA\n\nDirector&DOP: Roman Milovanov\nExecutive producer: Ivan Stoletov\nExecutive producer: Egor Popel\n1AD: Alexandra Goludina\nCasting director: Darya Kolyadnaya\nStylist: Vika El'kova\nMUA: Elizabeth Tsvetkova\nVirtual Production: XO VP\nGaffer: Leonid Tashenberg\n1AC: Oleg Demkiv\nDolly: Pavel Shlyk\nAdministrator: Viktor Ermakov"}/>
+      team={"Продюсер - Влад Калашников\nРежиссер - Михаил Шамриков\nОператор-постановщик - Александр Артеев\nЛинейный продюсер - Дарья Огорельцева\nХудожник по гриму - Арина Михеева\nХудожник по костюмам - Дарья Огорельцева\nГаффер - Артемий Мищихин\nМонтаж - Влад Калашников, Александр Артеев\nМоушен-дизайнер/VFX - Станислав Головин\nКомпозитор/SFX - Иван Пестерников\nЦвет/Клинап - Александр Артеев\nБэкстейдж фото - Слава Шустов\n"}/>
     </main>
   );
 }
