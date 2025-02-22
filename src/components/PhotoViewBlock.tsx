@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, useCallback, useEffect, useRef, memo } from 'react';
 import Image from 'next/image';
 import styles from './PhotoViewBlock.module.css';
 
@@ -56,21 +56,69 @@ const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }
 
 PhotoItem.displayName = 'PhotoItem';
 
-const VideoBlock = memo(({ videoSrc, videoSrcMobile }: { videoSrc: string, videoSrcMobile: string }) => (
-    <div className={`${styles.photo__item} ${styles['photo__item_large']}`}>
-        <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className={styles.photo__image}
-        >
-            <source src={videoSrcMobile} media="(max-width: 767px)" type="video/mp4" />
-            <source src={videoSrc} type="video/mp4" />
-            Ваш браузер не поддерживает видео.
-        </video>
-    </div>
-));
+const VideoBlock = memo(({ videoSrc, videoSrcMobile }: { videoSrc: string, videoSrcMobile: string }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const observerRef = useRef<IntersectionObserver>();
+
+    const initVideo = useCallback(() => {
+        const videoElement = videoRef.current;
+        if (!videoElement) return;
+
+        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+        const source = isMobile ? videoSrcMobile : videoSrc;
+
+        if (videoElement.currentSrc !== source) {
+            videoElement.src = source;
+        }
+
+        videoElement.muted = true;
+        videoElement.playsInline = true;
+        videoElement.preload = 'metadata';
+        
+        videoElement
+            .play()
+            .catch((err) => console.warn('Автоплей не сработал:', err));
+    }, [videoSrc, videoSrcMobile]);
+
+    useEffect(() => {
+        const videoElement = videoRef.current;
+        if (!videoElement) return;
+
+        // Наблюдение за видимостью видео
+        observerRef.current = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                initVideo();
+            } else {
+                videoElement.pause();
+            }
+        }, { threshold: 0.5 });
+
+        observerRef.current.observe(videoElement);
+
+        return () => {
+            observerRef.current?.disconnect();
+        };
+    }, [initVideo]);
+
+    return (
+        <div className={`${styles.photo__item} ${styles['photo__item_large']}`}>
+            <video
+                ref={videoRef}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className={styles.photo__image}
+                onError={(e) => console.error('Ошибка загрузки видео:', e)}
+            >
+                <source src={videoSrcMobile} media="(max-width: 767px)" type="video/mp4" />
+                <source src={videoSrc} type="video/mp4" />
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    );
+});
 
 VideoBlock.displayName = 'VideoBlock';
 
