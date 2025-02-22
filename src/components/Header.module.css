@@ -118,16 +118,9 @@
 }
 
 .menu__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(var(--background), 0);
     opacity: 0;
-    z-index: 50;
-    transition: all 0.5s ease-in-out;
-    animation: overlayFadeIn 0.5s forwards;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
 }
 
 @keyframes overlayFadeIn {
@@ -141,8 +134,14 @@
     }
 }
 
+.menu__overlay_visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .menu__overlay_closing {
-    animation: overlayFadeOut 0.5s forwards;
+    opacity: 0;
+    background-color: rgba(var(--background), 0);
 }
 
 @media (prefers-reduced-motion: reduce) {

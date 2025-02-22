@@ -35,13 +35,18 @@
   position: relative;
   aspect-ratio: var(--item-aspect);
   overflow: hidden;
-  border-radius: 4px;
   will-change: transform;
 }
 
 .photo__item_large {
   grid-column: 1 / -1;
   aspect-ratio: var(--large-aspect);
+}
+
+.photo__item_large video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .photo__image {

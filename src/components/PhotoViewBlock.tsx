@@ -7,7 +7,7 @@ import styles from './PhotoViewBlock.module.css';
 interface Photo {
     id: number;
     src: string;
-    srcMobile: string; // Добавляем свойство для мобильной версии
+    srcMobile: string;
     alt: string;
     width: number;
     height: number;
@@ -17,54 +17,10 @@ interface Photo {
 interface PhotoViewBlockProps {
     showMoreButton?: boolean;
     initialCount?: number;
+    photos: Photo[];
+    videoSrc: string;
+    videoSrcMobile: string;
 }
-
-// Оптимизированный массив фотографий с уникальными данными
-const photos: Photo[] = [
-    {
-        id: 1,
-        src: '/services/photos/1.avif',
-        srcMobile: '/services/photos/1-mobile.avif', // Мобильная версия
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 2,
-        src: '/services/photos/2.avif',
-        srcMobile: '/services/photos/2-mobile.avif', // Мобильная версия
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 3,
-        src: '/services/photos/3.avif',
-        srcMobile: '/services/photos/3-mobile.avif', // Мобильная версия
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 4,
-        src: '/services/photos/4.avif',
-        srcMobile: '/services/photos/4-mobile.avif', // Мобильная версия
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    },
-    {
-        id: 5,
-        src: '/services/photos/5.avif',
-        srcMobile: '/services/photos/5-mobile.avif', // Мобильная версия
-        alt: 'Work',
-        width: 1200,
-        height: 800
-    }
-].map((photo, index) => ({
-    ...photo,
-    isLarge: index % 5 === 0 // Автоматическое определение больших фото
-}));
 
 const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }) => (
     <div
@@ -72,7 +28,6 @@ const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }
         data-testid={`photo-item-${photo.id}`}
     >
         <picture>
-            {/* Добавляем источник для мобильной версии */}
             <source
                 srcSet={photo.srcMobile}
                 media="(max-width: 767px)"
@@ -101,6 +56,24 @@ const PhotoItem = memo(({ photo, priority }: { photo: Photo; priority: boolean }
 
 PhotoItem.displayName = 'PhotoItem';
 
+const VideoBlock = memo(({ videoSrc, videoSrcMobile }: { videoSrc: string, videoSrcMobile: string }) => (
+    <div className={`${styles.photo__item} ${styles['photo__item_large']}`}>
+        <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={styles.photo__image}
+        >
+            <source src={videoSrcMobile} media="(max-width: 767px)" type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+));
+
+VideoBlock.displayName = 'VideoBlock';
+
 const LoadMoreButton = memo(({ onClick }: { onClick: () => void }) => (
     <button
         className={styles.photo__more}
@@ -116,30 +89,35 @@ LoadMoreButton.displayName = 'LoadMoreButton';
 
 const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
     showMoreButton = false,
-    initialCount = 12
+    initialCount = 12,
+    photos,
+    videoSrc,
+    videoSrcMobile
 }) => {
     const [visibleCount, setVisibleCount] = useState(initialCount);
     const visiblePhotos = photos.slice(0, visibleCount);
 
     const handleShowMore = useCallback(() => {
-        setVisibleCount(prev => Math.min(prev + 12, photos.length));
-    }, []);
+        setVisibleCount((prev) => Math.min(prev + 12, photos.length));
+    }, [photos.length]);
 
     return (
-        <section 
+        <section
             className={styles.photo}
             aria-label="Галерея фотографий наших проектов"
             role="region"
         >
             <h2 className={styles.photo__title}>
-                Ваши проекты<br/>нашими глазами
+                Ваши проекты<br />нашими глазами
             </h2>
 
-            <div 
+            <div
                 className={styles.photo__grid}
                 role="grid"
                 aria-live="polite"
             >
+                <VideoBlock videoSrc={videoSrc} videoSrcMobile={videoSrcMobile} />
+
                 {visiblePhotos.map((photo, index) => (
                     <PhotoItem
                         key={photo.id}

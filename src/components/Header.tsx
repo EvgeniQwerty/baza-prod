@@ -18,13 +18,8 @@ export default function Header() {
     const [isAnimating, setIsAnimating] = useState(false);
 
     const toggleMenu = useCallback(() => {
-        if (!isMenuOpen) {
-            setIsMenuOpen(true);
-            setIsAnimating(true);
-        } else {
-            startClosingAnimation();
-        }
-    }, [isMenuOpen]);
+        setIsMenuOpen((prev) => !prev);
+    }, []);
 
     const startClosingAnimation = useCallback(() => {
         setIsAnimating(true);
@@ -46,6 +41,20 @@ export default function Header() {
         document.addEventListener('keydown', handleEscape);
         return () => document.removeEventListener('keydown', handleEscape);
     }, [isMenuOpen, startClosingAnimation]);
+
+    useEffect(() => {
+        if (isMenuOpen && !isAnimating) {
+            setIsAnimating(true);
+        }
+    
+        if (!isMenuOpen && isAnimating) {
+            const timer = setTimeout(() => {
+                setIsAnimating(false);
+            }, 500);
+    
+            return () => clearTimeout(timer);
+        }
+    }, [isMenuOpen, isAnimating]);
 
     return (
         <header className={styles.header}>
@@ -73,14 +82,12 @@ export default function Header() {
             </div>
 
             {/* Оверлей меню */}
-            {isMenuOpen && (
-                <div
-                    className={`${styles.menu__overlay} ${isAnimating ? styles.menu__overlay_closing : ''}`}
-                    onClick={startClosingAnimation}
-                    role="presentation"
-                    aria-hidden="true"
-                />
-            )}
+            <div
+                className={`${styles.menu__overlay} ${isMenuOpen ? styles.menu__overlay_visible : ''} ${isAnimating ? styles.menu__overlay_closing : ''}`}
+                onClick={startClosingAnimation}
+                role="presentation"
+                aria-hidden={!isMenuOpen}
+            />
 
             {/* Выплывающее меню */}
             <nav

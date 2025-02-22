@@ -11,11 +11,11 @@ interface ProjectProps {
   org: string;
   type: string;
   year: string;
-  img1: string;
-  img2: string;
-  img3: string;
-  img4: string;
-  team: string;
+  img1?: string;
+  img2?: string;
+  img3?: string;
+  img4?: string;
+  team?: string;
 }
 
 const Project: React.FC<ProjectProps> = ({
@@ -33,7 +33,7 @@ const Project: React.FC<ProjectProps> = ({
   const [currentSlide, setCurrentSlide] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
-  const images = [img1, img2, img3, img4];
+  const images = [img1, img2, img3, img4].filter(Boolean) as string[];
 
   const handleNext = () => {
     setCurrentSlide((prev) => (prev + 1) % images.length);
@@ -61,12 +61,14 @@ const Project: React.FC<ProjectProps> = ({
       }
     }
   };
-
-  // Автоматическая прокрутка
+  
   useEffect(() => {
     const timer = setInterval(handleNext, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const hasImages = images.length > 0;
+  const hasTeam = team?.trim();
 
   return (
     <div className={styles.project}>
@@ -83,12 +85,6 @@ const Project: React.FC<ProjectProps> = ({
       </header>
 
       <div className={styles.project__video}>
-        {/* <iframe
-          src={vimeoLink}
-          allow="autoplay; fullscreen; picture-in-picture;autoplay"
-          allowFullScreen
-          title="Project Video"
-        ></iframe> */}
         <iframe
           src={vimeoLink}
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
@@ -97,58 +93,62 @@ const Project: React.FC<ProjectProps> = ({
         <script src="https://player.vimeo.com/api/player.js"></script>
       </div>
 
-      <section className={styles.project__content}>
-        <div className={styles.project__content_left}>
-          <h3 className={styles.project__content_title}>Как это было</h3>
-          <div
-            className={styles.project__photos}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            {images.map((img, idx) => (
-              <picture>
-                <source
-                  srcSet={`${img.replace(".avif", "-mobile.avif")}`}
-                  media="(max-width: 767px)"
-                  type="image/avif"
-                />
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Проект Фото ${idx + 1}`}
-                  className={`${styles.project__photos_img} ${styles.carousel__slide}`}
-                  data-active={idx === currentSlide}
-                />
-              </picture>
+      {(hasImages || hasTeam) && (
+        <section className={styles.project__content}>
+          {hasImages && (
+            <div className={styles.project__content_left}>
+              <h3 className={styles.project__content_title}>Как это было</h3>
+              <div
+                className={styles.project__photos}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {images.map((img, idx) => (
+                  <picture key={idx}>
+                    <source
+                      srcSet={`${img.replace(".avif", "-mobile.avif")}`}
+                      media="(max-width: 767px)"
+                      type="image/avif"
+                    />
+                    <img
+                      src={img}
+                      alt={`Проект Фото ${idx + 1}`}
+                      className={`${styles.project__photos_img} ${styles.carousel__slide}`}
+                      data-active={idx === currentSlide}
+                    />
+                  </picture>
+                ))}
+                <button
+                  className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
+                  onClick={handlePrev}
+                  aria-label="Previous slide"
+                >
+                  <ArrowLeft />
+                </button>
+                <button
+                  className={`${styles.carousel__button} ${styles.carousel__button_next}`}
+                  onClick={handleNext}
+                  aria-label="Next slide"
+                >
+                  <ArrowRight />
+                </button>
+              </div>
+            </div>
+          )}
 
-            ))}
-            <button
-              className={`${styles.carousel__button} ${styles.carousel__button_prev}`}
-              onClick={handlePrev}
-              aria-label="Previous slide"
-            >
-              <ArrowLeft />
-            </button>
-            <button
-              className={`${styles.carousel__button} ${styles.carousel__button_next}`}
-              onClick={handleNext}
-              aria-label="Next slide"
-            >
-              <ArrowRight />
-            </button>
-          </div>
-        </div>
-
-        <div className={styles.project__content_right}>
-          <h3 className={styles.project__content_title}>Команда проекта</h3>
-          {team.split('\n').map((line, index) => (
-            <p key={index} className={styles.project__content_team_line}>
-              {line}
-            </p>
-          ))}
-        </div>
-      </section>
+          {hasTeam && (
+            <div className={styles.project__content_right}>
+              <h3 className={styles.project__content_title}>Команда проекта</h3>
+              {team?.split('\n').map((line, index) => (
+                <p key={index} className={styles.project__content_team_line}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 };
