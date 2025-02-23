@@ -54,16 +54,16 @@ const Slideshow = ({ currentImage }: { currentImage: number }) => (
         <picture key={imgNum}>
           <source
             media="(max-width: 768px)"
-            srcSet={`/showreel/imgs/${imgNum}-mobile.avif`}
+            srcSet={`/showreel_media/imgs/${imgNum}-mobile.avif`}
             type="image/avif"
           />
           <source
             media="(min-width: 769px)"
-            srcSet={`/showreel/imgs/${imgNum}.avif`}
+            srcSet={`/showreel_media/imgs/${imgNum}.avif`}
             type="image/avif"
           />
           <img
-            src={`/showreel/imgs/${imgNum}.avif`}
+            src={`/showreel_media/imgs/${imgNum}.avif`}
             alt={isActive ? `Кадр ${imgNum} из шоурила Baza` : ''}
             className={`
               ${styles.showreel__image} 

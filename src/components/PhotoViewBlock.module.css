@@ -13,15 +13,40 @@
   container-type: inline-size;
 }
 
+.photo__header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0rem 3rem;
+  margin-bottom: 2rem;
+  width: 50%;
+}
+
+.photo__button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  color: rgb(var(--primary));
+  cursor: pointer;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  transition: 0.3s all;
+  align-self: center;
+  border: 0.2rem solid rgb(var(--gray));
+  padding: 1rem;
+}
+
+.photo__button:hover {
+  color: rgb(var(--accent));
+}
+
 .photo__title {
   color: var(--title-color);
   font-size: var(--title-size);
-  margin-block-end: 2rem;
   font-weight: 400;
   text-transform: uppercase;
   text-align: left;
   line-height: 1.2;
-  margin-left: 2rem;
 }
 
 .photo__grid {
@@ -96,6 +121,10 @@
       --grid-columns: 2;
       --item-aspect: 3/2;
       --large-aspect: 16/9;
+  }
+
+  .photo__header {
+    width: 90%;
   }
 }
 

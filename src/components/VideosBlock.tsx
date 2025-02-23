@@ -28,7 +28,7 @@ interface VideosBlockProps {
 
 const videosData: VideoData[] = [
   {
-    folderPath: "/projects/supergoats",
+    folderPath: "/projects_media/supergoats",
     name: "Суперкозлы",
     org: "Суперкозлы",
     type: "Музыкальный клип",
@@ -37,7 +37,7 @@ const videosData: VideoData[] = [
     imgs: 9,
   },
   {
-    folderPath: "/projects/psycho",
+    folderPath: "/projects_media/psycho",
     name: "Псих",
     org: "Бренд одежды",
     type: "Fashion-ролик",
@@ -46,7 +46,7 @@ const videosData: VideoData[] = [
     imgs: 6,
   },
   {
-    folderPath: "/projects/smena",
+    folderPath: "/projects_media/smena",
     name: "Смена",
     org: "Кинотеатр Смена",
     type: "HR-видео",
@@ -55,7 +55,7 @@ const videosData: VideoData[] = [
     imgs: 8,
   },
   {
-    folderPath: "/projects/servicecar",
+    folderPath: "/projects_media/servicecar",
     name: "Servicecar",
     org: "Servicecar",
     type: "Реклама",
@@ -80,7 +80,6 @@ export default function VideosBlock({
   const [isFiltering, setIsFiltering] = useState(false);
   const [visibleCount, setVisibleCount] = useState(displayCount);
 
-  // Фильтруем данные в зависимости от выбранного фильтра
   const filteredVideos = useMemo(() => 
     videosData.filter(
       (video) => currentFilter === "all" || video.typeCode === currentFilter
@@ -90,7 +89,6 @@ export default function VideosBlock({
 
   const handleFilterChange = useCallback((filter: FilterType) => {
     setIsFiltering(true);
-    // Симуляция задержки для плавного перехода между фильтрами
     setTimeout(() => {
       setCurrentFilter(filter);
       setVisibleCount(displayCount);
@@ -138,6 +136,16 @@ export default function VideosBlock({
             aria-label="Перейти ко всем проектам"
           >
             Смотреть все
+          </Link>
+        )}
+
+        {!showWatchAllButton && (
+          <Link 
+            href="/services" 
+            className={`${styles.categories__button} ${styles.categories__watchall}`}
+            aria-label="Перейти ко всем услугам"
+          >
+            Услуги
           </Link>
         )}
       </div>

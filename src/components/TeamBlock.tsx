@@ -30,8 +30,8 @@ export default function TeamBlock() {
         { href: "https://t.me/kalashnikovk", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
         { href: "https://t.me/kalashnikovk", icon: <Telegram aria-hidden="true" />, platform: 'Telegram' },
       ],
-      imgSrc: "/persons/person-1.avif",
-      imgSrcMobile: "/persons/person-1-mobile.avif",
+      imgSrc: "/persons_media/person-1.avif",
+      imgSrcMobile: "/persons_media/person-1-mobile.avif",
       imgAlt: "Влад Калашников - CEO",
     },
     {
@@ -41,8 +41,8 @@ export default function TeamBlock() {
         { href: "https://t.me/darya", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/darya", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
-      imgSrc: "/persons/person-2.avif",
-      imgSrcMobile: "/persons/person-2-mobile.avif",
+      imgSrc: "/persons_media/person-2.avif",
+      imgSrcMobile: "/persons_media/person-2-mobile.avif",
       imgAlt: "Дарья Огорельцева - COO",
     },
     {
@@ -52,8 +52,8 @@ export default function TeamBlock() {
         { href: "https://t.me/mikhail", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/mikhail", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
-      imgSrc: "/persons/person-3.avif",
-      imgSrcMobile: "/persons/person-3-mobile.avif",
+      imgSrc: "/persons_media/person-3.avif",
+      imgSrcMobile: "/persons_media/person-3-mobile.avif",
       imgAlt: "Михаил Шамриков - Режиссёр",
     },
     {
@@ -63,8 +63,8 @@ export default function TeamBlock() {
         { href: "https://t.me/alex", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://t.me/alex", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
-      imgSrc: "/persons/person-4.avif",
-      imgSrcMobile: "/persons/person-4-mobile.avif",
+      imgSrc: "/persons_media/person-4.avif",
+      imgSrcMobile: "/persons_media/person-4-mobile.avif",
       imgAlt: "Александр Артеев - Оператор",
     },
   ];
@@ -80,7 +80,6 @@ export default function TeamBlock() {
           key={index}
           role="article"
         >
-          {/* Изображение для десктопа */}
           <Image
             src={member.imgSrc}
             alt={member.imgAlt}
@@ -90,7 +89,6 @@ export default function TeamBlock() {
             unoptimized
             sizes="(min-width: 768px) 50vw, 100vw"
           />
-          {/* Изображение для мобильных устройств */}
           <Image
             src={member.imgSrcMobile}
             alt={member.imgAlt}
@@ -133,7 +131,7 @@ export default function TeamBlock() {
         role="complementary"
       >
         <Image
-          src="/persons/person-who.avif"
+          src="/persons_media/person-who.avif"
           alt="Вакансия открыта"
           fill
           className={styles.team__image}

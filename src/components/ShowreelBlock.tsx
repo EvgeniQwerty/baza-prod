@@ -1,15 +1,14 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./ShowreelBlock.module.css";
 
 type ButtonType = 'baza' | 'showreel';
 const SLIDE_INTERVAL = 3000;
 const TOTAL_SLIDES = 5;
-const MOBILE_VIDEO_PATH = '/showreel/main_video-mobile.webm';
-const DESKTOP_VIDEO_PATH = '/showreel/main_video.webm';
+const MOBILE_VIDEO_PATH = '/showreel_media/main_video-mobile.webm';
+const DESKTOP_VIDEO_PATH = '/showreel_media/main_video.webm';
 
 export default function ShowreelBlock() {
     const [activeButton, setActiveButton] = useState<ButtonType>('showreel');
@@ -18,12 +17,10 @@ export default function ShowreelBlock() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const observerRef = useRef<IntersectionObserver>();
 
-    // Функция инициализации видео
     const initVideo = useCallback(() => {
         const videoElement = videoRef.current;
         if (!videoElement) return;
 
-        // Определяем, какое видео загружать
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         const videoPath = isMobile ? MOBILE_VIDEO_PATH : DESKTOP_VIDEO_PATH;
 
@@ -53,13 +50,11 @@ export default function ShowreelBlock() {
         };
     }, [initVideo]);
 
-    // Видео загружено
     const handleVideoCanPlay = useCallback(() => {
         setIsVideoLoaded(true);
         videoRef.current?.play().catch(console.error);
     }, []);
 
-    // Слайдшоу работает, пока видео не загружено
     useEffect(() => {
         if (isVideoLoaded) return;
 
@@ -80,7 +75,6 @@ export default function ShowreelBlock() {
             aria-label="Видеопрезентация проекта"
             data-video-loaded={isVideoLoaded}
         >
-            {/* Слайдшоу пока видео не загружено */}
             {!isVideoLoaded && (
                 <div
                     className={styles.showreel__slideshow}
@@ -91,16 +85,16 @@ export default function ShowreelBlock() {
                         <picture>
                             <source
                                 media="(max-width: 768px)"
-                                srcSet={`/showreel/imgs/${imgNum}-mobile.avif`}
+                                srcSet={`/showreel_media/imgs/${imgNum}-mobile.avif`}
                                 type="image/avif"
                             />
                             <source
                                 media="(min-width: 769px)"
-                                srcSet={`/showreel/imgs/${imgNum}.avif`}
+                                srcSet={`/showreel_media/imgs/${imgNum}.avif`}
                                 type="image/avif"
                             />
                             <img
-                                src={`/showreel/imgs/${imgNum}.avif`}  // fallback для старых браузеров
+                                src={`/showreel_media/imgs/${imgNum}.avif`}  // fallback для старых браузеров
                                 alt={`Демонстрация проекта - кадр ${imgNum}`}
                                 loading={imgNum <= 2 ? 'eager' : 'lazy'}
                                 decoding="async"
@@ -114,7 +108,6 @@ export default function ShowreelBlock() {
                 </div>
             )}
 
-            {/* Видео с динамической загрузкой по устройству */}
             <video
                 ref={videoRef}
                 className={`${styles.showreel__video} ${isVideoLoaded ? styles.video_visible : ''}`}
@@ -143,7 +136,7 @@ export default function ShowreelBlock() {
                     <span>Baza «Мы вас видим»</span>
                 </Link>
                 <Link
-                    href="/projects/showreel"
+                    href="/projects_media/showreel"
                     className={`${styles.showreel__button} ${activeButton === 'showreel' ? styles.button_active : ''}`}
                     onClick={() => handleClick('showreel')}
                     aria-current={activeButton === 'showreel' ? 'page' : undefined}

@@ -11,10 +11,10 @@ export default function ProjectPage() {
       org={"Servicecar"} 
       type={"Реклама на ТВ"} 
       year={"2023"} 
-      img1={"/projects/servicecar/1.avif"}
-      img2={"/projects/servicecar/2.avif"}
-      img3={"/projects/servicecar/3.avif"}
-      img4={"/projects/servicecar/4.avif"}
+      img1={"/projects_media/servicecar/1.avif"}
+      img2={"/projects_media/servicecar/2.avif"}
+      img3={"/projects_media/servicecar/3.avif"}
+      img4={"/projects_media/servicecar/4.avif"}
       team={"Продюсер - Влад Калашников\nРежиссер - Михаил Шамриков\nОператор-постановщик - Александр Артеев\nЛинейный продюсер - Дарья Огорельцева\nХудожник по гриму - Арина Михеева\nХудожник по костюмам - Дарья Огорельцева\nГаффер - Артемий Мищихин\nМонтаж - Влад Калашников, Александр Артеев\nМоушен-дизайнер/VFX - Станислав Головин\nКомпозитор/SFX - Иван Пестерников\nЦвет/Клинап - Александр Артеев\nБэкстейдж фото - Слава Шустов\n"}/>
     </main>
   );

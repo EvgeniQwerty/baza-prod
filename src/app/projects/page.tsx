@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
-      <PageName imageUrl="/projects/header.avif" title="Проекты"/>
+      <PageName imageUrl="/projects_media/header.avif" title="Проекты"/>
       <VideosBlock displayCount={8} enableLoadMore={true}/>
     </main>
   );

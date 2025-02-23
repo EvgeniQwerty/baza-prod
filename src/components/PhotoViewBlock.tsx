@@ -3,6 +3,7 @@
 import React, { useState, useCallback, useEffect, useRef, memo } from 'react';
 import Image from 'next/image';
 import styles from './PhotoViewBlock.module.css';
+import Link from 'next/link';
 
 interface Photo {
     id: number;
@@ -16,6 +17,7 @@ interface Photo {
 
 interface PhotoViewBlockProps {
     showMoreButton?: boolean;
+    showServicesLink?: boolean;
     initialCount?: number;
     photos: Photo[];
     videoSrc: string;
@@ -84,7 +86,6 @@ const VideoBlock = memo(({ videoSrc, videoSrcMobile }: { videoSrc: string, video
         const videoElement = videoRef.current;
         if (!videoElement) return;
 
-        // Наблюдение за видимостью видео
         observerRef.current = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 initVideo();
@@ -112,8 +113,8 @@ const VideoBlock = memo(({ videoSrc, videoSrcMobile }: { videoSrc: string, video
                 className={styles.photo__image}
                 onError={(e) => console.error('Ошибка загрузки видео:', e)}
             >
-                <source src={videoSrcMobile} media="(max-width: 767px)" type="video/mp4" />
-                <source src={videoSrc} type="video/mp4" />
+                <source src={videoSrcMobile} media="(max-width: 767px)" type="video/webm" />
+                <source src={videoSrc} type="video/webm" />
                 Ваш браузер не поддерживает видео.
             </video>
         </div>
@@ -137,6 +138,7 @@ LoadMoreButton.displayName = 'LoadMoreButton';
 
 const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
     showMoreButton = false,
+    showServicesLink = true,
     initialCount = 12,
     photos,
     videoSrc,
@@ -155,9 +157,20 @@ const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
             aria-label="Галерея фотографий наших проектов"
             role="region"
         >
-            <h2 className={styles.photo__title}>
-                Ваши проекты<br />нашими глазами
-            </h2>
+            <div className={styles.photo__header}>
+                <h2 className={styles.photo__title}>
+                    Ваши проекты<br />нашими глазами
+                </h2>
+                {showServicesLink && (
+                    <Link 
+                        href="/services" 
+                        className={`${styles.photo__button}`}
+                        aria-label="Перейти ко всем услугам"
+                    >
+                        Услуги
+                    </Link>
+                )}
+            </div>
 
             <div
                 className={styles.photo__grid}

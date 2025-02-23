@@ -132,13 +132,27 @@
   overflow: hidden;
 }
 
+.services__imagewrapper.hovered .services__image {
+  filter: saturate(1);
+  transition: filter 0.3s ease;
+}
+
+.services__imagewrapper:not(.hovered) .services__image {
+  filter: saturate(0);
+  transition: filter 20s cubic-bezier(0,1.19,.09,.87);
+}
+
 .services__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
   filter: saturate(0);
-  transition: all 0.3s ease;
+  transition: filter 0.3s ease;
+}
+
+.services__image_hovered {
+  filter: saturate(1);
+  transition: filter 0.3s ease;
 }
 
 .services__overlay {
@@ -245,7 +259,7 @@
   }
 
   .services__image {
-    filter: saturate(1);
+    filter: saturate(1) !important;
   }
 }
 

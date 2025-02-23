@@ -18,32 +18,32 @@ const defaultServices: Service[] = [
     {
         id: 1,
         title: 'Музыкальные клипы',
-        image: '/services/music.avif',
-        video: '/services/music.webm'
+        image: '/services_media/music.avif',
+        video: '/services_media/music.webm'
     },
     {
         id: 2,
         title: 'Рекламные ролики',
-        image: '/services/comm.avif',
-        video: '/services/comm.webm'
+        image: '/services_media/comm.avif',
+        video: '/services_media/comm.webm'
     },
     {
         id: 3,
         title: 'Продюсирование',
-        image: '/services/prod.avif',
-        video: '/services/prod.webm'
+        image: '/services_media/prod.avif',
+        video: '/services_media/prod.webm'
     },
     {
         id: 4,
         title: 'Креатив',
-        image: '/services/creative.avif',
-        video: '/services/creative.webm'
+        image: '/services_media/creative.avif',
+        video: '/services_media/creative.webm'
     },
     {
         id: 5,
         title: 'Скоро появится',
-        image: '/services/wip.avif',
-        video: '/services/wip.webm'
+        image: '/services_media/wip.avif',
+        video: '/services_media/wip.webm'
     }
 ];
 
@@ -92,84 +92,96 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onC
     );
 };
 
-const ServiceCard: React.FC<{ 
-    service: Service; 
-    onClick: () => void; 
-    isActive?: boolean 
-}> = React.memo(({ service, onClick, isActive = false }) => {
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
+const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: boolean }> = React.memo(
+    ({ service, onClick, isActive = false }) => {
+        const videoRef = useRef<HTMLVideoElement>(null);
+        const [isHovered, setIsHovered] = useState(false);
+        const [isDesktop, setIsDesktop] = useState(false);
 
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
+        // Проверка на размер экрана
+        useEffect(() => {
+            const checkScreenSize = () => setIsDesktop(window.innerWidth > 768);
+            checkScreenSize();
+            window.addEventListener('resize', checkScreenSize);
+            return () => window.removeEventListener('resize', checkScreenSize);
+        }, []);
 
-        video.preload = 'auto';
-        video.muted = true;
-        video.playsInline = true;
-        video.loop = true;
+        useEffect(() => {
+            const video = videoRef.current;
+            if (!video) return;
 
-        const handleCanPlay = () => setIsVideoLoaded(true);
-        const handleError = () => console.error(`Ошибка загрузки видео: ${service.title}`);
+            video.preload = 'auto';
+            video.muted = true;
+            video.playsInline = true;
+            video.loop = true;
 
-        video.addEventListener('canplay', handleCanPlay);
-        video.addEventListener('error', handleError);
-        
-        return () => {
-            video.removeEventListener('canplay', handleCanPlay);
-            video.removeEventListener('error', handleError);
-        };
-    }, [service.title]);
+            const handleCanPlay = () => video.play().catch(console.error);
+            const handleError = () => console.error(`Ошибка загрузки видео: ${service.title}`);
 
-    const handleMouseEnter = useCallback(() => {
-        if (!videoRef.current || !isVideoLoaded) return;
-        setIsHovered(true);
-        videoRef.current.play().catch(console.error);
-    }, [isVideoLoaded]);
+            video.addEventListener('canplay', handleCanPlay);
+            video.addEventListener('error', handleError);
 
-    const handleMouseLeave = useCallback(() => {
-        if (!videoRef.current) return;
-        setIsHovered(false);
-        videoRef.current.pause();
-    }, []);
+            return () => {
+                video.removeEventListener('canplay', handleCanPlay);
+                video.removeEventListener('error', handleError);
+            };
+        }, [service.title]);
 
-    return (
-        <div 
-            className={styles.services__imagewrapper} 
-            onClick={onClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            role="button"
-            tabIndex={0}
-            onKeyUp={(e) => e.key === 'Enter' && onClick()}
-            aria-label={`Открыть информацию об услуге: ${service.title}`}
-        >
-            <picture>
-                <source srcSet={service.image.replace('.avif', '-mobile.avif')} media="(max-width: 768px)" />
-                <img
-                    src={service.image}
-                    alt={service.title}
-                    className={`${styles.services__image} ${isHovered ? styles.services__image_hidden : ''}`}
-                />
-            </picture>
+        const handleMouseEnter = useCallback(() => {
+            if (isDesktop) {
+                setIsHovered(true);
+                videoRef.current?.play().catch(console.error);
+            }
+        }, [isDesktop]);
 
-            <video
-                ref={videoRef}
-                className={`${styles.services__video} ${isHovered ? styles.services__video_visible : ''}`}
-                aria-hidden="true"
+        const handleMouseLeave = useCallback(() => {
+            if (isDesktop) {
+                setIsHovered(false);
+                videoRef.current?.pause();
+            }
+        }, [isDesktop]);
+
+        return (
+            <div
+                className={`${styles.services__imagewrapper} ${isHovered ? styles.hovered : ''}`}
+                onClick={onClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                role="button"
+                tabIndex={0}
+                onKeyUp={(e) => e.key === 'Enter' && onClick()}
+                aria-label={`Открыть информацию об услуге: ${service.title}`}
             >
-                <source src={service.video.replace('.webm', '-mobile.webm')} type="video/webm" />
-                <source src={service.video} type="video/webm" />
-            </video>
+                <picture>
+                    <source srcSet={service.image.replace('.avif', '-mobile.avif')} media="(max-width: 768px)" />
+                    <img
+                        src={service.image}
+                        alt={service.title}
+                        className={`${styles.services__image} ${isHovered ? styles.services__image_hovered : ''}`}
+                    />
+                </picture>
 
-            <div className={styles.services__overlay} />
-            <div className={styles.services__content}>
-                <h3 className={styles.services__title}>{service.title}</h3>
+                <video
+                    ref={videoRef}
+                    className={`${styles.services__video} ${isHovered ? styles.services__video_visible : ''}`}
+                    aria-hidden="true"
+                    muted
+                    playsInline
+                    preload="auto"
+                    loop
+                >
+                    <source src={service.video.replace('.webm', '-mobile.webm')} type="video/webm" media="(max-width: 768px)" />
+                    <source src={service.video} type="video/webm" media="(min-width: 769px)" />
+                </video>
+
+                <div className={styles.services__overlay} />
+                <div className={styles.services__content}>
+                    <h3 className={styles.services__title}>{service.title}</h3>
+                </div>
             </div>
-        </div>
-    );
-});
+        );
+    }
+);
 
 ServiceCard.displayName = 'ServiceCard';
 

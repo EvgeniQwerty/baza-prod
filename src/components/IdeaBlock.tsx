@@ -36,7 +36,7 @@ export default function IdeaBlock() {
             <video
                 ref={videoRef}
                 className={styles.ideablock__video}
-                src="/ideas/ideas_video.webm"
+                src="/ideas_media/ideas_video.webm"
                 preload="auto"
                 playsInline
                 muted
@@ -44,12 +44,12 @@ export default function IdeaBlock() {
                 aria-label="Фоновое видео с анимацией"
             >
                 <source
-                    srcSet="/ideas/ideas_video-mobile.webm"
+                    srcSet="/ideas_media/ideas_video-mobile.webm"
                     type="video/webm"
                     media="(max-width: 768px)"
                 />
                 <source
-                    srcSet="/ideas/ideas_video.webm"
+                    srcSet="/ideas_media/ideas_video.webm"
                     type="video/webm"
                     media="(min-width: 769px)"
                 />

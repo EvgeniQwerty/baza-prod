@@ -105,17 +105,17 @@ export default function AboutTeam() {
       <div className={styles.team__image_wrapper}>
         <picture>
           <source
-            srcSet="/about/about_team.avif"
+            srcSet="/about_media/about_team.avif"
             type="image/avif"
             media="(min-width: 769px)"
           />
           <source
-            srcSet="/about/about_team-mobile.avif"
+            srcSet="/about_media/about_team-mobile.avif"
             type="image/avif"
             media="(max-width: 768px)"
           />
           <img
-            src="/about/about_team.avif"
+            src="/about_media/about_team.avif"
             alt="Фотография команды проекта"
             className={styles.team__image}
             loading="eager"
