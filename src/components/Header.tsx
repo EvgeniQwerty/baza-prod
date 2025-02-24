@@ -81,7 +81,6 @@ export default function Header() {
                 </Link>
             </div>
 
-            {/* Оверлей меню */}
             <div
                 className={`${styles.menu__overlay} ${isMenuOpen ? styles.menu__overlay_visible : ''} ${isAnimating ? styles.menu__overlay_closing : ''}`}
                 onClick={startClosingAnimation}
@@ -89,7 +88,6 @@ export default function Header() {
                 aria-hidden={!isMenuOpen}
             />
 
-            {/* Выплывающее меню */}
             <nav
                 className={`${styles.menu} ${isMenuOpen ? styles.menu_open : ''} ${isAnimating ? styles.menu_closing : ''}`}
                 aria-label="Основная навигация"

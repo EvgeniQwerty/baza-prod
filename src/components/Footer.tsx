@@ -7,7 +7,7 @@ import VkSvg from "@/svg/vk.svg";
 import TgSvg from "@/svg/telegram.svg";
 
 const socialLinks = [
-  { href: "https://instagram.com/samoyed.biz", Icon: InstaSvg, label: "Instagram" },
+  { href: "https://instagram.com/kalashnikov.vk", Icon: InstaSvg, label: "Instagram" },
   { href: "https://vk.com/kalashnikov.prod", Icon: VkSvg, label: "VKontakte" },
   { href: "https://t.me/kalashnikovk", Icon: TgSvg, label: "Telegram" }
 ];
@@ -35,6 +35,13 @@ export default function Footer() {
             </Link>
             <p className={styles.footer__copyright}>
               Все права защищены © {new Date().getFullYear()}
+            </p>
+            <p className={styles.footer__creator}>
+              <a 
+                href="https://t.me/evgeniqwerty" 
+                target="_blank"
+                rel="noopener noreferrer">By wwwavvve websites
+              </a>
             </p>
             <p className={styles.footer__coords}>58.5966, 49.6601</p>
           </div>
@@ -97,6 +104,13 @@ export default function Footer() {
             </Link>
             <p className={styles.footer__copyright}>
               Все права защищены © {new Date().getFullYear()}
+            </p>
+            <p className={styles.footer__creator}>
+              <a 
+                href="https://t.me/evgeniqwerty" 
+                target="_blank"
+                rel="noopener noreferrer">By wwwavvve websites
+              </a>
             </p>
             <p className={styles.footer__coords}>58.5966, 49.6601</p>
           </div>

@@ -43,7 +43,7 @@ const VideoBlock: FC<VideoBlockProps> = ({
 
   return (
     <Link
-      href={folderPath}
+      href={folderPath.replace('_media', '')}
       className={`${styles.videoblock} ${isHovered ? styles.videoblock_hovered : ''}`}
       data-type={typeCode}
       onMouseEnter={handleMouseEnter}

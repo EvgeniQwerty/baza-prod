@@ -30,7 +30,7 @@ const VimeoPlayer = ({ onLoad }: VimeoPlayerProps) => {
     <div className={styles.showreel__video}>
       <iframe
         ref={iframeRef}
-        src="https://player.vimeo.com/video/1056798263"
+        src="https://player.vimeo.com/video/1059838109?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
         title="Baza Showreel"
@@ -106,9 +106,9 @@ export default function AboutHeader() {
         <VimeoPlayer onLoad={handleVideoLoad} />
 
         <div className={styles.showreel__buttons} role="region" aria-live="polite">
-          <h1 id="about-heading" className={styles.showreel__button}>
+          {/* <h1 id="about-heading" className={styles.showreel__button}>
             «Мы вас видим»
-          </h1>
+          </h1> */}
         </div>
       </div>
 

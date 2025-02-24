@@ -26,8 +26,8 @@ export default function TeamBlock() {
       name: "Влад Калашников",
       position: "Основатель\nГенеральный продюсер",
       socials: [
-        { href: "https://t.me/kalashnikovk", icon: <VK aria-hidden="true" />, platform: 'VK' },
-        { href: "https://t.me/kalashnikovk", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
+        { href: "https://vk.com/kalashnikov572", icon: <VK aria-hidden="true" />, platform: 'VK' },
+        { href: "https://instagram.com/kalashnikov.vk", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
         { href: "https://t.me/kalashnikovk", icon: <Telegram aria-hidden="true" />, platform: 'Telegram' },
       ],
       imgSrc: "/persons_media/person-1.avif",
@@ -38,8 +38,8 @@ export default function TeamBlock() {
       name: "Дарья Огорельцева",
       position: "Исполнительный\nпродюсер",
       socials: [
-        { href: "https://t.me/darya", icon: <VK aria-hidden="true" />, platform: 'VK' },
-        { href: "https://t.me/darya", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
+        { href: "https://vk.com/odi_das", icon: <VK aria-hidden="true" />, platform: 'VK' },
+        { href: "https://instagram.com/odi_das", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
       imgSrc: "/persons_media/person-2.avif",
       imgSrcMobile: "/persons_media/person-2-mobile.avif",
@@ -49,8 +49,8 @@ export default function TeamBlock() {
       name: "Михаил Шамриков",
       position: "Режиссёр",
       socials: [
-        { href: "https://t.me/mikhail", icon: <VK aria-hidden="true" />, platform: 'VK' },
-        { href: "https://t.me/mikhail", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
+        { href: "https://vk.com/m.shamrikov", icon: <VK aria-hidden="true" />, platform: 'VK' },
+        { href: "https://instagram.com/skagboyzzz", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
       imgSrc: "/persons_media/person-3.avif",
       imgSrcMobile: "/persons_media/person-3-mobile.avif",
@@ -60,8 +60,8 @@ export default function TeamBlock() {
       name: "Александр Артеев",
       position: "Оператор-\nпостановщик",
       socials: [
-        { href: "https://t.me/alex", icon: <VK aria-hidden="true" />, platform: 'VK' },
-        { href: "https://t.me/alex", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
+        { href: "https://vk.com/alex_art", icon: <VK aria-hidden="true" />, platform: 'VK' },
+        { href: "https://instagram.com/alexart.film", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
       ],
       imgSrc: "/persons_media/person-4.avif",
       imgSrcMobile: "/persons_media/person-4-mobile.avif",

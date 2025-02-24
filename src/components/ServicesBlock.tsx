@@ -127,17 +127,27 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
             };
         }, [service.title]);
 
+        // Воспроизведение в зависимости от активности карточки
+        useEffect(() => {
+            const video = videoRef.current;
+            if (video) {
+                if (isActive || isHovered) {
+                    video.play().catch(console.error);
+                } else {
+                    video.pause();
+                }
+            }
+        }, [isActive, isHovered]);
+
         const handleMouseEnter = useCallback(() => {
             if (isDesktop) {
                 setIsHovered(true);
-                videoRef.current?.play().catch(console.error);
             }
         }, [isDesktop]);
 
         const handleMouseLeave = useCallback(() => {
             if (isDesktop) {
                 setIsHovered(false);
-                videoRef.current?.pause();
             }
         }, [isDesktop]);
 
@@ -163,7 +173,9 @@ const ServiceCard: React.FC<{ service: Service; onClick: () => void; isActive?: 
 
                 <video
                     ref={videoRef}
-                    className={`${styles.services__video} ${isHovered ? styles.services__video_visible : ''}`}
+                    className={`${styles.services__video} ${
+                        isHovered || isActive ? styles.services__video_visible : ''
+                    }`}
                     aria-hidden="true"
                     muted
                     playsInline
@@ -246,29 +258,27 @@ const ServicesBlock: React.FC<ServiceBlockProps> = ({
             </div>
 
             <div className={styles.services__mobile}>
-                <div
-                    className={styles.services__slider}
-                    ref={sliderRef}
-                    onTouchStart={onTouchStart}
-                    onTouchMove={onTouchMove}
-                    onTouchEnd={onTouchEnd}
-                >
-                    {services.map((service, index) => (
-                        <div 
-                            key={service.id} 
-                            className={`${styles.services__slide} ${
-                                index === currentSlide ? styles.active : ''
-                            }`}
-                        >
-                            <ServiceCard 
-                                service={service} 
-                                onClick={handleOpenModal} 
-                                isActive={index === currentSlide} 
-                            />
-                        </div>
-                    ))}
-                </div>
+    <div
+        className={styles.services__slider}
+        ref={sliderRef}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+    >
+        {services.map((service, index) => (
+            <div 
+                key={service.id} 
+                className={`${styles.services__slide} ${index === currentSlide ? styles.active : ''}`}
+            >
+                <ServiceCard 
+                    service={service} 
+                    onClick={handleOpenModal} 
+                    isActive={index === currentSlide} 
+                />
             </div>
+            ))}
+        </div>
+    </div>
 
             <div className={styles.services__grid}>
                 {services.map((service) => (

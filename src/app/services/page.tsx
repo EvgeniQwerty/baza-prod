@@ -18,8 +18,8 @@ export default function Services() {
       <ServicesBlock/>
       <PhotoViewBlock 
         photos={photos}
-        videoSrc="/about_media/backstage.webm"
-        videoSrcMobile="/about_media/backstage-mobile.webm"
+        videoSrc="/services_media/backstage.webm"
+        videoSrcMobile="/services_media/backstage-mobile.webm"
         showMoreButton
         initialCount={4}
         showServicesLink={false}/>

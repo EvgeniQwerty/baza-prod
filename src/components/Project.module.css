@@ -120,6 +120,10 @@
 }
 
 @media (max-width: 600px) {
+  .project {
+    margin: 12rem 4rem;
+  }
+
   .project__header {
     flex-direction: column;
   }

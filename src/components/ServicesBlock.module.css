@@ -81,7 +81,7 @@
 
 .services__progress {
   position: absolute;
-  top: -3rem;
+  top: -1rem;
   left: 10rem;
   right: 10rem;
   display: none;
@@ -132,14 +132,28 @@
   overflow: hidden;
 }
 
+@keyframes desaturate {
+  0% {
+    filter: saturate(1);
+  }
+  20% {
+    filter: saturate(0.9);
+  }
+  100% {
+    filter: saturate(0);
+  }
+}
+
 .services__imagewrapper.hovered .services__image {
+  animation: none;
   filter: saturate(1);
   transition: filter 0.3s ease;
 }
 
 .services__imagewrapper:not(.hovered) .services__image {
-  filter: saturate(0);
-  transition: filter 20s cubic-bezier(0,1.19,.09,.87);
+  /* filter: saturate(0);
+  transition: filter 20s cubic-bezier(0,1.19,.09,.87); */
+  animation: desaturate 5s forwards;
 }
 
 .services__image {
@@ -213,7 +227,8 @@
 }
 
 .services__video_visible {
-  opacity: 1;
+  opacity: 1 !important;
+  display: block !important;
 }
 
 .services__image_hidden {
