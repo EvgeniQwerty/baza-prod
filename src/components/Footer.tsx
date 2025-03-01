@@ -7,9 +7,9 @@ import VkSvg from "@/svg/vk.svg";
 import TgSvg from "@/svg/telegram.svg";
 
 const socialLinks = [
-  { href: "https://instagram.com/kalashnikov.vk", Icon: InstaSvg, label: "Instagram" },
-  { href: "https://vk.com/kalashnikov.prod", Icon: VkSvg, label: "VKontakte" },
-  { href: "https://t.me/kalashnikovk", Icon: TgSvg, label: "Telegram" }
+  { href: "https://instagram.com/baza.redpro", Icon: InstaSvg, label: "Instagram" },
+  { href: "https://vk.com/bazared", Icon: VkSvg, label: "VKontakte" },
+  { href: "https://t.me/baza_production", Icon: TgSvg, label: "Telegram" }
 ];
 
 const navigationLinks = [
@@ -22,7 +22,6 @@ const navigationLinks = [
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      {/* Десктоп версия */}
       <div className={styles.footer__wrapper}>
         <div className={styles.footer__left}>
           <div className={styles.footer__block}>
@@ -34,7 +33,7 @@ export default function Footer() {
               <LogoSvg width={90} height={40} className={styles.footer__logo} alt="Логотип компании" />
             </Link>
             <p className={styles.footer__copyright}>
-              Все права защищены © {new Date().getFullYear()}
+              Все права защищены &#169; {new Date().getFullYear()}
             </p>
             <p className={styles.footer__creator}>
               <a 
@@ -91,7 +90,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Мобильная версия */}
       <div className={styles.footer__wrapper_mobile}>
         <div className={styles.footer__top}>
           <div className={styles.footer__block}>

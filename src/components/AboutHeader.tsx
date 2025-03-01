@@ -1,47 +1,46 @@
 'use client'
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import styles from "./AboutHeader.module.css";
 
-interface VimeoPlayerProps {
-  onLoad: () => void;
-}
-
-const VimeoPlayer = ({ onLoad }: VimeoPlayerProps) => {
+const VimeoPlayer = ({ onLoad }: { onLoad: () => void }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    const handleLoad = () => {
-      onLoad();
-    };
-
-    const iframe = iframeRef.current;
-    if (iframe) {
-      iframe.addEventListener('load', handleLoad);
-    }
-
-    return () => {
-      if (iframe) {
-        iframe.removeEventListener('load', handleLoad);
+    const updateHeight = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.offsetWidth;
+        const aspectRatio = 9 / 16;
+        setHeight(width * aspectRatio);
       }
     };
-  }, [onLoad]);
+
+    updateHeight();
+
+    const resizeObserver = new ResizeObserver(updateHeight);
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   return (
-    <div className={styles.showreel__video}>
-      <iframe
-        ref={iframeRef}
-        src="https://player.vimeo.com/video/1059838109?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-        frameBorder="0"
-        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-        title="Baza Showreel"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-        }}
-      ></iframe>
+    <div ref={containerRef} className={styles.showreel} style={{ height }}>
+      <div className={styles.showreel__video}>
+        <iframe
+          ref={iframeRef}
+          src="https://player.vimeo.com/video/1059838109?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          title="Baza Showreel"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+          onLoad={onLoad}
+        ></iframe>
+      </div>
     </div>
   );
 };
@@ -102,7 +101,7 @@ export default function AboutHeader() {
   return (
     <section aria-labelledby="about-heading">
       <div className={styles.showreel}>
-        {!isVideoLoaded && <Slideshow currentImage={currentImage} />}
+        {/* {!isVideoLoaded && <Slideshow currentImage={currentImage} />} */}
         <VimeoPlayer onLoad={handleVideoLoad} />
 
         <div className={styles.showreel__buttons} role="region" aria-live="polite">
@@ -114,17 +113,10 @@ export default function AboutHeader() {
 
       <div className={styles.quote} role="article">
         <div className={styles.quote__left}>
-          <h4 className={`${styles.quote__h4} ${styles.quote__h4_accent}`}>
-            Мы взяли свои страхи, свою силу, свою страсть и создали этот ролик 
-            как визуальное выражение того, кем мы являемся.
-          </h4>
-          <h4 className={styles.quote__h4}>
-            Этот процесс помогает нам лучше понять, как раскрывать вас.
-          </h4>
         </div> 
         <div className={styles.quote__right}>
           <h3 className={styles.quote__h3}>
-            Мы видим ваши<br/>переживания, талант<br/>и желание<br/>самовыражаться
+            Мы видим вашу уникальность<br/>и превращаем ее<br/>в креативные визуальные истории
           </h3>
         </div>   
       </div>

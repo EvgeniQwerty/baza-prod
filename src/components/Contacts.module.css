@@ -23,6 +23,7 @@
     margin: auto;
     width: 50%;
     margin-bottom: 10rem;
+    transition: .3s all;
 }
 
 .contacts__socials {
@@ -35,7 +36,7 @@
     width: 100%;
     height: 7rem;
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: 300;
     text-transform: uppercase;
     color: rgb(var(--primary));
     background-color: rgb(var(--background));
@@ -52,8 +53,34 @@
     color: rgb(var(--accent));
 }
 
+.toast {
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(var(--primary));
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    animation: fadeInOut 3s ease;
+    z-index: 1000;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
 @media (max-width: 900px) {
     .contacts__buttons {
         width: 70%;
+    }
+
+    .toast {
+        font-size: 1.6rem;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
 }

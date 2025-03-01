@@ -43,7 +43,7 @@ const videosData: VideoData[] = [
     type: "Fashion-ролик",
     typeCode: "commercial",
     year: "2023",
-    imgs: 6,
+    imgs: 8,
   },
   {
     folderPath: "/projects_media/smena",

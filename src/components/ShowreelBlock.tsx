@@ -136,7 +136,7 @@ export default function ShowreelBlock() {
                     <span>Baza «Мы вас видим»</span>
                 </Link>
                 <Link
-                    href="/projects_media/showreel"
+                    href="/projects/showreel"
                     className={`${styles.showreel__button} ${activeButton === 'showreel' ? styles.button_active : ''}`}
                     onClick={() => handleClick('showreel')}
                     aria-current={activeButton === 'showreel' ? 'page' : undefined}

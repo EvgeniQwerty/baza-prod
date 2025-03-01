@@ -79,11 +79,9 @@ export default function AboutTeam() {
     >
       <div className={styles.team__quotes}>
         <div className={styles.team__quotes_left}>
-          <h3 className={styles.team__quote1}>Мы соединяем креативность,<br />профессионализм и искренность,<br />чтобы каждая история стала<br />уникальной.</h3>
+          <h3 className={styles.team__quote1}>Наша команда -<br/>это люди, которые<br/>умеют видеть глубже</h3>
         </div>
         <div className={styles.team__quotes_right}>
-          <p className={styles.team__quote2}>Наша команда - это люди, которые умеют видеть глубже</p>
-          <p className={`${styles.team__quote2} ${styles.accent}`}>Каждый важен, каждый внес свою лепту в историю этого ролика.</p>
         </div>
       </div>
 

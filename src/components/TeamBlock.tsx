@@ -26,7 +26,7 @@ export default function TeamBlock() {
       name: "Влад Калашников",
       position: "Основатель\nГенеральный продюсер",
       socials: [
-        { href: "https://vk.com/kalashnikov572", icon: <VK aria-hidden="true" />, platform: 'VK' },
+        { href: "https://vk.com/kalashnikovprod", icon: <VK aria-hidden="true" />, platform: 'VK' },
         { href: "https://instagram.com/kalashnikov.vk", icon: <Instagram aria-hidden="true" />, platform: 'Instagram' },
         { href: "https://t.me/kalashnikovk", icon: <Telegram aria-hidden="true" />, platform: 'Telegram' },
       ],

@@ -11,10 +11,10 @@ export default function ProjectPage() {
         org={"Кинотеатр Смена"}
         type={"HR-видео"}
         year={"2023"}
-        img1={"/projects_media/smena/1.avif"}
+        img1={"/projects_media/smena/4.avif"}
         img2={"/projects_media/smena/2.avif"}
         img3={"/projects_media/smena/3.avif"}
-        img4={"/projects_media/smena/4.avif"}
+        img4={"/projects_media/smena/5.avif"}
         team={"Продюсер - Влад Калашников\nОператор-постановщик - Александр Артеев\nХудожник по гриму - Алена Игнатьева\nХудожник по костюмам - Дарья Огорельцева, Елизавета Балуева\nГаффер - Артемий Мищихин\nОсветитель - Иван Бабинцев\nМонтаж - Влад Калашников, Александр Артеев\nКомпозитор/SFX - Лев Лерум\nЦвет/Клинап - Александр Артеев\nБэкстейдж фото - Илья Урс\n"} />
     </main>
   );

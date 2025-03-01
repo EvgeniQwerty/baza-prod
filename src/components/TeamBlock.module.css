@@ -60,6 +60,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: 300;
 }
 
 .team__socials {
@@ -105,12 +106,11 @@
     transform: translate(-50%, -125%);
     z-index: 10;
     cursor: pointer;
-    transition: color 0.3s, font-weight 0.3s;
+    transition: color 0.3s;
 }
 
 .team__sendresume:hover {
-    color: rgb(var(--accent));
-    font-weight: 800;    
+    color: rgb(var(--accent)); 
 }
 
 .team__image_mobile {

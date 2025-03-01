@@ -13,9 +13,9 @@ export default function ProjectPage() {
         year={"2023"}
         img1={"/projects_media/psycho/1.avif"}
         img2={"/projects_media/psycho/2.avif"}
-        img3={"/projects_media/psycho/3.avif"}
-        img4={"/projects_media/psycho/4.avif"}
-        team={"DIRECTED by Mikhail Shamrikov\nPRODUCED by Vladislav Kalashnikov\nART DIRECTION by Anna Romanova\nLine producer: Daria Ogoreltseva\nDirector of Photography: Vladislav Kalashnikov\nStyle by ПСИХ\nGaffer: Vladislav Kalashnikov\nMusic by dotbeats\nEdit: Mikhail Shamrikov\nTitles: Mikhail Shamrikov, Anna Romanova\nColor/VFX: Vladislav Kalashnikov\nMODEL: Artem Moshkin, Liza Smirnova\n"} />
+        img3={"/projects_media/psycho/8.avif"}
+        img4={"/projects_media/psycho/3.avif"}
+        team={"DIRECTED by Mikhail Shamrikov\nPRODUCED by Vladislav Kalashnikov\nART DIRECTION by Anna Romanova\nLine producer: Daria Ogoreltseva\nDirector of Photography: Vladislav Kalashnikov\nStyle by ПСИХ\nGaffer: Vladislav Kalashnikov\nMusic by dotbeats\nEdit: Mikhail Shamrikov\nTitles: Mikhail Shamrikov, Anna Romanova\nColor/VFX: Vladislav Kalashnikov\nMODEL: Artem Moshkin, Liza Smirnova\nBackstage: Ilya Urs\n"} />
     </main>
   );
 }

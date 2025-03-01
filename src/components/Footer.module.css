@@ -37,7 +37,7 @@
 
 .footer__creator:hover {
     color: rgb(var(--accent));
-    transform: scale(1.2);
+    /* transform: scale(1.05); */
 }
 
 .footer__link {
@@ -76,7 +76,7 @@
 
 .form__title {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .form__button {
@@ -84,7 +84,7 @@
     padding: 1.34rem 1.5rem;
     font-size: 1rem;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 300;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
@@ -96,7 +96,7 @@
 .form__button:hover {
     color: rgb(var(--accent));
     background-color: rgb(var(--gray));
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
 .footer__wrapper_mobile {
@@ -194,7 +194,7 @@
     }
 
     .footer__socials {
-        transform: translateY(10px);
+        transform: translateY(12px);
     }
 }
 
@@ -214,6 +214,6 @@
     }
 
     .footer__socials {
-        transform: translateY(10px);
+        transform: translateY(12px);
     }
 }

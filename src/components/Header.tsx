@@ -16,6 +16,7 @@ const menuItems = [
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [isLighthouseActive, setIsLighthouseActive] = useState(false);
 
     const toggleMenu = useCallback(() => {
         setIsMenuOpen((prev) => !prev);
@@ -34,7 +35,7 @@ export default function Header() {
     }, [isMenuOpen, startClosingAnimation]);
 
     useEffect(() => {
-        const handleEscape = (e: KeyboardEvent) => {
+        const handleEscape = (e: any) => {
             if (e.key === 'Escape' && isMenuOpen) startClosingAnimation();
         };
 
@@ -56,6 +57,19 @@ export default function Header() {
         }
     }, [isMenuOpen, isAnimating]);
 
+    // Эффект для анимации маяка
+    useEffect(() => {
+        const lighthouseInterval = setInterval(() => {
+            setIsLighthouseActive(true);
+            
+            setTimeout(() => {
+                setIsLighthouseActive(false);
+            }, 5000);
+        }, 15000);
+        
+        return () => clearInterval(lighthouseInterval);
+    }, []);
+
     return (
         <header className={styles.header}>
             <div className={styles.header__wrapper}>
@@ -73,7 +87,7 @@ export default function Header() {
                 
                 <Link 
                     href="/" 
-                    className={styles.header__logo}
+                    className={`${styles.header__logo} ${isLighthouseActive ? styles.lighthouse_active : ''}`}
                     aria-label="Главная страница"
                     prefetch={false}
                 >
@@ -93,7 +107,7 @@ export default function Header() {
                 aria-label="Основная навигация"
             >
                 <ul className={styles.menu__list}>
-                    {menuItems.map((item, index) => (
+                    {menuItems.map((item) => (
                         <li key={item.href} className={styles.menu__item}>
                             <Link
                                 href={item.href}

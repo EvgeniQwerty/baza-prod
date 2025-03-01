@@ -118,15 +118,22 @@
 }
 
 .menu__overlay {
-    opacity: 0;
-    pointer-events: none;
+    position: fixed;
+    top: 0;                   
+    left: 0;                  
+    width: 100%;              
+    height: 100%;             
+    background-color: rgba(0, 0, 0, 0.8); 
+    opacity: 0;               
+    pointer-events: none;     
     transition: opacity 0.5s ease;
+    z-index: 95;              
 }
 
 @keyframes overlayFadeIn {
     from {
         opacity: 0;
-        background-color: rgba(var(--background), 0);
+        background-color: rgba(var(--background), 0.5);
     }
     to {
         opacity: 1;
@@ -144,10 +151,38 @@
     background-color: rgba(var(--background), 0);
 }
 
+
+@keyframes lighthouseSweep {
+    0% {
+        filter: brightness(1) drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    }
+    25% {
+        filter: brightness(10) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+    50% {
+        filter: brightness(50) drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+    }
+    75% {
+        filter: brightness(10) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+    }
+    100% {
+        filter: brightness(1) drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    }
+}
+
+.lighthouse_active .logo {
+    animation: lighthouseSweep 2s ease-in-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .menu,
     .menu__overlay {
         transition: none;
+    }
+
+    .lighthouse_active .logo {
+        animation: none;
+        filter: brightness(1.3);
     }
 }
 

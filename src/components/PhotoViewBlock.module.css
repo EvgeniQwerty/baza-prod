@@ -43,7 +43,7 @@
 .photo__title {
   color: var(--title-color);
   font-size: var(--title-size);
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
   text-align: left;
   line-height: 1.2;

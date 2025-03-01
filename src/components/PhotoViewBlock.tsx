@@ -158,9 +158,16 @@ const PhotoViewBlock: React.FC<PhotoViewBlockProps> = ({
             role="region"
         >
             <div className={styles.photo__header}>
-                <h2 className={styles.photo__title}>
-                    Ваши проекты<br />нашими глазами
-                </h2>
+                {showServicesLink && (
+                    <h2 className={styles.photo__title}>
+                        Взгляд изнутри
+                    </h2>
+                )}
+                {!showServicesLink && (
+                    <h2 className={styles.photo__title}>
+                        Ваши проекты<br />нашими глазами
+                    </h2>
+                )}
                 {showServicesLink && (
                     <Link 
                         href="/services" 
