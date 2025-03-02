@@ -3,6 +3,7 @@ import React, { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import styles from "./VideosBlock.module.css";
+import videosData from "@/videosData";
 
 const VideoBlock = dynamic(() => import("@/components/VideoBlock"), {
   loading: () => <div className={styles.loader}>Загрузка...</div>,
@@ -11,59 +12,10 @@ const VideoBlock = dynamic(() => import("@/components/VideoBlock"), {
 
 type FilterType = "all" | "clip" | "commercial" | "photo";
 
-interface VideoData {
-  folderPath: string;
-  name: string;
-  org: string;
-  type: string;
-  typeCode: FilterType;
-  year: string;
-  imgs: number;
-}
-
 interface VideosBlockProps {
   displayCount?: number;
   enableLoadMore?: boolean;
 }
-
-const videosData: VideoData[] = [
-  {
-    folderPath: "/projects_media/supergoats",
-    name: "Суперкозлы",
-    org: "Суперкозлы",
-    type: "Музыкальный клип",
-    typeCode: "clip",
-    year: "2023",
-    imgs: 9,
-  },
-  {
-    folderPath: "/projects_media/psycho",
-    name: "Псих",
-    org: "Бренд одежды",
-    type: "Fashion-ролик",
-    typeCode: "commercial",
-    year: "2023",
-    imgs: 8,
-  },
-  {
-    folderPath: "/projects_media/smena",
-    name: "Смена",
-    org: "Кинотеатр Смена",
-    type: "HR-видео",
-    typeCode: "commercial",
-    year: "2023",
-    imgs: 8,
-  },
-  {
-    folderPath: "/projects_media/servicecar",
-    name: "Servicecar",
-    org: "Servicecar",
-    type: "Реклама",
-    typeCode: "commercial",
-    year: "2023",
-    imgs: 4,
-  }
-];
 
 const Categories = [
   { label: "Все категории", value: "all" },

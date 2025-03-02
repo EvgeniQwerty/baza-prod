@@ -1,21 +1,30 @@
 import styles from "./page.module.css";
 import Project from "@/components/Project";
+import videosData from "@/videosData";
 
 export default function ProjectPage() {
+  let projectName = "Смена";
+
+  let data = videosData.find(item => item.name.toLowerCase() === projectName.toLowerCase());
+
+  if (!data) {
+    return <></>
+  }
+
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
       <Project
-        vimeoLink={"https://player.vimeo.com/video/1056783749?h=e826efbf2a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"}
-        name={"Первая работа"}
-        org={"Кинотеатр Смена"}
-        type={"HR-видео"}
-        year={"2023"}
-        img1={"/projects_media/smena/4.avif"}
-        img2={"/projects_media/smena/2.avif"}
-        img3={"/projects_media/smena/3.avif"}
-        img4={"/projects_media/smena/5.avif"}
-        team={"Продюсер - Влад Калашников\nОператор-постановщик - Александр Артеев\nХудожник по гриму - Алена Игнатьева\nХудожник по костюмам - Дарья Огорельцева, Елизавета Балуева\nГаффер - Артемий Мищихин\nОсветитель - Иван Бабинцев\nМонтаж - Влад Калашников, Александр Артеев\nКомпозитор/SFX - Лев Лерум\nЦвет/Клинап - Александр Артеев\nБэкстейдж фото - Илья Урс\n"} />
+        vimeoLink={data.vimeoLink}
+        name={data.name}
+        org={data.org}
+        type={data.type}
+        year={data.year}
+        img1={data.img1}
+        img2={data.img2}
+        img3={data.img3}
+        img4={data.img4}
+        team={data.team} />
     </main>
   );
 }

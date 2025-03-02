@@ -1,21 +1,30 @@
 import styles from "./page.module.css";
 import Project from "@/components/Project";
+import videosData from "@/videosData";
 
 export default function ProjectPage() {
+  let projectName = "Псих";
+
+  let data = videosData.find(item => item.name.toLowerCase() === projectName.toLowerCase());
+
+  if (!data) {
+    return <></>
+  }
+
   return (
     <main className={styles.main}>
       <h1 className={styles.hidden}>BAZA видеопродакшн</h1>
       <Project
-        vimeoLink={"https://player.vimeo.com/video/1056777302?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"}
-        name={"Псих"}
-        org={"Бренд одежды"}
-        type={"Fashion-ролик"}
-        year={"2023"}
-        img1={"/projects_media/psycho/1.avif"}
-        img2={"/projects_media/psycho/2.avif"}
-        img3={"/projects_media/psycho/8.avif"}
-        img4={"/projects_media/psycho/3.avif"}
-        team={"DIRECTED by Mikhail Shamrikov\nPRODUCED by Vladislav Kalashnikov\nART DIRECTION by Anna Romanova\nLine producer: Daria Ogoreltseva\nDirector of Photography: Vladislav Kalashnikov\nStyle by ПСИХ\nGaffer: Vladislav Kalashnikov\nMusic by dotbeats\nEdit: Mikhail Shamrikov\nTitles: Mikhail Shamrikov, Anna Romanova\nColor/VFX: Vladislav Kalashnikov\nMODEL: Artem Moshkin, Liza Smirnova\nBackstage: Ilya Urs\n"} />
+        vimeoLink={data.vimeoLink}
+        name={data.name}
+        org={data.org}
+        type={data.type}
+        year={data.year}
+        img1={data.img1}
+        img2={data.img2}
+        img3={data.img3}
+        img4={data.img4}
+        team={data.team} />
     </main>
   );
 }
